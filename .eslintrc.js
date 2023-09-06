@@ -33,4 +33,5 @@ module.exports = {
       pragma: 'React', // Позволяет ESLint распознавать JSX синтаксис в файлах .js.
     },
   },
+  ignorePatterns: ['build/'],
 };
