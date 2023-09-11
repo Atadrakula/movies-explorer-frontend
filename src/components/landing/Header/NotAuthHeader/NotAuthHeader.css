@@ -1,0 +1,70 @@
+@import url('../../../common/button-hover.css');
+@import url('../../../common/cursor-pointer.css');
+@import url('../../../common/link-hover.css');
+
+.not-auth-header {
+  padding: 0 73px 0 70px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #073042;
+  align-items: center;
+  min-height: 74px;
+}
+
+.not-auth-header__links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.not-auth-header__link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.38;
+}
+
+.not-auth-header__button {
+  display: block;
+  width: 76px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background-color: #3ddc84;
+  border-radius: 3px;
+  color: black;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.38;
+}
+
+@media (width <= 800px) {
+  .not-auth-header {
+    padding: 0 30px;
+  }
+}
+
+@media (width <= 400px) {
+  .not-auth-header__button {
+    width: 52px;
+    height: 26px;
+    font-size: 10px;
+  }
+
+  .not-auth-header {
+    padding: 0 15px;
+  }
+
+  .not-auth-header__link {
+    font-size: 10px;
+    display: block;
+  }
+
+  .not-auth-header__links {
+    gap: 16px;
+  }
+}
