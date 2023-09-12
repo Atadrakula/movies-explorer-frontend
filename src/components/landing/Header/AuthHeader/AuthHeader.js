@@ -10,21 +10,28 @@ function AuthHeader() {
         <Logo />
         <ul className="auth-header__links">
           <li>
-            <a href="#link" className="auth-header__link link-hover">
+            <a
+              href="#link"
+              target="_blank"
+              className="auth-header__link link-hover"
+            >
               Фильмы
             </a>
           </li>
           <li>
-            <a href="#link" className="auth-header__link link-hover">
+            <a
+              href="#link"
+              target="_blank"
+              className="auth-header__link link-hover"
+            >
               Сохранённые фильмы
             </a>
           </li>
         </ul>
       </div>
-      <a href="#profile" className="auth-header__profile">
+      <a href="#profile" target="_blank" className="auth-header__profile">
         <span className="auth-header__profile-name">Аккаунт</span>
-        <span className="auth-header__profile-logo-container">
-        </span>
+        <span className="auth-header__profile-logo-container"></span>
       </a>
     </header>
   );

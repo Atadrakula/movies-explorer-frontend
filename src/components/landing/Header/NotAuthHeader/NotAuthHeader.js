@@ -9,7 +9,11 @@ function NotAuthHeader() {
       <Logo />
       <ul className="not-auth-header__links">
         <li>
-          <a href="#link" className="not-auth-header__link link-hover">
+          <a
+            href="#link"
+            target="_blank"
+            className="not-auth-header__link link-hover"
+          >
             Регистрация
           </a>
         </li>

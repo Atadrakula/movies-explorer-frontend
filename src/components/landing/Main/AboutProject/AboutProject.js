@@ -2,11 +2,7 @@ import React from 'react';
 import './AboutProject.css';
 
 function AboutProject() {
-  return (
-    <section className="about-project">
-
-    </section>
-  )
+  return <section className="about-project"></section>;
 }
 
 export default AboutProject;
