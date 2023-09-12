@@ -1,0 +1,16 @@
+.chapter-title {
+  margin: 0;
+  padding-bottom: 23px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.21;
+  letter-spacing: -1px;
+  border-bottom: 1px solid #dadada;
+}
+
+@media (width <= 600px) {
+  .chapter-title {
+    font-size: 18px;
+    padding-bottom: 28px;
+  }
+}

@@ -1,10 +1,11 @@
 import React from 'react';
+import ChapterTitle from '../../../common/ChapterTitle/ChapterTitle';
 import './AboutProject.css';
 
 function AboutProject() {
   return (
     <section className="about-project">
-      <h2 className="about-project__title">О проекте</h2>
+      <ChapterTitle text={'О проекте'} />
       <ul className="about-project__chapter-description">
         <li className="about-project__block-subtitle">
           <h3 className="about-project__subtitle">

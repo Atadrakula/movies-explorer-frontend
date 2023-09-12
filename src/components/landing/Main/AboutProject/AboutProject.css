@@ -11,16 +11,6 @@
   justify-content: center;
 }
 
-.about-project__title {
-  margin: 0;
-  padding-bottom: 23px;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.21;
-  border-bottom: 2px solid;
-  letter-spacing: -1px;
-}
-
 .about-project__block-subtitle {
   list-style-type: none;
   display: flex;
@@ -66,7 +56,7 @@
   margin: 0;
   padding: 0;
   background-color: #3ddc84;
-  color: black;
+  color: #000;
   min-height: 36px;
   font-weight: 400;
   font-size: 14px;
@@ -197,13 +187,10 @@
 
   .about-project__period-1 {
     min-width: 35.5%;
-  }
-
-  .about-project__period-2 {
     gap: 0;
   }
 
-  .about-project__period-1 {
+  .about-project__period-2 {
     gap: 0;
   }
 }
