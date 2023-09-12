@@ -1,6 +1,10 @@
 @import url('../../vendor/normalize.css');
 @import url('../../vendor/fonts/fonts.css');
 
+* {
+  outline: 1px solid red;
+}
+
 .body {
   width: 100%;
   background-color: #202020;

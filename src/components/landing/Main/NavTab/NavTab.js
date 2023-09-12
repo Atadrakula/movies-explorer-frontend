@@ -3,25 +3,21 @@ import './NavTab.css';
 
 function NavTab() {
   return (
-    <section className="nav-tab">
+    <nav className="nav-tab">
       <ul className="nav-tab__links">
         <li>
-          <a href="#link" target="_blank" className="nav-tab__link">
-            О проекте
-          </a>
+          <h2 className="nav-tab__link cursor-pointer link-hover">О проекте</h2>
         </li>
         <li>
-          <a href="#link" target="_blank" className="nav-tab__link">
+          <h2 className="nav-tab__link cursor-pointer link-hover">
             Технологии
-          </a>
+          </h2>
         </li>
         <li>
-          <a href="#link" target="_blank" className="nav-tab__link">
-            Студент
-          </a>
+          <h2 className="nav-tab__link cursor-pointer link-hover">Студент</h2>
         </li>
       </ul>
-    </section>
+    </nav>
   );
 }
 
