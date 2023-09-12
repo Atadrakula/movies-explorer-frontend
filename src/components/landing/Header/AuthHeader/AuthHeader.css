@@ -62,11 +62,6 @@
   justify-content: center;
 }
 
-/* .auth-header__profile-logo {
-  width: 12px;
-  height: 12px;
-} */
-
 @media (width <= 800px) {
   .auth-header__links {
     display: none;

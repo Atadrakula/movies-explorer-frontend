@@ -24,11 +24,6 @@ function AuthHeader() {
       <a href="#profile" className="auth-header__profile">
         <span className="auth-header__profile-name">Аккаунт</span>
         <span className="auth-header__profile-logo-container">
-          {/* <img
-            src={logoProfile}
-            alt="Логотип профиля"
-            className="auth-header__profile-logo"
-          /> */}
         </span>
       </a>
     </header>

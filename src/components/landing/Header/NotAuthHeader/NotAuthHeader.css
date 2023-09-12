@@ -3,7 +3,7 @@
 @import url('../../../common/link-hover.css');
 
 .not-auth-header {
-  padding: 0 73px 0 70px;
+  padding: 0 70px;
   display: flex;
   justify-content: space-between;
   background-color: #073042;
