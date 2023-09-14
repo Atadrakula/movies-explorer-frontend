@@ -114,7 +114,7 @@
 @media (width <= 800px) {
   .about-project {
     padding: 90px 50px 0;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
   }
 
   .about-project__chapter-description {
