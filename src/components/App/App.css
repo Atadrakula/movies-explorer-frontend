@@ -6,16 +6,16 @@
 }
 
 .body {
-  width: 100%;
   background-color: #202020;
-  font-family: Inter, Arial, sans-serif;
   color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  width: 100%;
 }
 
 .page {
-  max-width: 1280px;
-  min-height: 3148px;
-  margin: auto;
   display: flex;
   flex-direction: column;
+  margin: auto;
+  max-width: 1280px;
+  min-height: 3148px;
 }

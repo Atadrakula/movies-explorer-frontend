@@ -1,66 +1,65 @@
 .techs {
-  padding: 100px 70px;
   background-color: #272727;
+  padding: 100px 70px;
 }
 
 /* переиспользовать? */
 
 .techs__chapter-description {
-  margin: 0;
-  list-style-type: none;
-  padding: 90px 0 102px;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 26px;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 90px 0 102px;
 }
 
 .techs__subtitle {
+  font-size: 50px;
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1.16;
   margin: 0;
   padding: 0;
-  font-weight: 400;
-  font-size: 50px;
-  line-height: 1.16;
-  letter-spacing: -2px;
 }
 
 .techs__text {
-  margin: 0;
-  padding: 0;
-  max-width: 460px;
-  text-align: center;
-  font-weight: 400;
   font-size: 14px;
-  line-height: 1.42;
+  font-weight: 400;
   letter-spacing: -0.6px;
+  line-height: 1.42;
+  margin: 0;
+  max-width: 460px;
+  padding: 0;
+  text-align: center;
 }
 
 .techs__chapter-technologies {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  align-items: center;
   display: flex;
   gap: 16px;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .techs__specification-name {
-  width: 84px;
-  height: 57px;
-  margin: 0;
-  padding: 0;
+  align-items: center;
   background-color: #303030;
   border-radius: 10px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.21;
   display: flex;
+  font-size: 14px;
+  font-weight: 400;
+  height: 57px;
   justify-content: center;
-  align-items: center;
   letter-spacing: -0.6px;
+  line-height: 1.21;
+  margin: 0;
+  padding: 0;
+  width: 84px;
 }
 
 @media (width <= 800px) {
@@ -69,17 +68,18 @@
   }
 
   .techs__chapter-description {
-    padding: 80px 0 83px;
     gap: 23px;
+    padding: 80px 0 83px;
   }
 
   .techs__text {
     font-size: 12px;
-    line-height: 1.5;
     letter-spacing: -0.5px;
+    line-height: 1.5;
   }
 
   .techs__chapter-technologies {
+    flex-wrap: wrap;
     gap: 10px;
   }
 
@@ -91,7 +91,7 @@
 
 @media (width <= 600px) {
   .techs {
-    padding: 50px 18px 0;
+    padding: 50px 18px 70px;
   }
 
   .techs__subtitle {
@@ -105,16 +105,16 @@
   }
 
   .techs__chapter-description {
-    padding: 60px 0 51px;
     gap: 23px;
+    padding: 60px 0 51px;
   }
 }
 
 @media (width <= 400px) {
   .techs__chapter-technologies {
-    max-width: 178px;
     justify-content: flex-start;
     margin: auto;
+    max-width: 178px;
   }
 
   .techs {

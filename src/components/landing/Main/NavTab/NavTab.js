@@ -6,15 +6,19 @@ function NavTab() {
     <nav className="nav-tab">
       <ul className="nav-tab__links">
         <li>
-          <h2 className="nav-tab__link cursor-pointer link-hover">О проекте</h2>
+          <a href="#link" target="_blank" className="nav-tab__link link-hover">
+            О проекте
+          </a>
         </li>
         <li>
-          <h2 className="nav-tab__link cursor-pointer link-hover">
+          <a href="#link" target="_blank" className="nav-tab__link link-hover">
             Технологии
-          </h2>
+          </a>
         </li>
         <li>
-          <h2 className="nav-tab__link cursor-pointer link-hover">Студент</h2>
+          <a href="#link" target="_blank" className="nav-tab__link link-hover">
+            Студент
+          </a>
         </li>
       </ul>
     </nav>
