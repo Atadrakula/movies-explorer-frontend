@@ -37,26 +37,6 @@ function AboutMe() {
         </ul>
         <img src={avatar} alt="Аватар студента" className="about-me__avatar" />
       </div>
-      <ul className="about-me__chapter-portfolio">
-        <li>
-          <h3 className="about-me__subtitle">Портфолио</h3>
-        </li>
-        <li className="about-me__site-container cursor-pointer link-hover">
-          <a href="#link" target="_blank" className="about-me__site">
-            Статичный сайт
-          </a>
-        </li>
-        <li className="about-me__site-container cursor-pointer link-hover">
-          <a href="#link" target="_blank" className="about-me__site">
-            Адаптивный сайт
-          </a>
-        </li>
-        <li className="about-me__site-container cursor-pointer link-hover">
-          <a href="#link" target="_blank" className="about-me__site">
-            Одностраничное приложение
-          </a>
-        </li>
-      </ul>
     </section>
   );
 }

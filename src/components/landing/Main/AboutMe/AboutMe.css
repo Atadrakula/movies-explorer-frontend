@@ -1,14 +1,13 @@
 @import url('../../../common/link-hover.css');
-@import url('../../../common/cursor-pointer.css');
 
 .about-me {
-  padding: 90px 70px 125px;
+  padding: 110px 70px 0;
 }
 
 .about-me__chapter-description-with-avatar {
   display: flex;
   justify-content: space-between;
-  padding: 66px 0 100px;
+  padding: 66px 0;
 }
 
 .about-me__avatar {
@@ -66,56 +65,13 @@
   text-decoration: none;
 }
 
-.about-me__chapter-portfolio {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.about-me__subtitle {
-  color: #8b8b8b;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.11;
-  margin: 0;
-  margin-bottom: 30px;
-  padding: 0;
-}
-
-.about-me__site-container {
-  background-image: url('../../../../images/link-arrow.svg');
-  background-position: bottom 33px right 7px;
-  background-repeat: no-repeat;
-  border-bottom: 1px solid #424242;
-  min-height: 70px;
-  width: 100%;
-}
-
-.about-me__site-container:last-child {
-  border-bottom: none;
-}
-
-.about-me__site {
-  color: #fff;
-  font-size: 30px;
-  font-weight: 500;
-  letter-spacing: -1.5px;
-  line-height: 1.66;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-}
-
 @media (width <= 800px) {
   .about-me {
-    padding: 90px 50px;
+    padding: 90px 50px 0;
   }
 
   .about-me__chapter-description-with-avatar {
-    padding: 66px 0 90px;
+    padding: 66px 0 0;
   }
 
   .about-me__name {
@@ -141,19 +97,11 @@
     height: 307px;
     width: 255px;
   }
-
-  .about-me__chapter-portfolio {
-    gap: 19px;
-  }
-
-  .about-me__site {
-    letter-spacing: -2.5px;
-  }
 }
 
 @media (width <= 600px) {
   .about-me {
-    padding: 70px 14px;
+    padding: 70px 14px 0;
   }
 
   .about-me__chapter-description-with-avatar {
@@ -161,7 +109,7 @@
     flex-direction: column-reverse;
     gap: 40px;
     justify-content: center;
-    padding: 60px 0 70px;
+    padding: 60px 0 35px;
   }
 
   .about-me__chapter-description {
@@ -189,30 +137,5 @@
   .about-me__avatar {
     height: 352px;
     width: 292px;
-  }
-
-  .about-me__chapter-portfolio {
-    gap: 12px;
-  }
-
-  .about-me__subtitle {
-    font-size: 14px;
-    line-height: 1.42;
-    margin-bottom: 16px;
-  }
-
-  .about-me__site-container {
-    align-items: center;
-    background-position: bottom 24px right 5px;
-    background-size: 11px;
-    display: flex;
-    min-height: 55px;
-    width: 100%;
-  }
-
-  .about-me__site {
-    font-size: 18px;
-    letter-spacing: -1.5px;
-    line-height: 1.66;
   }
 }
