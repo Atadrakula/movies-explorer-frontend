@@ -2,6 +2,7 @@
 @import url('../../../common/cursor-pointer.css');
 
 .portfolio {
+  margin-bottom: 130px;
   padding: 33px 70px;
 }
 
@@ -64,6 +65,7 @@
 
 @media (width <= 600px) {
   .portfolio {
+    margin-bottom: 81px;
     padding: 33px 14px;
   }
 

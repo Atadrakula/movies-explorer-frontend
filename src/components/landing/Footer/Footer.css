@@ -1,0 +1,78 @@
+@import url('../../common/link-hover.css');
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px 70px;
+}
+
+.footer__subtitle {
+  border-bottom: 1px solid #424242;
+  color: #8b8b8b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.21;
+  margin: 0;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.footer__links-with-year {
+  align-items: center;
+  display: flex;
+  font-size: 13px;
+  font-weight: 400;
+  justify-content: space-between;
+  line-height: 1.21;
+  margin: 0;
+}
+
+.footer__year {
+  margin: 0;
+}
+
+.footer__links {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__link {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (width <= 800px) {
+  .footer {
+    padding: 20px 30px;
+  }
+}
+
+@media (width <= 600px) {
+  .footer {
+    gap: 32px;
+    padding: 23px 10px;
+  }
+
+  .footer__subtitle {
+    font-size: 12px;
+  }
+
+  .footer__links-with-year {
+    flex-direction: column-reverse;
+    font-size: 12px;
+    gap: 30px;
+  }
+
+  .footer__links {
+    flex-direction: column;
+    gap: 14px;
+  }
+}
