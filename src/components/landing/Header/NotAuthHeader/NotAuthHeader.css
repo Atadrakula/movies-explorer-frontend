@@ -3,21 +3,21 @@
 @import url('../../../common/link-hover.css');
 
 .not-auth-header {
-  align-items: center;
-  background-color: #073042;
+  padding: 0 70px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: #073042;
   min-height: 74px;
-  padding: 0 70px;
 }
 
 .not-auth-header__links {
-  align-items: center;
-  display: flex;
-  gap: 30px;
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style-type: none;
 }
 
 .not-auth-header__link {
@@ -29,17 +29,17 @@
 }
 
 .not-auth-header__button {
-  background-color: #3ddc84;
-  border: 0;
-  border-radius: 3px;
-  color: black;
-  display: block;
-  font-size: 12px;
-  font-weight: 500;
-  height: 32px;
-  line-height: 1.38;
   padding: 0;
   width: 76px;
+  height: 32px;
+  display: block;
+  color: black;
+  background-color: #3ddc84;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.38;
+  border: 0;
+  border-radius: 3px;
 }
 
 @media (width <= 800px) {
@@ -50,9 +50,9 @@
 
 @media (width <= 400px) {
   .not-auth-header__button {
-    font-size: 10px;
-    height: 26px;
     width: 52px;
+    height: 26px;
+    font-size: 10px;
   }
 
   .not-auth-header {

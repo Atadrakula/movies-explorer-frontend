@@ -5,63 +5,63 @@
 }
 
 .about-me__chapter-description-with-avatar {
+  padding: 66px 0;
   display: flex;
   justify-content: space-between;
-  padding: 66px 0;
 }
 
 .about-me__avatar {
-  border-radius: 10px;
-  height: 327px;
   width: 270px;
+  height: 327px;
+  border-radius: 10px;
 }
 
 .about-me__chapter-description {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  margin: 0;
   max-width: 600px;
-  padding: 0;
   padding-right: 50px;
 }
 
 .about-me__name {
+  margin: 0;
+  padding: 0;
   font-size: 50px;
   font-weight: 400;
-  letter-spacing: -2px;
   line-height: 1.16;
-  margin: 0;
+  letter-spacing: -2px;
   margin-bottom: 17px;
-  padding: 0;
 }
 
 .about-me__activity {
+  margin: 0;
+  padding: 0;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.42;
-  margin: 0;
   margin-bottom: 22px;
-  padding: 0;
 }
 
 .about-me__text {
+  margin: 0;
+  padding: 0;
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: 0.01px;
   line-height: 1.57;
-  margin: 0;
+  letter-spacing: 0.01px;
   margin-bottom: 98px;
-  padding: 0;
 }
 
 .about-me__github-link {
+  margin: 0;
+  padding: 0;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.21;
-  margin: 0;
-  padding: 0;
   text-decoration: none;
 }
 
@@ -94,8 +94,8 @@
   }
 
   .about-me__avatar {
-    height: 307px;
     width: 255px;
+    height: 307px;
   }
 }
 
@@ -105,11 +105,11 @@
   }
 
   .about-me__chapter-description-with-avatar {
-    align-items: center;
-    flex-direction: column-reverse;
-    gap: 40px;
-    justify-content: center;
     padding: 60px 0 35px;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
   }
 
   .about-me__chapter-description {
@@ -135,7 +135,7 @@
   }
 
   .about-me__avatar {
-    height: 352px;
     width: 292px;
+    height: 352px;
   }
 }

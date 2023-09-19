@@ -1,33 +1,33 @@
 @import url('../../common/link-hover.css');
 
 .footer {
+  padding: 20px 70px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
-  gap: 20px;
   justify-content: center;
-  padding: 20px 70px;
+  gap: 20px;
+  flex-shrink: 0;
 }
 
 .footer__subtitle {
-  border-bottom: 1px solid #424242;
+  margin: 0;
   color: #8b8b8b;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.21;
-  margin: 0;
+  border-bottom: 1px solid #424242;
   padding-bottom: 20px;
   text-align: center;
 }
 
 .footer__links-with-year {
-  align-items: center;
+  margin: 0;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 13px;
   font-weight: 400;
-  justify-content: space-between;
   line-height: 1.21;
-  margin: 0;
 }
 
 .footer__year {
@@ -35,13 +35,13 @@
 }
 
 .footer__links {
-  align-items: center;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style-type: none;
 }
 
 .footer__link {
@@ -57,8 +57,8 @@
 
 @media (width <= 600px) {
   .footer {
-    gap: 32px;
     padding: 23px 10px;
+    gap: 32px;
   }
 
   .footer__subtitle {
@@ -67,8 +67,8 @@
 
   .footer__links-with-year {
     flex-direction: column-reverse;
-    font-size: 12px;
     gap: 30px;
+    font-size: 12px;
   }
 
   .footer__links {

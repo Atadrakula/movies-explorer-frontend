@@ -1,65 +1,65 @@
 .techs {
-  background-color: #272727;
   padding: 100px 70px;
+  background-color: #272727;
 }
 
 /* переиспользовать? */
 
 .techs__chapter-description {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-  justify-content: center;
-  list-style-type: none;
   margin: 0;
   padding: 90px 0 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  list-style-type: none;
 }
 
 .techs__subtitle {
-  font-size: 50px;
-  font-weight: 400;
-  letter-spacing: -2px;
-  line-height: 1.16;
   margin: 0;
   padding: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
 }
 
 .techs__text {
+  margin: 0;
+  padding: 0;
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: -0.6px;
   line-height: 1.42;
-  margin: 0;
+  letter-spacing: -0.6px;
   max-width: 460px;
-  padding: 0;
   text-align: center;
 }
 
 .techs__chapter-technologies {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  list-style-type: none;
 }
 
 .techs__specification-name {
-  align-items: center;
-  background-color: #303030;
-  border-radius: 10px;
-  display: flex;
-  font-size: 14px;
-  font-weight: 400;
-  height: 57px;
-  justify-content: center;
-  letter-spacing: -0.6px;
-  line-height: 1.21;
   margin: 0;
   padding: 0;
   width: 84px;
+  height: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #303030;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  border-radius: 10px;
+  letter-spacing: -0.6px;
 }
 
 @media (width <= 800px) {
@@ -68,8 +68,8 @@
   }
 
   .techs__chapter-description {
-    gap: 23px;
     padding: 80px 0 83px;
+    gap: 23px;
   }
 
   .techs__text {
@@ -105,15 +105,15 @@
   }
 
   .techs__chapter-description {
-    gap: 23px;
     padding: 60px 0 51px;
+    gap: 23px;
   }
 }
 
 @media (width <= 400px) {
   .techs__chapter-technologies {
-    justify-content: flex-start;
     margin: auto;
+    justify-content: flex-start;
     max-width: 178px;
   }
 
