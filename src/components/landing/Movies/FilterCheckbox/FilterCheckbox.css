@@ -64,7 +64,7 @@
   }
 }
 
-@media (width <= 800px) {
+@media (width <= 400px) {
   .filtercheckbox__container {
     padding-bottom: 49px;
   }

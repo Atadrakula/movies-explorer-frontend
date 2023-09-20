@@ -4,15 +4,15 @@ import './Movies.css';
 import SearchForm from './SearchForm/SearchForm';
 import Preloader from './Preloader/Preloader';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-import MoviesCard from './MoviesCard/MoviesCard';
+
+import moviesCards from '../../../utils/constants';
 
 function Movies() {
   return (
     <main className="movies">
       <SearchForm />
       {/* <Preloader /> */}
-      <MoviesCardList />
-      <MoviesCard />
+      <MoviesCardList moviescards={moviesCards} />
     </main>
   );
 }

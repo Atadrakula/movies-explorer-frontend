@@ -2,7 +2,7 @@
 @import url('../../../common/cursor-pointer.css');
 
 .searchform {
-  padding: 60px 70px;
+  padding: 60px 70px 10px;
   display: flex;
   flex-direction: column;
 }
@@ -33,9 +33,6 @@
   outline: none;
 }
 
-.searchform__input-text-error {
-}
-
 .searchform__submit {
   width: 34px;
   height: 34px;
@@ -49,13 +46,13 @@
 
 @media (width <= 800px) {
   .searchform {
-    padding: 80px 31px;
+    padding: 80px 31px 10px;
   }
 }
 
-@media (width <= 800px) {
+@media (width <= 400px) {
   .searchform {
-    padding: 80px 13px;
+    padding: 80px 13px 20px;
   }
 
   .searchform__form {

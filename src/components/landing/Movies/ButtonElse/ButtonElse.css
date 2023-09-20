@@ -1,0 +1,15 @@
+@import url('../../../common/link-hover.css');
+@import url('../../../common/cursor-pointer.css');
+
+.button-else {
+  /* padding: 50px 70px 80px; */
+  width: 100%;
+  color: #fff;
+  background-color: #2f2f2f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.21;
+  min-height: 36px;
+  border-radius: 6px;
+  border: none;
+}

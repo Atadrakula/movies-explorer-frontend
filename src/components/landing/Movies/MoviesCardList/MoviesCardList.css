@@ -1,0 +1,45 @@
+@import url('../../../common/link-hover.css');
+@import url('../../../common/cursor-pointer.css');
+
+.moviesccardlist {
+  padding: 70px 70px 0;
+  margin-bottom: 139px;
+}
+
+.moviesccardlist__moviescards {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  flex-wrap: wrap;
+  row-gap: 53px;
+  column-gap: 24px;
+  overflow: hidden;
+  margin-bottom: 76px;
+}
+
+@media (width <= 900px) {
+  .moviesccardlist {
+    padding: 70px 30px 0;
+  }
+
+  .moviesccardlist__moviescards {
+    row-gap: 44px;
+    column-gap: 24px;
+    margin-bottom: 93px;
+  }
+}
+
+@media (width <= 400px) {
+  .moviesccardlist {
+    padding: 30px 10px 26px;
+    margin-bottom: 109px;
+  }
+
+  .moviesccardlist__moviescards {
+    row-gap: 26px;
+    column-gap: 0;
+    margin-bottom: 91px;
+  }
+}
