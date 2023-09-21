@@ -3,7 +3,11 @@ import './ButtonElse.css';
 
 function ButtonElse() {
   return (
-    <button className="button-else cursor-pointer link-hover" type="button">
+    <button
+      className="button-else cursor-pointer link-hover"
+      type="button"
+      aria-label="Показать еще фильмы"
+    >
       Ещё
     </button>
   );

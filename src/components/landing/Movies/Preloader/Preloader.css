@@ -41,7 +41,7 @@
 .preloader__round {
   width: 100px;
   height: 100px;
-  background: #ff6838;
+  background: #202020;
   border-radius: 50px;
   left: 0;
   position: absolute;
@@ -61,11 +61,11 @@
 
 .preloader__round::after {
   animation: preloader-inside-white 1s ease-in-out infinite;
-  background: white;
+  background: #716f6f;
 }
 
 .preloader__round::before {
   animation: preloader-inside-red 1s ease-in-out infinite;
-  background: #ff6838;
+  background: #202020;
   z-index: 10;
 }

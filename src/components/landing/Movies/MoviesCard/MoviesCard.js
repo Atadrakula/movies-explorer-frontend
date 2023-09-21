@@ -21,7 +21,7 @@ function MoviesCard({ moviescard }) {
       />
       <div className="moviescard__name-form">
         <h2 className="moviescard__name">{moviescard.name}</h2>
-        <button className={cardLikedClassName}></button>
+        <button className={cardLikedClassName} aria-label="Лайкнуть"></button>
       </div>
       <p className="moviescard__time">{moviescard.time}</p>
     </li>

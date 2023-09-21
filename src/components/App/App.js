@@ -8,6 +8,9 @@ import Footer from '../landing/Footer/Footer.js';
 import React, { useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import NotFound from '../landing/NotFound/NotFound';
+import Preloader from '../landing/Movies/Preloader/Preloader';
+import SavedMovies from '../landing/SavedMovies/SavedMovies';
+import Profile from '../landing/Profile/Profile';
 // import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -19,12 +22,14 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
+          <AuthHeader />
           {/* <NotAuthHeader /> */}
           {/* <Main /> */}
-          {/* <AuthHeader /> */}
           {/* <Movies /> */}
+          {/* <SavedMovies /> */}
           {/* <Footer /> */}
-          <NotFound />
+          {/* <NotFound /> */}
+          <Profile />
         </div>
       </div>
     </CurrentUserContext.Provider>
