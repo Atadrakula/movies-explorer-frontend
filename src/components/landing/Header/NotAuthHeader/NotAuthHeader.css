@@ -7,8 +7,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #073042;
   min-height: 74px;
+}
+
+.not-auth-header_theme_dark {
+  background-color: inherit;
+}
+
+.not-auth-header_theme_light {
+  background-color: #073042;
 }
 
 .not-auth-header__links {

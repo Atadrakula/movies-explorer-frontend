@@ -3,9 +3,13 @@ import Logo from '../../../common/Logo/Logo';
 
 import './NotAuthHeader.css';
 
-function NotAuthHeader() {
+function NotAuthHeader({ isThemeDark }) {
+  const backGroundColorClass = `not-auth-header ${
+    isThemeDark ? 'auth-header_theme_dark' : 'auth-header_theme_light'
+  }`;
+
   return (
-    <header className="not-auth-header">
+    <header className={backGroundColorClass}>
       <Logo />
       <ul className="not-auth-header__links">
         <li>

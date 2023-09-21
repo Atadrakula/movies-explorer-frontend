@@ -5,8 +5,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #073042;
   min-height: 74px;
+}
+
+.auth-header_theme_dark {
+  background-color: inherit;
+}
+
+.auth-header_theme_light {
+  background-color: #073042;
 }
 
 .auth-header__navigation-and-logo-container {

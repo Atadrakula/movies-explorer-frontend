@@ -22,7 +22,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          <AuthHeader />
+          <AuthHeader isTheme={true} />
           {/* <NotAuthHeader /> */}
           {/* <Main /> */}
           {/* <Movies /> */}

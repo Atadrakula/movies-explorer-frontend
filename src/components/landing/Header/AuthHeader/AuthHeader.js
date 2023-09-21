@@ -3,9 +3,13 @@ import React from 'react';
 import Logo from '../../../common/Logo/Logo';
 import './AuthHeader.css';
 
-function AuthHeader() {
+function AuthHeader({ isThemeDark }) {
+  const backGroundColorClass = `auth-header ${
+    isThemeDark ? 'auth-header_theme_dark' : 'auth-header_theme_light'
+  }`;
+
   return (
-    <header className="auth-header">
+    <header className={backGroundColorClass}>
       <div className="auth-header__navigation-and-logo-container">
         <Logo />
         <ul className="auth-header__links">
