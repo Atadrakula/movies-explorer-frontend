@@ -6,7 +6,7 @@ function Logo({ isPageWithAuth }) {
   const typePageClass = `logo ${isPageWithAuth ? 'logo__auth' : ''}`;
 
   return (
-    <Link to="/main">
+    <Link to="/">
       <img src={logo} alt="Логотип" className={typePageClass} id="logo" />
     </Link>
   );

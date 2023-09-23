@@ -1,0 +1,31 @@
+@import url('../link-hover.css');
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.profile-icon__name {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 0.92;
+}
+
+.profile-icon__logo-container {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f4157;
+  background-image: url('../../../images/profile-logo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  border-radius: 50%;
+}

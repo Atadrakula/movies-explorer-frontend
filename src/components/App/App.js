@@ -13,27 +13,38 @@ import SavedMovies from '../landing/SavedMovies/SavedMovies';
 import Profile from '../landing/Profile/Profile';
 import Register from '../landing/Register/Register';
 import Login from '../landing/Login/Login';
+import PopupMenu from '../landing/Movies/PopupMenu/PopupMenu';
 // import { Route, Routes } from 'react-router-dom';
 
 function App() {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ _id: '12345' });
   const [visibleCards, setVisibleCards] = useState();
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  function openPopupMenu() {
+    setPopupVisible(true);
+  }
+
+  function closePopupMenu() {
+    setPopupVisible(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          {/* <AuthHeader isTheme={true} /> */}
+          <AuthHeader isThemeDark={true} isOpen={openPopupMenu} />
           {/* <NotAuthHeader /> */}
           {/* <Main /> */}
-          {/* <Movies /> */}
+          <Movies />
           {/* <SavedMovies /> */}
-          {/* <Footer /> */}
+          <Footer />
           {/* <NotFound /> */}
           {/* <Profile /> */}
           {/* <Register /> */}
-          <Login />
+          {/* <Login /> */}
+          <PopupMenu onClose={closePopupMenu} isOpen={isPopupVisible} />
         </div>
       </div>
     </CurrentUserContext.Provider>
