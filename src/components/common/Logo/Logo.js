@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import logo from '../../../images/logo.svg';
 import './Logo.css';
 
-function Logo() {
+function Logo({ isPageWithAuth }) {
+  const typePageClass = `logo ${isPageWithAuth ? 'logo__auth' : ''}`;
+
   return (
     <Link to="/main">
-      <img src={logo} alt="Логотип" className="logo" id="logo" />
+      <img src={logo} alt="Логотип" className={typePageClass} id="logo" />
     </Link>
   );
 }

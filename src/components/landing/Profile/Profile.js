@@ -6,7 +6,7 @@ function Profile() {
     <section className="profile">
       <h1 className="profile__name">Привет, Виталий!</h1>
       <form action="#" className="profile__form">
-        <fieldset className="profile__container-input">
+        <div className="profile__container-input">
           <div className="profile__label-input-wrapper">
             <label htmlFor="profile-text" className="profile__label">
               Имя
@@ -20,8 +20,8 @@ function Profile() {
             />
           </div>
           <span className="profile__input-text-error"></span>
-        </fieldset>
-        <fieldset className="profile__container-input">
+        </div>
+        <div className="profile__container-input">
           <div className="profile__label-input-wrapper">
             <label htmlFor="profile-email" className="profile__label">
               E-mail
@@ -35,7 +35,7 @@ function Profile() {
             />
           </div>
           <span className="profile__input-text-error"></span>
-        </fieldset>
+        </div>
       </form>
       <button
         className="profile__button-edit cursor-pointer"

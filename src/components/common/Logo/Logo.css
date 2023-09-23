@@ -3,3 +3,17 @@
   height: 38px;
   display: block;
 }
+
+.logo__auth {
+  position: absolute;
+  left: 0%;
+  top: 70px;
+}
+
+@media (width <= 450px) {
+  .logo__auth {
+    position: absolute;
+    left: 43%;
+    top: 7.5%;
+  }
+}
