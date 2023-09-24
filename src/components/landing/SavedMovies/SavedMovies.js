@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import './SavedMovies.css';
-import SearchForm from '../Movies/SearchForm/SearchForm';
-import MoviesCardList from './MoviesCardList/MoviesCardList';
+import SearchForm from '../common/SearchForm/SearchForm';
+import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 
 import moviesCards from '../../../utils/constants';
 

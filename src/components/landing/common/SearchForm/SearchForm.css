@@ -1,5 +1,5 @@
-@import url('../../../common/link-hover.css');
-@import url('../../../common/cursor-pointer.css');
+@import url('../../common/link-hover.css');
+@import url('../../common/cursor-pointer.css');
 
 .searchform {
   padding: 60px 70px 10px;

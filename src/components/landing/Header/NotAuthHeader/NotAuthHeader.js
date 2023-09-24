@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../../../common/Logo/Logo';
+import Logo from '../../common/Logo/Logo';
 
 import './NotAuthHeader.css';
 

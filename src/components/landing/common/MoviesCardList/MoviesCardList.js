@@ -2,9 +2,8 @@ import React from 'react';
 import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
-import ButtonElse from '../ButtonElse/ButtonElse';
 
-function MoviesCardList({ moviescards }) {
+function MoviesCardList({ children, moviescards }) {
   return (
     <section className="moviesccardlist">
       <ul className="moviesccardlist__moviescards">
@@ -12,7 +11,7 @@ function MoviesCardList({ moviescards }) {
           <MoviesCard key={moviescard._id} moviescard={moviescard} />
         ))}
       </ul>
-      <ButtonElse />
+      {children}
     </section>
   );
 }

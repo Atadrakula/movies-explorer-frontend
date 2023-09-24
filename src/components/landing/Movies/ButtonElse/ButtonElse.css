@@ -1,5 +1,5 @@
-@import url('../../../common/link-hover.css');
-@import url('../../../common/cursor-pointer.css');
+@import url('../../common/button-hover.css');
+@import url('../../common/cursor-pointer.css');
 
 .button-else {
   /* padding: 50px 70px 80px; */

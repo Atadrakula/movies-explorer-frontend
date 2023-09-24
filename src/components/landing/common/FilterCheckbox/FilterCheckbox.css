@@ -1,4 +1,4 @@
-@import url('../../../common/cursor-pointer.css');
+@import url('../../common/cursor-pointer.css');
 
 .filtercheckbox__container {
   display: flex;
@@ -14,15 +14,6 @@
   width: 0;
   height: 0;
   visibility: hidden;
-}
-
-.filtercheckbox__input:checked + .filtercheckbox__label {
-  background: #3ddc84;
-}
-
-.filtercheckbox__input:checked + .filtercheckbox__label::after {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
 }
 
 .filtercheckbox__label {
@@ -49,6 +40,15 @@
 
 .filtercheckbox__label:active::after {
   width: 21px;
+}
+
+.filtercheckbox__input:checked + .filtercheckbox__label {
+  background: #3ddc84;
+}
+
+.filtercheckbox__input:checked + .filtercheckbox__label::after {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
 }
 
 .filtercheckbox__text {

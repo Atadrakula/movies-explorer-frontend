@@ -1,5 +1,5 @@
 import React from 'react';
-import ChapterTitle from '../../../common/ChapterTitle/ChapterTitle';
+import ChapterTitle from '../../common/ChapterTitle/ChapterTitle';
 import './AboutMe.css';
 import avatar from '../../../../images/avatar-student.png';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Logo from '../../../common/Logo/Logo';
-import MenuIcon from '../../../common/MenuIcon/MenuIcon';
-import ProfileIcon from '../../../common/ProfileIcon/ProfileIcon';
+import Logo from '../../common/Logo/Logo';
+import MenuIcon from '../../common/MenuIcon/MenuIcon';
+import ProfileIcon from '../../common/ProfileIcon/ProfileIcon';
 import './AuthHeader.css';
 
 function AuthHeader({ isThemeDark, isOpen }) {

@@ -1,8 +1,8 @@
-@import url('../../../common/button-hover.css');
-@import url('../../../common/cursor-pointer.css');
-@import url('../../../common/link-hover.css');
-@import url('../../../common/popup_visible.css');
-@import url('../../../common/popup_invisible.css');
+@import url('../common/button-hover.css');
+@import url('../common/cursor-pointer.css');
+@import url('../common/link-hover.css');
+@import url('../common/popup_visible.css');
+@import url('../common/popup_invisible.css');
 
 .popup {
   width: 100%;
@@ -46,7 +46,7 @@
   right: 27px;
   border: none;
   box-sizing: border-box;
-  background: no-repeat center/32px 32px url('../../../../images/Close.svg');
+  background: no-repeat center/32px 32px url('../../../images/Close.svg');
   z-index: 21;
 }
 

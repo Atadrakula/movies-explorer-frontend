@@ -13,7 +13,7 @@ import SavedMovies from '../landing/SavedMovies/SavedMovies';
 import Profile from '../landing/Profile/Profile';
 import Register from '../landing/Register/Register';
 import Login from '../landing/Login/Login';
-import PopupMenu from '../landing/Movies/PopupMenu/PopupMenu';
+import PopupMenu from '../landing/PopupMenu/PopupMenu';
 // import { Route, Routes } from 'react-router-dom';
 
 function App() {

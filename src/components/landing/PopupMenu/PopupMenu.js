@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProfileIcon from '../../../common/ProfileIcon/ProfileIcon';
+import ProfileIcon from '../common/ProfileIcon/ProfileIcon';
 import './PopupMenu.css';
 
 function PopupMenu({ onClose, isOpen }) {
