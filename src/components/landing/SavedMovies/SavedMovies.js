@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import './SavedMovies.css';
 import SearchForm from '../common/SearchForm/SearchForm';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
@@ -27,5 +25,3 @@ function SavedMovies() {
 }
 
 export default SavedMovies;
-
-// доделать

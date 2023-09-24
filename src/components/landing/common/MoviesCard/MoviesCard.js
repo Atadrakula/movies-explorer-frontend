@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 
 function MoviesCard({ moviescard, isSavedMovies }) {
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = moviescard.owner === currentUser._id;
   const isLiked =
     moviescard.like && moviescard.like.some((i) => i === currentUser._id);
   const [isMobile, setIsMobile] = useState(false);

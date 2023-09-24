@@ -9,17 +9,32 @@ function Portfolio() {
           <h3 className="portfolio__subtitle">Портфолио</h3>
         </li>
         <li className="portfolio__site-container cursor-pointer link-hover">
-          <a href="#link" target="_blank" className="portfolio__site">
+          <a
+            href="https://atadrakula.github.io/how-to-learn/"
+            target="_blank"
+            className="portfolio__site"
+            rel="noreferrer"
+          >
             Статичный сайт
           </a>
         </li>
         <li className="portfolio__site-container cursor-pointer link-hover">
-          <a href="#link" target="_blank" className="portfolio__site">
+          <a
+            href="https://atadrakula.github.io/russian-travel/"
+            target="_blank"
+            className="portfolio__site"
+            rel="noreferrer"
+          >
             Адаптивный сайт
           </a>
         </li>
         <li className="portfolio__site-container cursor-pointer link-hover">
-          <a href="#link" target="_blank" className="portfolio__site">
+          <a
+            href="https://web.portfolio.nomoreparties.co"
+            target="_blank"
+            className="portfolio__site"
+            rel="noreferrer"
+          >
             Одностраничное приложение
           </a>
         </li>

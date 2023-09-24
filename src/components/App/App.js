@@ -5,22 +5,23 @@ import NotAuthHeader from '../landing/Header/NotAuthHeader/NotAuthHeader';
 import Main from '../landing/Main/Main.js';
 import Movies from '../landing/Movies/Movies';
 import Footer from '../landing/Footer/Footer.js';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import NotFound from '../landing/NotFound/NotFound';
-import Preloader from '../landing/Movies/Preloader/Preloader';
 import SavedMovies from '../landing/SavedMovies/SavedMovies';
-import Profile from '../landing/PopupProfile/PopupProfile';
+import PopupProfile from '../landing/PopupProfile/PopupProfile';
 import Register from '../landing/Register/Register';
 import Login from '../landing/Login/Login';
 import PopupMenu from '../landing/PopupMenu/PopupMenu';
-// import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 function App() {
-  // const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({ _id: '12345' });
-  const [visibleCards, setVisibleCards] = useState();
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isThemeDark, setIsThemeDark] = useState(false);
+
+  const location = useLocation();
 
   function openPopupMenu() {
     setPopupVisible(true);
@@ -30,20 +31,37 @@ function App() {
     setPopupVisible(false);
   }
 
+  useEffect(() => {
+    const darkThemeRoutes = ['/movies', '/saved-movies', '/profile'];
+    setIsThemeDark(darkThemeRoutes.includes(location.pathname));
+  }, [location]);
+
+  const isRouteWithoutHeaderAndFooter = ['/signin', '/signup', '*'].includes(
+    location.pathname,
+  );
+  const isAuthHeaderVisible = loggedIn && !isRouteWithoutHeaderAndFooter;
+  const isNotAuthHeaderVisible = !loggedIn && !isRouteWithoutHeaderAndFooter;
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          <AuthHeader isThemeDark={true} isOpen={openPopupMenu} />
-          {/* <NotAuthHeader /> */}
-          {/* <Main /> */}
-          <Movies />
-          {/* <SavedMovies /> */}
-          <Footer />
-          {/* <NotFound /> */}
-          {/* <Profile /> */}
-          {/* <Register /> */}
-          {/* <Login /> */}
+          {isAuthHeaderVisible && (
+            <AuthHeader isThemeDark={isThemeDark} isOpen={openPopupMenu} />
+          )}
+          {isNotAuthHeaderVisible && (
+            <NotAuthHeader isThemeDark={isThemeDark} />
+          )}
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/saved-movies" element={<SavedMovies />} />
+            <Route path="/profile" element={<PopupProfile />} />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {!isRouteWithoutHeaderAndFooter && <Footer />}
           <PopupMenu onClose={closePopupMenu} isOpen={isPopupVisible} />
         </div>
       </div>

@@ -59,11 +59,13 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  color: #fff;
   font-size: 11px;
   font-weight: 400;
   line-height: 1.21;
   border: none;
   background: transparent;
+  text-align: end;
 }
 
 .profile__input::placeholder {

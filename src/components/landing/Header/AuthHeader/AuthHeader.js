@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Logo from '../../common/Logo/Logo';
 import MenuIcon from '../../common/MenuIcon/MenuIcon';
 import ProfileIcon from '../../common/ProfileIcon/ProfileIcon';
@@ -30,14 +31,28 @@ function AuthHeader({ isThemeDark, isOpen }) {
         <Logo />
         <ul className="auth-header__links">
           <li>
-            <a href="#link" className="auth-header__link link-hover">
+            <NavLink
+              to="/movies"
+              className={({ isActive }) =>
+                isActive
+                  ? 'auth-header__link link-hover auth-header__link_active'
+                  : 'auth-header__link link-hover'
+              }
+            >
               Фильмы
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#link" className="auth-header__link link-hover">
+            <NavLink
+              to="/saved-movies"
+              className={({ isActive }) =>
+                isActive
+                  ? 'auth-header__link link-hover auth-header__link_active'
+                  : 'auth-header__link link-hover'
+              }
+            >
               Сохранённые фильмы
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

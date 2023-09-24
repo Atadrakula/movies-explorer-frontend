@@ -39,6 +39,10 @@
   text-decoration: none;
 }
 
+.auth-header__link_active {
+  font-weight: 500;
+}
+
 @media (width <= 800px) {
   .auth-header__links {
     display: none;

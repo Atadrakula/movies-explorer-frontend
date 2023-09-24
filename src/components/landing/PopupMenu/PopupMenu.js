@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ProfileIcon from '../common/ProfileIcon/ProfileIcon';
 import './PopupMenu.css';
 
@@ -20,22 +20,40 @@ function PopupMenu({ onClose, isOpen }) {
         />
         <ul className="popup-menu__links">
           <li>
-            <Link to="/" className="popup-menu__link link-hover">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? 'popup-menu__link link-hover popup-menu__link_active'
+                  : 'popup-menu__link link-hover'
+              }
+            >
               Главная
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/movies"
-              className="popup-menu__link link-hover popup-menu__link_active"
+              className={({ isActive }) =>
+                isActive
+                  ? 'popup-menu__link link-hover popup-menu__link_active'
+                  : 'popup-menu__link link-hover'
+              }
             >
               Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/saved-movies" className="popup-menu__link link-hover">
+            <NavLink
+              to="/saved-movies"
+              className={({ isActive }) =>
+                isActive
+                  ? 'popup-menu__link link-hover popup-menu__link_active'
+                  : 'popup-menu__link link-hover'
+              }
+            >
               Сохранённые фильмы
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <ProfileIcon />

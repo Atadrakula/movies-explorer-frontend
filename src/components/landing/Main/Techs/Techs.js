@@ -4,7 +4,7 @@ import './Techs.css';
 
 function Techs() {
   return (
-    <section className="techs">
+    <section className="techs" id="about-techs">
       <ChapterTitle borderColor="#000" text={'Технологии'} />
       <ul className="techs__chapter-description">
         <li>

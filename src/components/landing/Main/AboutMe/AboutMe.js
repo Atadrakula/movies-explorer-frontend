@@ -5,7 +5,7 @@ import avatar from '../../../../images/avatar-student.png';
 
 function AboutMe() {
   return (
-    <section className="about-me">
+    <section className="about-me" id="about-me">
       <ChapterTitle text={'Студент'} />
       <div className="about-me__chapter-description-with-avatar">
         <ul className="about-me__chapter-description">

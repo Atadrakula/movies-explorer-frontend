@@ -24,8 +24,8 @@ function PageWithIdentification({
   }`;
 
   return (
-    <main className="content-auth">
-      <section className="auth">
+    <section className="content-auth">
+      <div className="auth">
         <Logo isPageWithAuth={true} />
         <h1 className="auth__name">{name}</h1>
         <form action="#" className="auth__form" onSubmit={onSubmit}>
@@ -90,8 +90,8 @@ function PageWithIdentification({
             {linkText}
           </Link>
         </p>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
 

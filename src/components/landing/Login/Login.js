@@ -1,6 +1,5 @@
 import React from 'react';
 import PageWithIdentification from '../common/PageWithIdentification/PageWithIdentification';
-import './Login.css';
 
 function Login() {
   return (
@@ -9,7 +8,7 @@ function Login() {
       textSubmit="Войти"
       signatute="Ещё не зарегистрированы?"
       linkText="Регистрация"
-      linkTo="/sign-up"
+      linkTo="/signup"
       isFormRegistration={false}
     />
   );
