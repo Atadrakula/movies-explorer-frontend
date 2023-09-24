@@ -1,5 +1,5 @@
 import React from 'react';
-import PageWithIdentification from '../PageWithIdentification/PageWithIdentification';
+import PageWithIdentification from '../common/PageWithIdentification/PageWithIdentification';
 import './Register.css';
 
 function Register() {

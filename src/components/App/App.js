@@ -10,7 +10,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import NotFound from '../landing/NotFound/NotFound';
 import Preloader from '../landing/Movies/Preloader/Preloader';
 import SavedMovies from '../landing/SavedMovies/SavedMovies';
-import Profile from '../landing/Profile/Profile';
+import Profile from '../landing/PopupProfile/PopupProfile';
 import Register from '../landing/Register/Register';
 import Login from '../landing/Login/Login';
 import PopupMenu from '../landing/PopupMenu/PopupMenu';

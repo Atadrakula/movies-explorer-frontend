@@ -1,4 +1,5 @@
 @import url('../../common/cursor-pointer.css');
+@import url('../../common/button-hover.css');
 
 .moviescard {
   margin: 0;
@@ -7,7 +8,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 13px;
   background-color: #222;
   border-radius: 6px;
   box-sizing: border-box;
@@ -15,9 +15,16 @@
 
 .moviescard__img {
   margin: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 364px;
+  height: 203px;
+  object-fit: cover;
+}
+
+.moviescard__wrapper-for-cursor {
+  padding-top: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
 }
 
 .moviescard__name-form {
@@ -25,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 23px;
 }
 
 .moviescard__name {
@@ -48,8 +56,27 @@
   border: none;
 }
 
-.moviescard__heart-active {
+.moviescard__heart_active {
   background-image: url('../../../../images/heart_active.svg');
+}
+
+.moviescard__cross {
+  margin: 0;
+  padding: 0;
+  width: 23px;
+  height: 23px;
+  background: no-repeat url('../../../../images/cross_icon.svg') center;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.moviescard__wrapper-for-cursor:hover .moviescard__cross {
+  opacity: 1;
+}
+
+.moviescard__cross_visible {
+  opacity: 1;
 }
 
 .moviescard__time {
@@ -62,7 +89,13 @@
 }
 
 @media (width <= 920px) {
-  .moviescard {
+  .moviescard__img {
+    width: 342px;
+    height: 190px;
+  }
+
+  .moviescard__wrapper-for-cursor {
+    padding-top: 11px;
     gap: 11px;
   }
 
@@ -75,7 +108,12 @@
   }
 }
 
-@media (width <= 767px) {
+@media (width <= 500px) {
+  .moviescard__img {
+    width: 300px;
+    height: 168px;
+  }
+
   .moviescard__name-form {
     padding: 0 15px;
   }

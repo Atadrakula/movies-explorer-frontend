@@ -20,6 +20,7 @@ function SavedMovies() {
       <MoviesCardList
         moviescards={moviesCardsData}
         filterFunction={showLikedMovies}
+        isSavedMovies={true}
       />
     </main>
   );

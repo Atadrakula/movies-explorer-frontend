@@ -20,6 +20,7 @@ function Movies() {
         children={<ButtonElse />}
         moviescards={moviesCardsData}
         filterFunction={showAllMovies}
+        isSavedMovies={false}
       />
     </main>
   );

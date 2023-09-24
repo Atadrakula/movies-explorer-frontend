@@ -1,7 +1,7 @@
 import React from 'react';
 import './PageWithIdentification.css';
 import { Link } from 'react-router-dom';
-import Logo from '../common/Logo/Logo';
+import Logo from '../Logo/Logo';
 
 function PageWithIdentification({
   isFormRegistration,
