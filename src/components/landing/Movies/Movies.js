@@ -5,16 +5,22 @@ import SearchForm from '../common/SearchForm/SearchForm';
 import Preloader from './Preloader/Preloader';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 
-import moviesCards from '../../../utils/constants';
+import moviesCardsData from '../../../utils/constants';
 import PopupMenu from '../PopupMenu/PopupMenu';
 import ButtonElse from './ButtonElse/ButtonElse';
 
 function Movies() {
+  const showAllMovies = (moviescards) => moviescards;
+
   return (
     <main className="movies">
       <SearchForm />
       {/* <Preloader /> */}
-      <MoviesCardList children={<ButtonElse />} moviescards={moviesCards} />
+      <MoviesCardList
+        children={<ButtonElse />}
+        moviescards={moviesCardsData}
+        filterFunction={showAllMovies}
+      />
     </main>
   );
 }

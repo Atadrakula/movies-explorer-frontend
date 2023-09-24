@@ -9,7 +9,7 @@ import card_8 from '../images/pic__8.png';
 import card_9 from '../images/pic__9.png';
 import card_10 from '../images/pic__10.png';
 import card_11 from '../images/pic__11.png';
-import card_12 from '../images/pic__12.png';
+// import card_12 from '../images/pic__12.png';
 
 const moviesCards = [
   {
@@ -111,15 +111,15 @@ const moviesCards = [
     name: 'Пи Джей Харви: A dog called money',
     time: '1ч 4м',
   },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_12',
-    src: card_12,
-    alt: 'Мужчина в очках перед монитором',
-    name: 'По волнам: Искусство звука в кино',
-    time: '1ч 7м',
-  },
+  // {
+  //   owner: '56789',
+  //   like: ['56789'],
+  //   _id: 'card_12',
+  //   src: card_12,
+  //   alt: 'Мужчина в очках перед монитором',
+  //   name: 'По волнам: Искусство звука в кино',
+  //   time: '1ч 7м',
+  // },
 ];
 
 export default moviesCards;
