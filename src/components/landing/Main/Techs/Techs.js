@@ -6,17 +6,13 @@ function Techs() {
   return (
     <section className="techs" id="about-techs">
       <ChapterTitle borderColor="#000" text={'Технологии'} />
-      <ul className="techs__chapter-description">
-        <li>
-          <h3 className="techs__subtitle">7 технологий</h3>
-        </li>
-        <li>
-          <p className="techs__text">
-            На курсе веб-разработки мы освоили технологии, которые применили в
-            дипломном проекте.
-          </p>
-        </li>
-      </ul>
+      <div className="techs__chapter-description">
+        <h3 className="techs__subtitle">7 технологий</h3>
+        <p className="techs__text">
+          На курсе веб-разработки мы освоили технологии, которые применили в
+          дипломном проекте.
+        </p>
+      </div>
       <ul className="techs__chapter-technologies">
         <li>
           <p className="techs__specification-name">HTML</p>

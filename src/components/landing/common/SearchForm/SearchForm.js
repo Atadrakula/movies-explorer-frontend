@@ -9,7 +9,7 @@ function SearchForm() {
         <div className="searchform__input-container">
           <input
             type="text"
-            className="searchform__input"
+            className="searchform__input input-style"
             placeholder="Фильм"
             aria-label="Поиск"
           />

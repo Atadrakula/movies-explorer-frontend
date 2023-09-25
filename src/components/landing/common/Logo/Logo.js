@@ -3,7 +3,7 @@ import logo from '../../../../images/logo.svg';
 import './Logo.css';
 
 function Logo({ isPageWithAuth }) {
-  const typePageClass = `logo ${isPageWithAuth ? 'logo__auth' : ''}`;
+  const typePageClass = `logo ${isPageWithAuth ? 'logo-auth' : ''}`;
 
   return (
     <Link to="/">

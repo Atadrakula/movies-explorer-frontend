@@ -1,7 +1,7 @@
 import React from 'react';
 import './Movies.css';
 import SearchForm from '../common/SearchForm/SearchForm';
-import Preloader from './Preloader/Preloader';
+// import Preloader from './Preloader/Preloader';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 
 import moviesCardsData from '../../../utils/constants';
@@ -19,7 +19,7 @@ function Movies() {
         filterFunction={showAllMovies}
         isSavedMovies={false}
       />
-      <Preloader />
+      {/* <Preloader /> */}
     </main>
   );
 }

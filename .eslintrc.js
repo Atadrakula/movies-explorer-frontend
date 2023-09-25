@@ -5,8 +5,9 @@ module.exports = {
     commonjs: true, // Для среды CommonJS (Node.js).
     es2021: true, // Для поддержки ECMAScript 2021.
   },
-  // Используем настройки из расширения "airbnb-base".
-  extends: 'react-app',
+  // 'react-app' используется CRA по умолчанию
+  // Используем настройки из расширения "plugin:jsx-a11y" для проверки доступности React компонентов.
+  extends: ['react-app', 'plugin:jsx-a11y/recommended'],
   // Определяем параметры парсера JavaScript.
   parserOptions: {
     ecmaVersion: 'latest', // Используйте необходимую версию ECMAScript.

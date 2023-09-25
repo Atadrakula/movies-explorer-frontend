@@ -24,8 +24,8 @@ function PageWithIdentification({
   }`;
 
   return (
-    <section className="content-auth">
-      <div className="auth">
+    <main className="content-auth">
+      <section className="auth">
         <Logo isPageWithAuth={true} />
         <h1 className="auth__name">{name}</h1>
         <form action="#" className="auth__form" onSubmit={onSubmit}>
@@ -37,7 +37,8 @@ function PageWithIdentification({
               id="auth-name"
               name="auth-name"
               type="text"
-              className="auth__input"
+              placeholder="Имя"
+              className="auth__input input-style"
               onChange={onChange}
               autoComplete="name"
               required
@@ -52,7 +53,8 @@ function PageWithIdentification({
               id="auth-email"
               name="auth-email"
               type="email"
-              className="auth__input"
+              placeholder="example@example.ru"
+              className="auth__input input-style"
               onChange={onChange}
               autoComplete="email"
               required
@@ -67,7 +69,8 @@ function PageWithIdentification({
               id="auth-password"
               name="auth-password"
               type="password"
-              className="auth__input"
+              className="auth__input input-style"
+              placeholder="Надёжный пароль"
               minLength="6"
               maxLength="200"
               onChange={onChange}
@@ -90,8 +93,8 @@ function PageWithIdentification({
             {linkText}
           </Link>
         </p>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

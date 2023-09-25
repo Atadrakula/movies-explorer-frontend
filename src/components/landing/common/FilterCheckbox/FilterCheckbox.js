@@ -3,7 +3,7 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox() {
   return (
-    <div className="filtercheckbox__container">
+    <div className="filtercheckbox">
       <input type="checkbox" id="switch" className="filtercheckbox__input" />
       <label htmlFor="switch" className="filtercheckbox__label cursor-pointer">
         Поиск с тумблером

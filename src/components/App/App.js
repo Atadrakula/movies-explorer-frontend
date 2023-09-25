@@ -36,11 +36,15 @@ function App() {
     setIsThemeDark(darkThemeRoutes.includes(location.pathname));
   }, [location]);
 
-  const isRouteWithoutHeaderAndFooter = ['/signin', '/signup', '*'].includes(
+  const isRouteWithoutHeaderAndFooter = ['/signin', '/signup'].includes(
     location.pathname,
   );
+
+  const isRouteWithoutFooter = ['/profile'].includes(location.pathname);
+
   const isAuthHeaderVisible = loggedIn && !isRouteWithoutHeaderAndFooter;
   const isNotAuthHeaderVisible = !loggedIn && !isRouteWithoutHeaderAndFooter;
+  const isNotFooterUnvisible = loggedIn && isRouteWithoutFooter;
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -61,7 +65,9 @@ function App() {
             <Route path="/signup" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {!isRouteWithoutHeaderAndFooter && <Footer />}
+          {!isRouteWithoutHeaderAndFooter && !isNotFooterUnvisible && (
+            <Footer />
+          )}
           <PopupMenu onClose={closePopupMenu} isOpen={isPopupVisible} />
         </div>
       </div>

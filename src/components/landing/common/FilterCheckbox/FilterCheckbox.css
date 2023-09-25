@@ -1,6 +1,6 @@
 @import url('../../common/cursor-pointer.css');
 
-.filtercheckbox__container {
+.filtercheckbox {
   display: flex;
   justify-content: center;
   padding-bottom: 69px;
@@ -59,13 +59,13 @@
 }
 
 @media (width <= 800px) {
-  .filtercheckbox__container {
+  .filtercheckbox {
     padding-bottom: 51px;
   }
 }
 
 @media (width <= 400px) {
-  .filtercheckbox__container {
+  .filtercheckbox {
     padding-bottom: 49px;
   }
 

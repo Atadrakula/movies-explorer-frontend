@@ -1,0 +1,13 @@
+.input-style::placeholder {
+  color: rgb(255 255 255 / 40%);
+}
+
+.input-style:focus {
+  outline: none;
+  box-shadow: 0.3px 2px 3px -1px rgb(255 255 255 / 40%);
+}
+
+.input-style:focus::placeholder {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}

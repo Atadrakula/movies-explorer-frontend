@@ -26,7 +26,7 @@ function AboutProject() {
           </p>
         </li>
       </ul>
-      <div className="about-project__chapter-period">
+      <ul className="about-project__chapter-period">
         <li className="about-project__period-1">
           <h4 className="about-project__period-1-title">1 неделя</h4>
           <p className="about-project__period-1-text">Back-end</p>
@@ -35,7 +35,7 @@ function AboutProject() {
           <h4 className="about-project__period-2-title">4 недели</h4>
           <p className="about-project__period-2-text">Front-end</p>
         </li>
-      </div>
+      </ul>
     </section>
   );
 }

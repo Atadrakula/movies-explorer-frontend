@@ -6,7 +6,7 @@ import './NotAuthHeader.css';
 
 function NotAuthHeader({ isThemeDark }) {
   const backGroundColorClass = `not-auth-header ${
-    isThemeDark ? 'auth-header_theme_dark' : 'auth-header_theme_light'
+    isThemeDark ? 'not-auth-header_theme_dark' : 'not-auth-header_theme_light'
   }`;
   const navigate = useNavigate();
 

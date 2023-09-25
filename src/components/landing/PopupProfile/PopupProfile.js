@@ -1,9 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PopupProfile.css';
 
 function Profile() {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/signin');
+  };
+
   return (
-    <section className="profile">
+    <main className="profile">
       <h1 className="profile__name">Привет, Виталий!</h1>
       <form action="#" className="profile__form">
         <div className="profile__container-input">
@@ -12,11 +18,13 @@ function Profile() {
               Имя
             </label>
             <input
-              placeholder="Виталий"
+              placeholder="Имя"
               name="profile-text"
               id="profile-text"
               type="text"
-              className="profile__input"
+              value="Виталий"
+              className="profile__input input-style"
+              readOnly
             />
           </div>
           <span className="profile__input-text-error"></span>
@@ -27,11 +35,13 @@ function Profile() {
               E-mail
             </label>
             <input
-              placeholder="pochta@yandex.ru"
+              placeholder="example@example.ru"
               name="profile-email"
               id="profile-email"
               type="email"
-              className="profile__input"
+              value="pochta@yandex.ru"
+              className="profile__input input-style"
+              readOnly
             />
           </div>
           <span className="profile__input-text-error"></span>
@@ -48,10 +58,11 @@ function Profile() {
         className="profile__button-exit cursor-pointer"
         aria-label="Выйти из аккаунта"
         type="button"
+        onClick={handleButtonClick}
       >
         Выйти из аккаунта
       </button>
-    </section>
+    </main>
   );
 }
 
