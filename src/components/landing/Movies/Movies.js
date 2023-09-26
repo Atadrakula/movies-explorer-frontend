@@ -1,25 +1,28 @@
 import React from 'react';
 import './Movies.css';
 import SearchForm from '../common/SearchForm/SearchForm';
-// import Preloader from './Preloader/Preloader';
+import Preloader from './Preloader/Preloader';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 
-import moviesCardsData from '../../../utils/constants';
+// import { moviesCardsData } from '../../../utils/constants';
 import ButtonElse from './ButtonElse/ButtonElse';
 
-function Movies() {
-  const showAllMovies = (moviescards) => moviescards;
+function Movies({ movies, onSearchSubmit }) {
+  const showAllMovies = (movies) => movies;
 
   return (
     <main className="movies">
-      <SearchForm />
-      <MoviesCardList
-        children={<ButtonElse />}
-        moviescards={moviesCardsData}
-        filterFunction={showAllMovies}
-        isSavedMovies={false}
-      />
-      {/* <Preloader /> */}
+      <SearchForm onSearchSubmit={onSearchSubmit} />
+      {movies.length > 0 ? (
+        <MoviesCardList
+          children={<ButtonElse />}
+          filterFunction={showAllMovies}
+          isSavedMovies={false}
+          movies={movies}
+        />
+      ) : (
+        <Preloader />
+      )}
     </main>
   );
 }

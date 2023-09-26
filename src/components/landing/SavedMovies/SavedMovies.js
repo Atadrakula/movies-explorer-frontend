@@ -3,7 +3,7 @@ import SearchForm from '../common/SearchForm/SearchForm';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
-import moviesCardsData from '../../../utils/constants';
+// import { moviesCardsData } from '../../../utils/constants';
 
 function SavedMovies() {
   const currentUser = useContext(CurrentUserContext);
@@ -16,7 +16,7 @@ function SavedMovies() {
     <main className="movies">
       <SearchForm />
       <MoviesCardList
-        moviescards={moviesCardsData}
+        // moviescards={moviesCardsData}
         filterFunction={showLikedMovies}
         isSavedMovies={true}
       />

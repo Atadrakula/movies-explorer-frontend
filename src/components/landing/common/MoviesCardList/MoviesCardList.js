@@ -3,21 +3,16 @@ import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({
-  children,
-  moviescards,
-  filterFunction,
-  isSavedMovies,
-}) {
-  const filteredMovies = filterFunction(moviescards);
+function MoviesCardList({ children, movies, filterFunction, isSavedMovies }) {
+  const filteredMovies = filterFunction(movies);
 
   return (
     <section className="moviesccardlist">
       <ul className="moviesccardlist__moviescards">
-        {filteredMovies.map((moviescard) => (
+        {filteredMovies.map((movie) => (
           <MoviesCard
-            key={moviescard._id}
-            moviescard={moviescard}
+            key={movie.id}
+            movie={movie}
             isSavedMovies={isSavedMovies}
           />
         ))}
