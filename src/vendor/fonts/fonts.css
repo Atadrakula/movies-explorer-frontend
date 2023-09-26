@@ -1,6 +1,6 @@
 @font-face {
   font-display: swap;
-  font-family: Inter, Arial, sans-serif;
+  font-family: Inter;
   font-style: normal;
   font-weight: 400;
   src:
@@ -10,7 +10,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: Inter, Arial, sans-serif;
+  font-family: Inter;
   font-style: normal;
   font-weight: 500;
   src:
@@ -20,7 +20,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: Inter, Arial, sans-serif;
+  font-family: Inter;
   font-style: normal;
   font-weight: 900;
   src:

@@ -4,10 +4,8 @@ import './Portfolio.css';
 function Portfolio() {
   return (
     <section className="portfolio">
+      <h3 className="portfolio__subtitle">Портфолио</h3>
       <ul className="portfolio__container">
-        <li>
-          <h3 className="portfolio__subtitle">Портфолио</h3>
-        </li>
         <li className="portfolio__site-container cursor-pointer link-hover">
           <a
             href="https://atadrakula.github.io/how-to-learn/"
