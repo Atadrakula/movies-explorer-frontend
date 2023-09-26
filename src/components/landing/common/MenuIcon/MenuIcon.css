@@ -1,0 +1,20 @@
+@import url('../cursor-pointer.css');
+@import url('../button-hover.css');
+
+.menu-icon {
+  width: 44px;
+  height: 44px;
+  background-color: inherit;
+  border: none;
+  background-image: url('../../../../images/burger.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (width <= 400px) {
+  .menu-icon {
+    width: 40px;
+    height: 43px;
+    background-size: 91%;
+  }
+}

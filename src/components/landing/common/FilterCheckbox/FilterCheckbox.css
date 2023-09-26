@@ -1,0 +1,76 @@
+@import url('../../common/cursor-pointer.css');
+
+.filtercheckbox {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 69px;
+  border-bottom: 1px solid #424242;
+  padding-right: 11px;
+  align-items: center;
+  gap: 12px;
+}
+
+.filtercheckbox__input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.filtercheckbox__label {
+  width: 36px;
+  height: 20px;
+  display: block;
+  background: grey;
+  border-radius: 20px;
+  position: relative;
+  text-indent: -9999px;
+}
+
+.filtercheckbox__label::after {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 16px;
+  content: '';
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  transition: 0.3s;
+}
+
+.filtercheckbox__label:active::after {
+  width: 21px;
+}
+
+.filtercheckbox__input:checked + .filtercheckbox__label {
+  background: #3ddc84;
+}
+
+.filtercheckbox__input:checked + .filtercheckbox__label::after {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.filtercheckbox__text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28;
+}
+
+@media (width <= 800px) {
+  .filtercheckbox {
+    padding-bottom: 51px;
+  }
+}
+
+@media (width <= 400px) {
+  .filtercheckbox {
+    padding-bottom: 49px;
+  }
+
+  .filtercheckbox__text {
+    font-size: 11px;
+    line-height: 1.63;
+  }
+}

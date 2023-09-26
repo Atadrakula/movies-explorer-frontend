@@ -1,0 +1,66 @@
+@import url('../../common/link-hover.css');
+@import url('../../common/cursor-pointer.css');
+
+.searchform {
+  padding: 60px 70px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchform__form {
+  display: flex;
+  flex-direction: column;
+  gap: 41px;
+}
+
+.searchform__input-container {
+  padding: 6px 6px 6px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2f2f2f;
+  border-radius: 20px;
+}
+
+.searchform__input {
+  width: 100%;
+  color: #8b8b8b;
+  background-color: #2f2f2f;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.31;
+  border: none;
+  outline: none;
+}
+
+.searchform__submit {
+  width: 34px;
+  height: 34px;
+  background-color: #4285f4;
+  background-image: url('../../../../images/search_icon.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 50%;
+}
+
+@media (width <= 800px) {
+  .searchform {
+    padding: 80px 31px 10px;
+  }
+}
+
+@media (width <= 400px) {
+  .searchform {
+    padding: 80px 13px 20px;
+  }
+
+  .searchform__form {
+    gap: 42px;
+  }
+
+  .searchform__input::placeholder {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+}

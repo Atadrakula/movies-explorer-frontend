@@ -1,0 +1,42 @@
+@import url('../../common/link-hover.css');
+
+.nav-tab {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #272727;
+  min-height: 66px;
+}
+
+.nav-tab__links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style-type: none;
+}
+
+.nav-tab__link {
+  border-bottom: 1px solid;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.23;
+  text-decoration: none;
+}
+
+@media (width <= 400px) {
+  .nav-tab {
+    min-height: 63px;
+    padding-bottom: 3px;
+  }
+
+  .nav-tab__links {
+    gap: 24px;
+  }
+
+  .nav-tab__link {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,77 @@
+@import url('../../common/link-hover.css');
+
+.auth-header {
+  padding: 0 75px 0 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 74px;
+}
+
+.auth-header_theme_dark {
+  background-color: inherit;
+}
+
+.auth-header_theme_light {
+  background-color: #073042;
+}
+
+.auth-header__navigation-and-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+
+.auth-header__links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style-type: none;
+}
+
+.auth-header__link {
+  color: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.38;
+  text-decoration: none;
+}
+
+.auth-header__link_active {
+  font-weight: 500;
+}
+
+@media (width <= 800px) {
+  .auth-header__links {
+    display: none;
+  }
+
+  .auth-header__profile-logo-container {
+    display: none;
+  }
+
+  .auth-header__profile-name {
+    display: none;
+  }
+
+  .auth-header__profile {
+    width: 44px;
+    height: 44px;
+    display: block;
+    background-image: url('../../../../images/burger.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .auth-header {
+    padding: 0 30px;
+  }
+}
+
+@media (width <= 400px) {
+  .auth-header {
+    padding: 0 14px;
+  }
+}

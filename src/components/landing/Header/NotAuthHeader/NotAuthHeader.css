@@ -1,0 +1,77 @@
+@import url('../../common/button-hover.css');
+@import url('../../common/cursor-pointer.css');
+@import url('../../common/link-hover.css');
+
+.not-auth-header {
+  padding: 0 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 74px;
+}
+
+.not-auth-header_theme_dark {
+  background-color: inherit;
+}
+
+.not-auth-header_theme_light {
+  background-color: #073042;
+}
+
+.not-auth-header__links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style-type: none;
+}
+
+.not-auth-header__link {
+  color: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.38;
+  text-decoration: none;
+}
+
+.not-auth-header__button {
+  padding: 0;
+  width: 76px;
+  height: 32px;
+  display: block;
+  color: black;
+  background-color: #3ddc84;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.38;
+  border: 0;
+  border-radius: 3px;
+}
+
+@media (width <= 800px) {
+  .not-auth-header {
+    padding: 0 30px;
+  }
+}
+
+@media (width <= 400px) {
+  .not-auth-header__button {
+    width: 52px;
+    height: 26px;
+    font-size: 10px;
+  }
+
+  .not-auth-header {
+    padding: 0 15px;
+  }
+
+  .not-auth-header__link {
+    display: block;
+    font-size: 10px;
+  }
+
+  .not-auth-header__links {
+    gap: 16px;
+  }
+}

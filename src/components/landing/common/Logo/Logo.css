@@ -1,0 +1,19 @@
+.logo {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.logo-auth {
+  position: absolute;
+  left: 0%;
+  top: 70px;
+}
+
+@media (width <= 450px) {
+  .logo-auth {
+    position: absolute;
+    left: 43%;
+    top: 7.5%;
+  }
+}

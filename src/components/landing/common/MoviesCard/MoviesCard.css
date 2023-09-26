@@ -1,0 +1,128 @@
+@import url('../../common/cursor-pointer.css');
+@import url('../../common/button-hover.css');
+
+.moviescard {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #222;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.moviescard__img {
+  margin: 0;
+  width: 364px;
+  height: 203px;
+  object-fit: cover;
+}
+
+.moviescard__wrapper-for-cursor {
+  padding-top: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.moviescard__name-form {
+  padding: 0 19px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 23px;
+}
+
+.moviescard__name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.21;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 85%;
+  overflow: hidden;
+}
+
+.moviescard__heart {
+  margin: 0;
+  padding: 0;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: no-repeat url('../../../../images/heart_inactive.svg') center;
+  border: none;
+}
+
+.moviescard__heart_active {
+  background-image: url('../../../../images/heart_active.svg');
+}
+
+.moviescard__cross {
+  margin: 0;
+  padding: 0;
+  width: 23px;
+  height: 23px;
+  background: no-repeat url('../../../../images/cross_icon.svg') center;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.moviescard__wrapper-for-cursor:hover .moviescard__cross {
+  opacity: 1;
+}
+
+.moviescard__cross_visible {
+  opacity: 1;
+}
+
+.moviescard__time {
+  margin: 0;
+  padding: 0 16px;
+  color: #8b8b8b;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.21;
+}
+
+@media (width <= 920px) {
+  .moviescard__img {
+    width: 342px;
+    height: 190px;
+  }
+
+  .moviescard__wrapper-for-cursor {
+    padding-top: 11px;
+    gap: 11px;
+  }
+
+  .moviescard__name-form {
+    padding: 0 20px 0 15px;
+  }
+
+  .moviescard__time {
+    padding: 0 14px;
+  }
+}
+
+@media (width <= 500px) {
+  .moviescard__img {
+    width: 300px;
+    height: 168px;
+  }
+
+  .moviescard__name-form {
+    padding: 0 15px;
+  }
+
+  .moviescard__name {
+    font-size: 12px;
+  }
+
+  .moviescard__time {
+    font-size: 10px;
+  }
+}

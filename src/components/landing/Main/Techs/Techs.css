@@ -1,0 +1,120 @@
+.techs {
+  padding: 100px 70px;
+  background-color: #272727;
+}
+
+.techs__chapter-description {
+  margin: 0;
+  padding: 90px 0 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+}
+
+.techs__subtitle {
+  margin: 0;
+  padding: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
+}
+
+.techs__text {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
+  letter-spacing: -0.6px;
+  max-width: 460px;
+  text-align: center;
+}
+
+.techs__chapter-technologies {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  list-style-type: none;
+}
+
+.techs__specification-name {
+  margin: 0;
+  padding: 0;
+  width: 84px;
+  height: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #303030;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  border-radius: 10px;
+  letter-spacing: -0.6px;
+}
+
+@media (width <= 800px) {
+  .techs {
+    padding: 91px 50px;
+  }
+
+  .techs__chapter-description {
+    padding: 80px 0 83px;
+    gap: 23px;
+  }
+
+  .techs__text {
+    font-size: 12px;
+    letter-spacing: -0.5px;
+    line-height: 1.5;
+  }
+
+  .techs__chapter-technologies {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .techs__specification-name {
+    font-size: 12px;
+    letter-spacing: -0.5px;
+  }
+}
+
+@media (width <= 600px) {
+  .techs {
+    padding: 50px 18px 70px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    letter-spacing: -0.4px;
+  }
+
+  .techs__chapter-description {
+    padding: 60px 0 51px;
+    gap: 23px;
+  }
+}
+
+@media (width <= 400px) {
+  .techs__chapter-technologies {
+    margin: auto;
+    justify-content: flex-start;
+    max-width: 178px;
+  }
+
+  .techs {
+    background-color: transparent;
+  }
+}
