@@ -21,23 +21,55 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ _id: '12345' });
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isThemeDark, setIsThemeDark] = useState(false);
-  // const [movies, setMovies] = useState([]);
-  const [searchResult, setSearchResult] = useState([]);
-  const [error, setError] = useState('');
-
+  const [visibleMoviesCount, setVisibleMoviesCount] = useState(0);
+  const [visibleMoviesCountToPressButton, setVisibleMoviesCountToPressButton] =
+    useState(0);
   const location = useLocation();
 
-  async function handleSearchSubmit(keyword) {
-    try {
-      const dataMovies = await movieApi.pullMovieInfo(keyword);
-      const filteredMovies = dataMovies.filter((movie) =>
-        movie.nameRU.toLowerCase().includes(keyword.toLowerCase()),
-      );
-      setSearchResult(filteredMovies || []);
-    } catch (error) {
-      setError(`Произошла ошибка при запросе к API: ${error}`);
+  function initialCalculateVisibleMovies(screenWidth) {
+    if (screenWidth >= 1280) {
+      return 12; // 4 ряда по 3 карточки
+    } else if (screenWidth >= 768) {
+      return 8; // 4 ряда по 2 карточки
+    } else {
+      return 5; // 5 карточек по 1 в ряд
     }
   }
+
+  function pressButtonCalculateVisibleMovies(screenWidth) {
+    if (screenWidth >= 1280) {
+      return 3; // 4 ряда по 3 карточки
+    } else {
+      return 2; // 4 ряда по 2 карточки
+    }
+  }
+
+  useEffect(() => {
+    let resizeTimeout; // Переменная для хранения таймера
+
+    function handleResize() {
+      clearTimeout(resizeTimeout); // Очищаем предыдущий таймер, если он был установлен
+      resizeTimeout = setTimeout(() => {
+        const screenWidth = window.innerWidth;
+        const newVisibleMoviesCount =
+          initialCalculateVisibleMovies(screenWidth);
+        const newVisibleMoviesCountToPressButton =
+          pressButtonCalculateVisibleMovies(screenWidth);
+        setVisibleMoviesCount((prevCount) =>
+          Math.max(prevCount, newVisibleMoviesCount),
+        );
+        setVisibleMoviesCountToPressButton(newVisibleMoviesCountToPressButton);
+      }, 1000); // Устанавливаем задержку в 1000 миллисекунд
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [setVisibleMoviesCount]);
 
   function openPopupMenu() {
     setPopupVisible(true);
@@ -96,8 +128,11 @@ function App() {
               path="/movies"
               element={
                 <Movies
-                  movies={searchResult}
-                  onSearchSubmit={handleSearchSubmit}
+                  visibleMoviesCount={visibleMoviesCount}
+                  setVisibleMoviesCount={setVisibleMoviesCount}
+                  visibleMoviesCountToPressButton={
+                    visibleMoviesCountToPressButton
+                  }
                 />
               }
             />
@@ -119,6 +154,7 @@ function App() {
 
 export default App;
 
+// const [movies, setMovies] = useState([]);
 // useEffect(() => {
 //   const fetchData = async () => {
 //     if (!loggedIn) return;
@@ -137,3 +173,28 @@ export default App;
 
 //   fetchData();
 // }, [loggedIn]);
+
+// useEffect(() => {
+//   // Функция для расчета видимого количества карточек в зависимости от ширины экрана
+//   const calculateVisibleMovies = () => {
+//     const screenWidth = window.innerWidth;
+
+//     if (screenWidth >= 1280) {
+//       setVisibleMoviesCount(12); // 4 ряда по 3 карточки
+//     } else if (screenWidth >= 768) {
+//       setVisibleMoviesCount(8); // 4 ряда по 2 карточки
+//     } else {
+//       setVisibleMoviesCount(5); // 5 карточек по 1 в ряд
+//     }
+//   };
+
+//   calculateVisibleMovies();
+
+//   // Добавляем слушатель события изменения размера окна
+//   window.addEventListener('resize', calculateVisibleMovies);
+
+//   // Очистка слушателя при размонтировании компонента
+//   return () => {
+//     window.removeEventListener('resize', calculateVisibleMovies);
+//   };
+// }, [setVisibleMoviesCount]);

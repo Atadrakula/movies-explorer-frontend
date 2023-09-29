@@ -1,31 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-function SearchForm({ onSearchSubmit }) {
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [error, setError] = useState('');
-
-  const handleInputChange = (e) => {
-    setSearchKeyword(e.target.value);
-  };
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!searchKeyword) {
-      setError('Нужно ввести ключевое слово');
-      return;
-    }
-
-    try {
-      onSearchSubmit(searchKeyword);
-      setError('');
-    } catch (error) {
-      setError(`Произошла ошибка при запросе к API: ${error}`);
-    }
-  }
-
+function SearchForm({
+  handleInputChange,
+  handleSubmit,
+  currentSearchKeyword,
+  textError,
+  isShortFilm,
+  onToggleShortFilm,
+}) {
   return (
     <section className="searchform">
       <form
@@ -37,10 +21,10 @@ function SearchForm({ onSearchSubmit }) {
         <div className="searchform__input-container">
           <input
             type="text"
-            className="searchform__input input-style"
+            className="searchform__input input-style-search"
             placeholder="Фильм"
             aria-label="Поиск"
-            value={searchKeyword}
+            value={currentSearchKeyword}
             onChange={handleInputChange}
           />
           <button
@@ -49,9 +33,12 @@ function SearchForm({ onSearchSubmit }) {
             aria-label="Поиск"
           />
         </div>
-        <FilterCheckbox />
+        <FilterCheckbox
+          isShortFilm={isShortFilm}
+          onToggleShortFilm={onToggleShortFilm}
+        />
       </form>
-      {error && <p className="searchform__error">{error}</p>}
+      {textError && <p className="searchform__error">{textError}</p>}
     </section>
   );
 }

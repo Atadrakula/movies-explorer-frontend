@@ -3,9 +3,10 @@ import { CurrentUserContext } from '../../../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 import { serverDataConfig, notImage } from '../../../../utils/constants';
 
-function MoviesCard({ movie, isSavedMovies }) {
+function MoviesCard({ movie, isSavedMovies, getMovieName }) {
   const currentUser = useContext(CurrentUserContext);
   const isLiked = movie.like && movie.like.some((i) => i === currentUser._id);
+  // const isLiked = currentUser._id && movie.like.includes(currentUser._id);
   const [isMobile, setIsMobile] = useState(false);
 
   const cardLikedClassName = `moviescard__heart cursor-pointer ${
@@ -42,7 +43,7 @@ function MoviesCard({ movie, isSavedMovies }) {
     if (movie && movie.image && movie.image.url) {
       return `${serverDataConfig.urlForImg}${movie.image.url}`;
     }
-    return { notImage }; //можно выставить по умолчанию что то иное
+    return { notImage };
   }
 
   function getCorrectFormateDuration(movie) {
@@ -61,6 +62,8 @@ function MoviesCard({ movie, isSavedMovies }) {
     return 'неизвестно';
   }
 
+  const movieName = getMovieName(movie);
+
   return (
     <li className="moviescard">
       <img
@@ -70,7 +73,7 @@ function MoviesCard({ movie, isSavedMovies }) {
       />
       <div className={cardFormCursorClassToggle}>
         <div className="moviescard__name-form">
-          <h2 className="moviescard__name">{movie.nameRU}</h2>
+          <h2 className="moviescard__name">{movieName}</h2>
           <button
             className={toggleClassNameButton}
             aria-label="Лайкнуть/Дизлайкнуть"

@@ -1,3 +1,5 @@
+@import url('../../common/input-style.css');
+
 .content-auth {
   display: flex;
   flex: auto;

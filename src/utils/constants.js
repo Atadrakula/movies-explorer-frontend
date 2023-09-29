@@ -17,4 +17,16 @@ const serverAuthConfig = {
   },
 };
 
-export { serverAuthConfig, serverDataConfig, notImage };
+const cyrillicRegex = /^[а-яёА-ЯЁ]+$/;
+const latinRegex = /^[a-zA-Z]+$/;
+
+const containsCyrillicAndLatinRegex = /^(?=.*[а-яА-ЯёЁ])(?=.*[a-zA-Z])/;
+
+export {
+  serverAuthConfig,
+  serverDataConfig,
+  cyrillicRegex,
+  latinRegex,
+  containsCyrillicAndLatinRegex,
+  notImage,
+};

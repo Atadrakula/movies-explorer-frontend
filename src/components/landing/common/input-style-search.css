@@ -1,0 +1,8 @@
+.input-style-search::placeholder {
+  color: rgb(255 255 255 / 40%);
+}
+
+.input-style-search:focus::placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
