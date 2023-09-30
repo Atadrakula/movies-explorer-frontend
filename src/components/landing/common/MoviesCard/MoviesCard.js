@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext';
 import './MoviesCard.css';
-import { serverDataConfig, notImage } from '../../../../utils/constants';
+import { serverDataFilmsConfig, notImage } from '../../../../utils/constants';
 
 function MoviesCard({ movie, isSavedMovies, getMovieName }) {
   const currentUser = useContext(CurrentUserContext);
@@ -41,7 +41,7 @@ function MoviesCard({ movie, isSavedMovies, getMovieName }) {
 
   function getAbsoluteImageUrl(movie) {
     if (movie && movie.image && movie.image.url) {
-      return `${serverDataConfig.urlForImg}${movie.image.url}`;
+      return `${serverDataFilmsConfig.urlForImg}${movie.image.url}`;
     }
     return { notImage };
   }

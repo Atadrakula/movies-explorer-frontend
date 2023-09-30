@@ -1,80 +1,93 @@
-import { serverAuthConfig } from './constants';
+import { serverDataLocalConfig } from './constants';
 
 class MainApi {
   constructor({ url, headers }) {
     this._generalUrl = url;
     this._headers = headers;
-    this._token = null;
   }
 
   _checkResponse(response) {
     if (!response.ok) {
-      console.error(`Error response from ${response.url}: ${response.status}`);
-      if (response.status === 401) {
-        return Promise.reject('Токен недействителен или отсутствует');
-      }
+      console.error(
+        `Error when requesting ${response.url}. Status code: ${response.status}`,
+      );
       return Promise.reject(`Ошибка: ${response.status}`);
     }
     return response.json();
   }
 
-  _request(endpoint, headers, options) {
-    return fetch(`${this._generalUrl}${endpoint}`, options).then(
-      this._checkResponse,
-    );
+  _request(endpoint, options) {
+    return fetch(`${this._generalUrl}${endpoint}`, {
+      ...options,
+      headers: this._headers,
+      credentials: 'include',
+    }).then(this._checkResponse);
   }
 
-  // попробывать так может, чтобы не дублировать код?
+  pullProfileInfo() {
+    return this._request(`/users/me`);
+  }
 
-  // _request(endpoint, options) {
-  //   return fetch(`${this._generalUrl}${endpoint}`, {
-  //     ...options,
-  //     headers: this._headers,
-  //     credentials: 'include',
-  //   }).then(this._checkResponse);
-  // }
-
-  pushRegistration(data) {
-    return this._request('/signup', this._headers, {
-      method: 'POST',
-      headers: this._headers,
+  patchProfileInfo(data) {
+    return this._request(`/users/me`, {
+      method: 'PATCH',
       body: JSON.stringify({
-        password: data.password,
+        name: data.name,
         email: data.email,
       }),
-    });
-  }
-
-  pushLogin(data) {
-    return this._request('/signin', this._headers, {
-      method: 'POST',
-      headers: this._headers,
-      credentials: 'include',
-      body: JSON.stringify({
-        password: data.password,
-        email: data.email,
-      }),
-    }).then((res) => {
-      return res;
-    });
-  }
-
-  pullDataAuth() {
-    return this._request('/users/me', this._headers, {
-      headers: this._headers,
-      credentials: 'include',
-    });
-  }
-
-  pushLogout() {
-    return this._request('/signout', this._headers, {
-      method: 'POST',
-      headers: this._headers,
-      credentials: 'include',
     });
   }
 }
 
-const mainApi = new MainApi(serverAuthConfig);
+const mainApi = new MainApi(serverDataLocalConfig);
 
 export default mainApi;
+
+// pullMovieInfo() {
+//   return this._request(`/cards`);
+// }
+
+// pushCardInfo(data) {
+//   return this._request(`/cards`, {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       name: data.name,
+//       link: data.link,
+//     }),
+//   });
+// }
+
+// deleteCard(cardId) {
+//   return this._request(`/cards/${cardId}`, {
+//     method: 'DELETE',
+//   });
+// }
+
+// likeCard(cardId) {
+//   return this._request(`/cards/${cardId}/likes`, {
+//     method: 'PUT',
+//   });
+// }
+
+// dislikeCard(cardId) {
+//   return this._request(`/cards/${cardId}/likes`, {
+//     method: 'DELETE',
+//   });
+// }
+
+// toggleLikeCard(cardId, isLiked) {
+//   if (isLiked) {
+//     return this.likeCard(cardId);
+//   } else {
+//     return this.dislikeCard(cardId);
+//   }
+// }
+
+// pushAvatar(data) {
+//   return this._request(`/users/me/avatar`, {
+//     method: 'PATCH',
+//     body: JSON.stringify({
+//       avatar: data.avatar,
+//     }),
+//   });
+// }

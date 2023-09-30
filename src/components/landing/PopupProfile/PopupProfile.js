@@ -1,34 +1,70 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PopupProfile.css';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../../utils/hooks/UseFormWithValidation';
+import { capitalizeFirstLetter } from '../../../utils/utils';
 
-function Profile() {
+function Profile({ onSignOut, onUpdateProfile }) {
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+  const [textSubmit, setTextSubmit] = useState('');
+  console.log(`Profile: currentUser: ${currentUser}`);
   const navigate = useNavigate();
+  const nameInTitle = (str) => `Привет, ${capitalizeFirstLetter(str)}!`;
   const handleButtonClick = () => {
+    onSignOut();
     navigate('/signin');
   };
+  useEffect(() => {
+    // Устанавливаем начальные значения полей при обновлении currentUser
+    if (currentUser) {
+      resetForm({
+        name: currentUser.name || '',
+        email: currentUser.email || '',
+      });
+    }
+  }, [currentUser, resetForm]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (isValid) {
+      onUpdateProfile({
+        name: values.name,
+        email: values.email,
+      });
+      setTextSubmit(`Данные обновлены`);
+    }
+  }
+  const submitClass = `profile__submit ${
+    isValid ? 'cursor-pointer button-hover' : 'profile__submit_inactive'
+  }`;
 
   return (
     <main>
       <section className="profile">
-        <h1 className="profile__name">Привет, Виталий!</h1>
-        <form action="#" className="profile__form">
+        <h1 className="profile__name">
+          {currentUser && nameInTitle(currentUser.name)}
+        </h1>
+        <form action="#" className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__container-input">
             <div className="profile__label-input-wrapper">
-              <label htmlFor="profile-text" className="profile__label">
+              <label htmlFor="profile-name" className="profile__label">
                 Имя
               </label>
               <input
                 placeholder="Имя"
-                name="profile-text"
-                id="profile-text"
+                name="name"
+                id="profile-name"
                 type="text"
-                value="Виталий"
                 className="profile__input input-style"
-                readOnly
+                value={values.name || ''}
+                onChange={handleChange}
               />
             </div>
-            <span className="profile__input-text-error"></span>
+            <span className="profile__input-text-error">{errors.name}</span>
           </div>
           <div className="profile__container-input">
             <div className="profile__label-input-wrapper">
@@ -37,26 +73,27 @@ function Profile() {
               </label>
               <input
                 placeholder="example@example.ru"
-                name="profile-email"
+                name="email"
                 id="profile-email"
                 type="email"
-                value="pochta@yandex.ru"
                 className="profile__input input-style"
-                readOnly
+                value={values.email || ''}
+                onChange={handleChange}
               />
             </div>
-            <span className="profile__input-text-error"></span>
+            <span className="profile__input-text-error">{errors.email}</span>
           </div>
+          <span className="profile__submit-text">{textSubmit}</span>
+          <button
+            className={submitClass}
+            aria-label="Редактировать профиль"
+            type="submit"
+          >
+            Редактировать
+          </button>
         </form>
         <button
-          className="profile__button-edit cursor-pointer"
-          aria-label="Редактировать профиль"
-          type="submit"
-        >
-          Редактировать
-        </button>
-        <button
-          className="profile__button-exit cursor-pointer"
+          className="profile__button-exit cursor-pointer button-hover"
           aria-label="Выйти из аккаунта"
           type="button"
           onClick={handleButtonClick}

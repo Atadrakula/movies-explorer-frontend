@@ -1,5 +1,6 @@
 @import url('../common/cursor-pointer.css');
 @import url('../common/input-style.css');
+@import url('../common/button-hover.css');
 
 .profile {
   margin: 0;
@@ -25,7 +26,6 @@
   min-width: 410px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 203px;
 }
 
 .profile__container-input {
@@ -39,6 +39,10 @@
 .profile__container-input:first-of-type {
   margin-bottom: 18px;
   border-bottom: 1px solid #424242;
+}
+
+.profile__container-input:last-of-type {
+  margin-bottom: 153px;
 }
 
 .profile__label-input-wrapper {
@@ -80,9 +84,25 @@
 .profile__input-text-error {
   min-height: 17px;
   padding: 0;
+  color: #ee3465;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.21;
+  text-align: end;
 }
 
-.profile__button-edit {
+.profile__submit-text {
+  min-height: 40px;
+  padding: 0;
+  padding-bottom: 10px;
+  color: #3ddc84;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.21;
+  text-align: center;
+}
+
+.profile__submit {
   margin: 0;
   padding: 0;
   color: #fff;
@@ -92,6 +112,10 @@
   line-height: 1.21;
   border: none;
   margin-bottom: 17px;
+}
+
+.profile__submit_inactive {
+  color: rgb(255 255 255 / 40%);
 }
 
 .profile__button-exit {
@@ -118,8 +142,8 @@
     margin-bottom: 17px;
   }
 
-  .profile__form {
-    margin-bottom: 193px;
+  .profile__container-input:last-of-type {
+    margin-bottom: 143px;
   }
 }
 
@@ -128,9 +152,8 @@
     padding-top: 70px;
   }
 
-  .profile__form {
-    min-width: 260px;
-    margin-bottom: 363px;
+  .profile__container-input:last-of-type {
+    margin-bottom: 313px;
   }
 
   .profile__name {

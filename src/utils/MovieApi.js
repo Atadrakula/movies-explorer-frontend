@@ -1,4 +1,4 @@
-import { serverDataConfig } from './constants';
+import { serverDataFilmsConfig } from './constants';
 
 class MovieApi {
   constructor({ url, headers }) {
@@ -28,17 +28,9 @@ class MovieApi {
   }
 }
 
-const movieApi = new MovieApi(serverDataConfig);
+const movieApi = new MovieApi(serverDataFilmsConfig);
 
 export default movieApi;
-
-// pullProfileInfo() {
-//   return this._request(`/users/me`);
-// }
-
-// pullMovieInfo() {
-//   return this._request(`/cards`);
-// }
 
 // patchProfileInfo(data) {
 //   return this._request(`/users/me`, {
