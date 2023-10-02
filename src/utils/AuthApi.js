@@ -8,14 +8,17 @@ class AuthApi {
   }
 
   _checkResponse(response) {
-    if (!response.ok) {
-      console.error(`Ответ об ошибке от${response.url}: ${response.status}`);
-      if (response.status === 401) {
-        return Promise.reject('Токен недействителен или отсутствует');
+    return response.json().then((data) => {
+      if (!response.ok) {
+        console.error(`Ответ об ошибке от${response.url}: ${response.status}`);
+        const error =
+          response.status === 401
+            ? 'Токен недействителен или отсутствует'
+            : `Ошибка: ${response.status}`;
+        throw new Error(error);
       }
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    return response.json();
+      return data;
+    });
   }
 
   _request(endpoint, headers, options) {
@@ -25,8 +28,8 @@ class AuthApi {
     })
       .then(this._checkResponse)
       .catch((error) => {
-        console.error('Ошибка сети:', error);
-        throw new Error('Не удалось получить данные с сервера', error);
+        console.error(`Ошибка сети: ${error}`);
+        throw new Error(`Не удалось получить данные с сервера: ${error}`);
       });
   }
 

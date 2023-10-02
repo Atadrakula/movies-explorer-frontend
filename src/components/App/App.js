@@ -14,7 +14,7 @@ import Register from '../landing/Register/Register';
 import Login from '../landing/Login/Login';
 import PopupMenu from '../landing/PopupMenu/PopupMenu';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import movieApi from '../../utils/MovieApi';
+// import movieApi from '../../utils/MovieApi';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
 
@@ -26,9 +26,8 @@ function App() {
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(null);
   const [visibleMoviesCountToPressButton, setVisibleMoviesCountToPressButton] =
     useState(0);
-  const [movies, setMovies] = useState([]);
   const [authError, setAuthError] = useState('');
-  const [email, setEmail] = useState('');
+  const [savedMovies, setSavedMovies] = useState([]);
   const [errorApi, setErrorApi] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,14 +35,16 @@ function App() {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const userData = await authApi.pullDataAuth();
-        // console.log(`App: userData.data.email: ${userData.data.email}`);
-        setEmail(userData.data.email);
+        await authApi.pullDataAuth();
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       } catch (error) {
-        setErrorApi(`Ошибка при загрузке данных пользователя: ${error}`);
-        console.error(`Ошибка при загрузке данных пользователя: ${error}`);
+        setErrorApi(
+          `Ошибка при загрузке данных пользователя: ${error.message}`,
+        );
+        console.error(
+          `Ошибка при загрузке данных пользователя: ${error.message}`,
+        );
         setLoggedIn(false);
       }
     };
@@ -56,31 +57,73 @@ function App() {
       if (!loggedIn) return;
 
       try {
-        const dataUser = await mainApi.pullProfileInfo();
-        // console.log(`App: dataUser: ${dataUser.data}`);
-
-        // const [dataCards, dataUser] = await Promise.all([
-        //   movieApi.pullMovieInfo(),
-        // mainApi.pullProfileInfo(),
-        // ]);
-        // setMovies(dataCards.data || []);
-        setCurrentUser(dataUser.data); //null?
-        // console.log(`App: currentUser: ${currentUser}`)
+        const [dataSavedMovies, dataUser] = await Promise.all([
+          mainApi.pullMovieInfo(),
+          mainApi.pullProfileInfo(),
+        ]);
+        setSavedMovies(dataSavedMovies.data);
+        setCurrentUser(dataUser.data);
       } catch (error) {
-        setErrorApi('Ошибка при загрузке данных:', error);
-        console.error('Ошибка при загрузке данных:', error);
+        setErrorApi(`Ошибка при загрузке данных: ${error.message}`);
+        console.error(`Ошибка при загрузке данных:${error.message}`);
       }
     };
     fetchData();
   }, [loggedIn]);
+
+  //РАБОЧЕЕ !!!
+
+  function isMovieSaved(movie) {
+    return savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+  }
+
+  async function handleMovieDislike(dataMovie) {
+    // console.log('Сохраненные фильмы:', savedMovies);
+    // console.log('Текущий пользователь:', currentUser._id);
+    // console.log('Фильм для удаления:', dataMovie);
+    const savedMovie = savedMovies.find(
+      (savedMovie) =>
+        savedMovie.movieId === dataMovie.id &&
+        savedMovie.owner === currentUser._id,
+    );
+
+    if (!savedMovie) {
+      setErrorApi('Фильм для дизлайка/удаления не найден');
+      console.error('Фильм для дизлайка/удаления не найден');
+      return;
+    }
+
+    try {
+      await mainApi.deleteMovieCard(savedMovie.movieId);
+      setSavedMovies((prevSavedMovies) =>
+        prevSavedMovies.filter((movie) => movie.movieId !== savedMovie.movieId),
+      );
+    } catch (error) {
+      setErrorApi(`Ошибка при удалении фильма: ${error.message}`);
+      console.error(`Ошибка при удалении фильма: ${error.message}`);
+    }
+  }
+
+  async function handleMovieLike(dataMovie) {
+    try {
+      const newSavedMovie = await mainApi.pushNewMovieCard(dataMovie);
+      setSavedMovies((prevSavedMovies) => [
+        ...prevSavedMovies,
+        newSavedMovie.data,
+      ]);
+    } catch (error) {
+      setErrorApi(`Ошибка при сохранении фильма: ${error.message}`);
+      console.error(`Ошибка при сохранении фильма: ${error.message}`);
+    }
+  }
 
   async function handleSignOut() {
     try {
       await authApi.pushLogout();
       setLoggedIn(false);
     } catch (error) {
-      setErrorApi(`Ошибка при выходе из системы: ${error}`);
-      console.error(`Ошибка при выходе из системы: ${error}`);
+      setErrorApi(`Ошибка при выходе из системы: ${error.message}`);
+      console.error(`Ошибка при выходе из системы: ${error.message}`);
     }
   }
 
@@ -88,7 +131,6 @@ function App() {
     try {
       const response = await authApi.pushLogin(data);
       if (response.token) {
-        setEmail(data.email);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       }
@@ -97,7 +139,7 @@ function App() {
         `Произошла ошибка входа. Пожалуйста, проверьте введенные данные и повторите попытку.`,
       );
       console.error(
-        `Ошибка при отправки данных регистрации пользователя: ${error}`,
+        `Ошибка при отправки данных регистрации пользователя: ${error.message}`,
       );
     }
   }
@@ -110,7 +152,7 @@ function App() {
       }
     } catch (error) {
       setAuthError(
-        `Ошибка при отправки данных регистрации пользователя: ${error}`,
+        `Ошибка при отправки данных регистрации пользователя: ${error.message}`,
       );
       console.error(
         'Ошибка при отправки данных регистрации пользователя:',
@@ -124,7 +166,12 @@ function App() {
       const updateData = await mainApi.patchProfileInfo(dataUser);
       setCurrentUser(updateData.data);
     } catch (error) {
-      console.error('Ошибка при обновлении данных пользователя:', error);
+      setErrorApi(
+        `Ошибка при обновлении данных пользователя: ${error.message}`,
+      );
+      console.error(
+        `Ошибка при обновлении данных пользователя: ${error.message}`,
+      );
     }
   }
 
@@ -235,10 +282,25 @@ function App() {
                   visibleMoviesCountToPressButton={
                     visibleMoviesCountToPressButton
                   }
+                  handleMovieLike={handleMovieLike}
+                  handleMovieDislike={handleMovieDislike}
+                  // onToggleMovieLike={handleToggleMovieLike}
+                  isMovieSaved={isMovieSaved}
                 />
               }
             />
-            <Route path="/saved-movies" element={<SavedMovies />} />
+            <Route
+              path="/saved-movies"
+              element={
+                <SavedMovies
+                  savedMovies={savedMovies}
+                  // onToggleMovieLike={handleToggleMovieLike}
+                  isMovieSaved={isMovieSaved}
+                  handleMovieLike={handleMovieLike}
+                  handleMovieDislike={handleMovieDislike}
+                />
+              }
+            />
             <Route
               path="/profile"
               element={
@@ -271,3 +333,186 @@ function App() {
 }
 
 export default App;
+
+//РАБОЧЕЕ !!!
+// async function handleMovieDislike(dataMovie) {
+//   console.log('Сохраненные фильмы:', savedMovies);
+//   console.log('Текущий пользователь:', currentUser._id);
+//   console.log('Фильм для удаления:', dataMovie);
+//   const savedMovie = savedMovies.find(
+//     (savedMovie) =>
+//     savedMovie.nameEN === dataMovie.nameEN &&
+//     savedMovie.owner === currentUser._id,
+//     );
+//     try {
+//       await mainApi.deleteMovieCard(savedMovie._id);
+//       setSavedMovies((prevSavedMovies) =>
+//       prevSavedMovies.filter((movie) => movie._id !== savedMovie._id),
+//       );
+//     } catch (error) {
+//       console.error(`Ошибка при удалении фильма: ${error.message}`);
+//     }
+//   }
+
+// function handleToggleMovieLike(movie) {
+//   const isSaved = savedMovies.some(c => c.movieId === movie.id);
+//   if (!isSaved) {
+//     mainApi.pushNewMovieCard(movie)
+//       .then((movie) => setSavedMovies([movie, ...savedMovies]))
+//       .catch((err) => console.log(err));
+//   } else {
+//     const id = savedMovies.find(c => c.movieId === movie.id)._id;
+//     mainApi.deleteMovieCard(id)
+//     .then(() => {
+//       setSavedMovies(res => res.filter(c => c.movieId !== movie.id))
+//     })
+//     .catch((err) => console.log(err));
+//   }
+// }
+// РАБОЧЕЕ
+// async function handleToggleMovieLike(dataMovie) {
+//   const savedMovie = savedMovies.find(
+//     (savedMovie) =>
+//       savedMovie.nameEN === dataMovie.nameEN &&
+//       savedMovie.owner === currentUser._id,
+//   );
+
+//   console.log('Data movie to be toggled:', dataMovie);
+//   console.log('Found saved movie:', savedMovie);
+
+//   if (savedMovie) {
+//   // Если фильм уже сохранен, удаляем его
+//   try {
+//       await mainApi.deleteMovieCard(savedMovie._id);
+//       setSavedMovies((prevSavedMovies) =>
+//         prevSavedMovies.filter((movie) => movie._id !== savedMovie._id),
+//       );
+//     } catch (error) {
+//       console.error(`Ошибка при удалении фильма: ${error.message}`);
+//     }
+//   } else {
+//     // Если фильм не сохранен, сохраняем его и ставим в начало
+//     try {
+//       const newSavedMovie = await mainApi.pushNewMovieCard(dataMovie);
+//       setSavedMovies((prevSavedMovies) => [
+//         ...prevSavedMovies,
+//         newSavedMovie,
+//       ]);
+//     } catch (error) {
+//       console.error(`Ошибка при сохранении фильма: ${error.message}`);
+//     }
+//   }
+// }
+
+//надо потестить
+// useEffect(() => {
+//   const fetchData = async () => {
+//     if (!loggedIn) return;
+
+//       if (!savedMovies.length) {
+//         // Запрашиваем сохраненные фильмы только если их еще нет в состоянии
+//         const dataSavedMovies = await mainApi.pullMovieInfo();
+//         setSavedMovies(dataSavedMovies.data || []);
+//       }
+
+//       if (!currentUser) {
+//         // Запрашиваем данные пользователя только если они еще не загружены
+//         const dataUser = await mainApi.pullProfileInfo();
+//         setCurrentUser(dataUser.data);
+//       }
+//     } catch (error) {
+//       setErrorApi(`Ошибка при загрузке данных: ${error.message}`);
+//       console.error(`Ошибка при загрузке данных: ${error.message}`);
+//     }
+//   };
+
+//   fetchData();
+// }, [loggedIn, savedMovies, currentUser]);
+
+// const savedMovie = savedMovies.find(
+//   (savedMovie) =>
+//   savedMovie.movieId === dataMovie.id &&
+//   savedMovie.owner === currentUser._id,
+// );
+
+// function isMovieSaved(movie) {
+//   return savedMovies.some((savedMovie) => savedMovie.nameEN === movie.nameEN);
+// }
+
+// async function handleMovieLike(dataMovie) {
+//   try {
+//     const newSavedMovie = await mainApi.pushNewMovieCard(dataMovie);
+//     setSavedMovies((prevSavedMovies) => [...prevSavedMovies, newSavedMovie]);
+//   } catch (error) {
+//     console.error(`Ошибка при сохранении фильма: ${error.message}`);
+//   }
+// }
+
+//   Функция isMovieSaved:
+// Эта функция проверяет, сохранён ли фильм в списке сохранённых фильмов.
+
+// Аргумент функции — movie — это фильм, который необходимо проверить.
+// Функция возвращает true, если фильм уже сохранён, и false в противном случае.
+// Для этой проверки используется метод массива .some(), который возвращает true, если хотя бы один элемент массива удовлетворяет условие.
+// Условие проверки — совпадение movieId сохранённого фильма с _id проверяемого фильма.
+
+// function isMovieSaved(movie) {
+//   console.log("movie", movie);
+//   console.log("savedMovies", savedMovies);
+//   debugger
+
+//   return savedMovies.some((savedMovie) => savedMovie._id === movie._id);
+// }
+
+//   Функция handleMovieDislike:
+// Эта функция обрабатывает действие "дизлайка" или удаления фильма из списка сохранённых.
+
+// Аргумент функции — dataMovie — это фильм, который необходимо удалить.
+// В начале функции идёт поиск соответствующего фильма в списке сохранённых фильмов.
+// Если соответствующий фильм не найден, выводится сообщение об ошибке и функция завершает выполнение.
+// Если фильм найден, то происходит попытка удаления этого фильма с использованием API (mainApi.deleteMovieCard).
+// После успешного удаления, фильм также удаляется из локального состояния приложения.
+
+// async function handleMovieDislike(dataMovie) {
+//   console.log('Сохраненные фильмы:', savedMovies);
+//   console.log('Текущий пользователь:', currentUser._id);
+//   console.log('Фильм для удаления:', dataMovie);
+
+//   const savedMovie = savedMovies.find(
+//     (savedMovie) => savedMovie._id === dataMovie._id
+//   );
+//   console.log('savedMovie._id', savedMovie._id);
+
+//   if (!savedMovie) {
+//     console.error('Фильм для удаления не найден.');
+//     return;
+//   }
+
+//   try {
+//     await mainApi.deleteMovieCard(savedMovie._id);
+//     setSavedMovies((prevSavedMovies) =>
+//       prevSavedMovies.filter((movie) => movie._id !== savedMovie._id),
+//     );
+//   } catch (error) {
+//     console.error(`Ошибка при удалении фильма: ${error.message}`);
+//   }
+// }
+
+// Функция handleMovieLike:
+// Эта функция обрабатывает действие "лайка" или добавления фильма в список сохранённых.
+
+// Аргумент функции — dataMovie — это фильм, который необходимо добавить.
+// Сначала происходит попытка добавления фильма с использованием API (mainApi.pushNewMovieCard).
+// Если фильм успешно добавлен на сервер, он также добавляется в локальное состояние приложения.
+// Если произошла ошибка при добавлении, выводится сообщение об ошибке.
+
+// async function handleMovieLike(dataMovie) {
+//   try {
+//     const newSavedMovie = await mainApi.pushNewMovieCard(dataMovie);
+//     setSavedMovies((prevSavedMovies) => [...prevSavedMovies, newSavedMovie]);
+//   } catch (error) {
+//     console.error(`Ошибка при сохранении фильма: ${error.message}`);
+//   }
+// }
+
+//     try {

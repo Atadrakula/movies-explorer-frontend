@@ -1,29 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { CurrentUserContext } from '../../../../contexts/CurrentUserContext';
+import React, { useEffect, useState } from 'react';
 import './MoviesCard.css';
-import { serverDataFilmsConfig, notImage } from '../../../../utils/constants';
+import { notImage, serverDataFilmsConfig } from '../../../../utils/constants';
 
-function MoviesCard({ movie, isSavedMovies, getMovieName }) {
-  const currentUser = useContext(CurrentUserContext);
-  const isLiked = movie.like && movie.like.some((i) => i === currentUser._id);
-  // const isLiked = currentUser._id && movie.like.includes(currentUser._id);
+function MoviesCard({
+  movie,
+  isSavedMovies,
+  // onToggleMovieLike,
+  handleMovieLike,
+  handleMovieDislike,
+  getCorrectFormateDuration,
+  getAbsoluteImageUrl,
+  isLiked,
+  getMovieName,
+}) {
   const [isMobile, setIsMobile] = useState(false);
-
-  const cardLikedClassName = `moviescard__heart cursor-pointer ${
-    isLiked && 'moviescard__heart_active'
-  }`;
-
-  const cardDeleteClassName = `moviescard__cross cursor-pointer button-hover ${
-    isMobile ? 'moviescard__cross_visible' : ''
-  }`;
-
-  const toggleClassNameButton = isSavedMovies
-    ? cardDeleteClassName
-    : cardLikedClassName;
-
-  const cardFormCursorClassToggle = `moviescard__wrapper-for-cursor ${
-    isSavedMovies ? 'cursor-pointer' : ''
-  }`;
+  const [isLikedMovie, setLikedMovie] = useState(isLiked);
 
   useEffect(() => {
     const handleResizeWindow = () => {
@@ -39,36 +30,45 @@ function MoviesCard({ movie, isSavedMovies, getMovieName }) {
     };
   }, []);
 
-  function getAbsoluteImageUrl(movie) {
-    if (movie && movie.image && movie.image.url) {
-      return `${serverDataFilmsConfig.urlForImg}${movie.image.url}`;
-    }
-    return { notImage };
-  }
-
-  function getCorrectFormateDuration(movie) {
-    if (movie && movie.duration) {
-      const hours = Math.floor(movie.duration / 60);
-      const remainingMinutes = movie.duration % 60;
-      const hoursText = hours > 0 ? `${hours}ч` : '';
-      const minutesText = remainingMinutes > 0 ? `${remainingMinutes}м` : '';
-
-      if (hoursText && minutesText) {
-        return `${hoursText} ${minutesText}`;
+  async function handleLikeClick() {
+    try {
+      if (isLiked) {
+        await handleMovieDislike(movie);
       } else {
-        return `${hoursText}${minutesText}`;
+        await handleMovieLike(movie);
       }
+      setLikedMovie(!isLikedMovie);
+    } catch (error) {
+      console.error('Ошибка при лайке/дизлайке фильма:', error.message);
     }
-    return 'неизвестно';
   }
 
+  const cardLikedClassName = `moviescard__heart cursor-pointer ${
+    isLikedMovie && 'moviescard__heart_active'
+  }`;
+
+  const cardDeleteClassName = `moviescard__cross cursor-pointer button-hover ${
+    isMobile ? 'moviescard__cross_visible' : ''
+  }`;
+
+  const toggleClassNameButton = isSavedMovies
+    ? cardDeleteClassName
+    : cardLikedClassName;
+
+  const cardFormCursorClassToggle = `moviescard__wrapper-for-cursor ${
+    isSavedMovies ? 'cursor-pointer' : ''
+  }`;
   const movieName = getMovieName(movie);
 
   return (
     <li className="moviescard">
       <img
-        src={getAbsoluteImageUrl(movie)}
-        alt={movie.nameRU}
+        src={getAbsoluteImageUrl(
+          movie,
+          serverDataFilmsConfig.urlForImg,
+          notImage,
+        )}
+        alt={movieName}
         className="moviescard__img"
       />
       <div className={cardFormCursorClassToggle}>
@@ -77,6 +77,7 @@ function MoviesCard({ movie, isSavedMovies, getMovieName }) {
           <button
             className={toggleClassNameButton}
             aria-label="Лайкнуть/Дизлайкнуть"
+            onClick={handleLikeClick}
           ></button>
         </div>
         <p className="moviescard__time">{getCorrectFormateDuration(movie)}</p>
@@ -86,3 +87,19 @@ function MoviesCard({ movie, isSavedMovies, getMovieName }) {
 }
 
 export default MoviesCard;
+
+//РАБОЧИЙ
+// useEffect(() => {
+//   if (isMovieSaved(movie)) {
+//     setIsLiked(true);
+//   }
+// }, [movie, isMovieSaved]);
+
+// function handleLikeClick() {
+//   onToggleMovieLike(movie);
+//   setIsLiked(!isLiked);
+// }
+
+// const currentUser = useContext(CurrentUserContext);
+// const isLiked = currentUser._id && movie.like.includes(currentUser._id);
+// const likedMovies = isLiked.some((isLiked) => isLiked._id === movie._id);

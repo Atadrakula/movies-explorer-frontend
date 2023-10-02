@@ -25,6 +25,11 @@ const serverDataLocalConfig = {
   },
 };
 
+const urlForImgToServerDataFilms = (data) =>
+  `${serverDataFilmsConfig.urlForImg}${data.image.url}`;
+const urlForThumbnailToServerDataFilms = (data) =>
+  `${serverDataFilmsConfig.urlForImg}${data.image.formats.thumbnail.url}`;
+
 const cyrillicRegex = /^[а-яёА-ЯЁ]+$/; //регулярка только кириллицы
 const latinRegex = /^[a-zA-Z]+$/; //регулярка только латиницы
 
@@ -48,5 +53,7 @@ export {
   containsCyrillicAndLatinRegex,
   validNameRegex,
   strongPasswordRegex,
+  urlForImgToServerDataFilms,
+  urlForThumbnailToServerDataFilms,
   notImage,
 };

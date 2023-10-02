@@ -1,4 +1,8 @@
-import { serverDataLocalConfig } from './constants';
+import {
+  urlForImgToServerDataFilms,
+  urlForThumbnailToServerDataFilms,
+  serverDataLocalConfig,
+} from './constants';
 
 class MainApi {
   constructor({ url, headers }) {
@@ -9,9 +13,11 @@ class MainApi {
   _checkResponse(response) {
     if (!response.ok) {
       console.error(
-        `Error when requesting ${response.url}. Status code: ${response.status}`,
+        `Ошибка при запросе ${response.url}. Код статуса: ${response.status}`,
       );
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return response.json().then((errorData) => {
+        throw new Error(errorData.message || `Ошибка: ${response.status}`);
+      });
     }
     return response.json();
   }
@@ -37,14 +43,47 @@ class MainApi {
       }),
     });
   }
+
+  _transformMovieData(data) {
+    return {
+      movieId: data.id,
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: urlForImgToServerDataFilms(data),
+      trailerLink: data.trailerLink,
+      thumbnail: urlForThumbnailToServerDataFilms(data),
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+    };
+  }
+
+  pushNewMovieCard(data) {
+    return this._request(`/movies`, {
+      method: 'POST',
+      body: JSON.stringify(this._transformMovieData(data)),
+    });
+  }
+
+  deleteMovieCard(movieId) {
+    return this._request(`/movies/${movieId}`, {
+      method: 'DELETE',
+    });
+  }
+
+  pullMovieInfo() {
+    return this._request(`/movies`);
+  }
 }
 
 const mainApi = new MainApi(serverDataLocalConfig);
 
 export default mainApi;
 
-// pullMovieInfo() {
-//   return this._request(`/cards`);
+// toggleLikeCard(cardId, isLiked, data) {
+//   return isLiked ? this.pushNewMovieCard(data) : this.deleteMovieCard(cardId);
 // }
 
 // pushCardInfo(data) {

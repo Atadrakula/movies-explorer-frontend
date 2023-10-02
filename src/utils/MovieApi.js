@@ -9,9 +9,11 @@ class MovieApi {
   _checkResponse(response) {
     if (!response.ok) {
       console.error(
-        `Error when requesting ${response.url}. Status code: ${response.status}`,
+        `Ошибка при запросе ${response.url}. Код статуса: ${response.status}`,
       );
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return response.json().then((errorData) => {
+        throw new Error(errorData.message || `Ошибка: ${response.status}`);
+      });
     }
     return response.json();
   }

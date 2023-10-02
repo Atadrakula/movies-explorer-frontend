@@ -1,33 +1,50 @@
 import React from 'react';
 import './MoviesCardList.css';
-
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList({
   children,
   movies,
-  filterFunction,
   isSavedMovies,
-  getMovieName,
   visibleMoviesCount,
+  onToggleMovieLike,
+  handleMovieLike,
+  handleMovieDislike,
+  isMovieSaved,
+  filteredShortMovies,
+  getCorrectFormateDuration,
+  getAbsoluteImageUrl,
+  getMovieName,
 }) {
-  const filteredMovies = filterFunction(movies);
+  function checkSavedMovies(movies) {
+    return movies.map((movie) => ({
+      ...movie,
+      isLiked: isMovieSaved(movie),
+    }));
+  }
 
-  const moviesToRender = filteredMovies
+  const moviesToRender = checkSavedMovies(filteredShortMovies(movies))
     .slice(0, visibleMoviesCount)
     .map((movie) => (
       <MoviesCard
-        key={movie.id}
+        key={movie.id || movie._id}
         movie={movie}
         isSavedMovies={isSavedMovies}
+        handleMovieLike={handleMovieLike}
+        handleMovieDislike={handleMovieDislike}
+        onToggleMovieLike={onToggleMovieLike}
+        isMovieSaved={isMovieSaved}
+        getCorrectFormateDuration={getCorrectFormateDuration}
+        getAbsoluteImageUrl={getAbsoluteImageUrl}
         getMovieName={getMovieName}
+        isLiked={movie.isLiked}
       />
     ));
 
   return (
     <section className="moviesccardlist">
       <ul className="moviesccardlist__moviescards">{moviesToRender}</ul>
-      {visibleMoviesCount < filteredMovies.length && children}
+      {visibleMoviesCount < filteredShortMovies(movies).length && children}
     </section>
   );
 }
