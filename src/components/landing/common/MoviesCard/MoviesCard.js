@@ -1,36 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './MoviesCard.css';
 import { notImage, serverDataFilmsConfig } from '../../../../utils/constants';
 
 function MoviesCard({
   movie,
-  isSavedMovies,
-  // onToggleMovieLike,
+  isRenderSavedMoviesButton,
   handleMovieLike,
   handleMovieDislike,
   getCorrectFormateDuration,
   getAbsoluteImageUrl,
   isLiked,
   getMovieName,
+  isMobileSavedCard,
 }) {
-  const [isMobile, setIsMobile] = useState(false);
   const [isLikedMovie, setLikedMovie] = useState(isLiked);
 
-  useEffect(() => {
-    const handleResizeWindow = () => {
-      setIsMobile(window.innerWidth < 767);
-    };
-
-    handleResizeWindow();
-
-    window.addEventListener('resize', handleResizeWindow);
-
-    return () => {
-      window.removeEventListener('resize', handleResizeWindow);
-    };
-  }, []);
-
   async function handleLikeClick() {
+    debugger;
     try {
       if (isLiked) {
         await handleMovieDislike(movie);
@@ -44,33 +30,36 @@ function MoviesCard({
   }
 
   const cardLikedClassName = `moviescard__heart cursor-pointer ${
-    isLikedMovie && 'moviescard__heart_active'
+    isLiked && 'moviescard__heart_active'
   }`;
 
   const cardDeleteClassName = `moviescard__cross cursor-pointer button-hover ${
-    isMobile ? 'moviescard__cross_visible' : ''
+    isMobileSavedCard ? 'moviescard__cross_visible' : ''
   }`;
 
-  const toggleClassNameButton = isSavedMovies
+  const toggleClassNameButton = isRenderSavedMoviesButton
     ? cardDeleteClassName
     : cardLikedClassName;
 
   const cardFormCursorClassToggle = `moviescard__wrapper-for-cursor ${
-    isSavedMovies ? 'cursor-pointer' : ''
+    isRenderSavedMoviesButton ? 'cursor-pointer' : ''
   }`;
+
   const movieName = getMovieName(movie);
 
   return (
     <li className="moviescard">
-      <img
-        src={getAbsoluteImageUrl(
-          movie,
-          serverDataFilmsConfig.urlForImg,
-          notImage,
-        )}
-        alt={movieName}
-        className="moviescard__img"
-      />
+      <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
+        <img
+          src={getAbsoluteImageUrl(
+            movie,
+            serverDataFilmsConfig.urlForImg,
+            notImage,
+          )}
+          alt={movieName}
+          className="moviescard__img button-hover"
+        />
+      </a>
       <div className={cardFormCursorClassToggle}>
         <div className="moviescard__name-form">
           <h2 className="moviescard__name">{movieName}</h2>
@@ -87,19 +76,3 @@ function MoviesCard({
 }
 
 export default MoviesCard;
-
-//РАБОЧИЙ
-// useEffect(() => {
-//   if (isMovieSaved(movie)) {
-//     setIsLiked(true);
-//   }
-// }, [movie, isMovieSaved]);
-
-// function handleLikeClick() {
-//   onToggleMovieLike(movie);
-//   setIsLiked(!isLiked);
-// }
-
-// const currentUser = useContext(CurrentUserContext);
-// const isLiked = currentUser._id && movie.like.includes(currentUser._id);
-// const likedMovies = isLiked.some((isLiked) => isLiked._id === movie._id);

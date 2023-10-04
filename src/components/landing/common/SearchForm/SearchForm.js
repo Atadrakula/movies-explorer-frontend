@@ -26,11 +26,13 @@ function SearchForm({
             aria-label="Поиск"
             value={currentSearchKeyword}
             onChange={handleInputChange}
+            name="searchKeyword"
           />
           <button
             className="searchform__submit cursor-pointer link-hover"
             type="submit"
             aria-label="Поиск"
+            name="submitSearchButton"
           />
         </div>
         <FilterCheckbox

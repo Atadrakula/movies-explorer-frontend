@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PopupProfile.css';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
-import { useFormWithValidation } from '../../../utils/hooks/UseFormWithValidation';
+import { useFormWithValidation } from '../../../utils/hooks/useFormWithValidation';
 import { capitalizeFirstLetter } from '../../../utils/utils';
 
 function Profile({ onSignOut, onUpdateProfile }) {
@@ -11,7 +10,6 @@ function Profile({ onSignOut, onUpdateProfile }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
   const [textSubmit, setTextSubmit] = useState('');
-  console.log(`Profile: currentUser: ${currentUser}`);
   const navigate = useNavigate();
   const nameInTitle = (str) => `Привет, ${capitalizeFirstLetter(str)}!`;
   const handleButtonClick = () => {
@@ -62,6 +60,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
                 className="profile__input input-style"
                 value={values.name || ''}
                 onChange={handleChange}
+                autocomplete="name"
               />
             </div>
             <span className="profile__input-text-error">{errors.name}</span>
@@ -79,6 +78,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
                 className="profile__input input-style"
                 value={values.email || ''}
                 onChange={handleChange}
+                autocomplete="email"
               />
             </div>
             <span className="profile__input-text-error">{errors.email}</span>
@@ -88,6 +88,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
             className={submitClass}
             aria-label="Редактировать профиль"
             type="submit"
+            name="supmitProfileButton"
           >
             Редактировать
           </button>

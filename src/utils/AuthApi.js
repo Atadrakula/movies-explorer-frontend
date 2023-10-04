@@ -78,36 +78,3 @@ class AuthApi {
 const authApi = new AuthApi(serverAuthConfig);
 
 export default authApi;
-
-// попробывать так может, чтобы не дублировать код?
-
-// _request(endpoint, options) {
-//   return fetch(`${this._generalUrl}${endpoint}`, {
-//     ...options,
-//     headers: this._headers,
-//     credentials: 'include',
-//   }).then(this._checkResponse);
-// }
-
-// _request(endpoint, headers, options) {
-//   return fetch(`${this._generalUrl}${endpoint}`, options).then(this._checkResponse);
-// }
-
-// pullDataAuth() {
-//   return this._request('/users/me', this._headers, {
-//     headers: this._headers,
-//     credentials: 'include',
-//   });
-// }
-
-// _request(endpoint, headers, options) {
-//   return fetch(`${this._generalUrl}${endpoint}`, {
-//     ...options,
-//     headers: this._headers,
-//   })
-//     .then(this._checkResponse)
-//     .catch((error) => {
-//       console.error('Ошибка сети:', error);
-//       throw new Error('Не удалось получить данные с сервера', error);
-//     });
-// }

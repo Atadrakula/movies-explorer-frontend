@@ -5,9 +5,8 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList({
   children,
   movies,
-  isSavedMovies,
+  isRenderSavedMoviesButton,
   visibleMoviesCount,
-  onToggleMovieLike,
   handleMovieLike,
   handleMovieDislike,
   isMovieSaved,
@@ -15,12 +14,16 @@ function MoviesCardList({
   getCorrectFormateDuration,
   getAbsoluteImageUrl,
   getMovieName,
+  isMobileSavedCard,
+  isSavedMoviesPage,
 }) {
   function checkSavedMovies(movies) {
-    return movies.map((movie) => ({
-      ...movie,
-      isLiked: isMovieSaved(movie),
-    }));
+    return isSavedMoviesPage
+      ? movies
+      : movies.map((movie) => ({
+          ...movie,
+          isLiked: isMovieSaved(movie),
+        }));
   }
 
   const moviesToRender = checkSavedMovies(filteredShortMovies(movies))
@@ -29,15 +32,15 @@ function MoviesCardList({
       <MoviesCard
         key={movie.id || movie._id}
         movie={movie}
-        isSavedMovies={isSavedMovies}
+        isRenderSavedMoviesButton={isRenderSavedMoviesButton}
         handleMovieLike={handleMovieLike}
         handleMovieDislike={handleMovieDislike}
-        onToggleMovieLike={onToggleMovieLike}
         isMovieSaved={isMovieSaved}
         getCorrectFormateDuration={getCorrectFormateDuration}
         getAbsoluteImageUrl={getAbsoluteImageUrl}
         getMovieName={getMovieName}
-        isLiked={movie.isLiked}
+        isLiked={movie.isLiked || isSavedMoviesPage}
+        isMobileSavedCard={isMobileSavedCard}
       />
     ));
 

@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { latinRegex, containsCyrillicAndLatinRegex } from '../constants';
-import movieApi from '../MovieApi';
 
-export function useMoviesFilterAndLogic(savedMovies = null) {
+export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
   const [currentSearchKeyword, setCurrentSearchKeyword] = useState('');
   const [errorMovieApi, setErrorMovieApi] = useState('');
   const [errorSearch, setErrorSearch] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const [savedSearchResult, setSavedSearchResult] = useState([]);
   const [submitedSearchKeyword, setSubmitedSearchKeyword] = useState('');
   const [isShortFilm, setShortFilm] = useState(false);
   const [isNoneResult, setNoneResult] = useState(false);
@@ -34,82 +34,15 @@ export function useMoviesFilterAndLogic(savedMovies = null) {
     return movies;
   };
 
-  function searchSavedMoviesByKeyword(keyword, savedMovies) {
-    try {
-      const filteredSavedMovies = savedMovies.filter((movie) =>
-        getMovieName(movie).toLowerCase().includes(keyword.toLowerCase()),
-      );
-      if (filteredSavedMovies.length === 0) {
-        setNoneResult(true);
-        setSearchResult([]);
-      } else {
-        setNoneResult(false);
-        setSearchResult(filteredSavedMovies);
-      }
-    } catch (error) {
-      setErrorMovieApi(
-        `Произошла ошибка при запросе к API сервера с сохраненными фильмами: ${error.message}`,
+  useEffect(() => {
+    if (searchResult.length > 0) {
+      saveSearchResultsToLocalStorage(
+        currentSearchKeyword,
+        isShortFilm,
+        searchResult,
       );
     }
-  }
-
-  async function searchAllMoviesByKeyword(keyword) {
-    try {
-      const dataMovies = await movieApi.pullMovieInfo();
-      const filteredAllMovies = dataMovies.filter((movie) =>
-        getMovieName(movie).toLowerCase().includes(keyword.toLowerCase()),
-      );
-
-      if (filteredAllMovies.length === 0) {
-        setNoneResult(true);
-        setSearchResult([]);
-      } else {
-        setNoneResult(false);
-        setSearchResult(filteredAllMovies);
-      }
-    } catch (error) {
-      setErrorMovieApi(
-        `Произошла ошибка при запросе к API со всеми фильмами: ${error.message}`,
-      );
-    }
-  }
-
-  function validateAndSearch() {
-    if (!currentSearchKeyword) {
-      setErrorSearch('Нужно ввести ключевое слово');
-      return;
-    } else if (
-      isСharacterQuery(currentSearchKeyword, containsCyrillicAndLatinRegex)
-    ) {
-      setErrorSearch(
-        'Пожалуйста, используйте только символы одного алфавита (кириллицы или латиницы).',
-      );
-      return;
-    }
-
-    setSubmitedSearchKeyword(currentSearchKeyword);
-    try {
-      if (savedMovies) {
-        // Если savedMovies предоставлены, выполняем поиск по сохраненным фильмам
-        searchSavedMoviesByKeyword(currentSearchKeyword, savedMovies);
-      } else {
-        // В противном случае выполняем поиск по всем фильмам
-        searchAllMoviesByKeyword(currentSearchKeyword);
-      }
-      setErrorSearch('');
-    } catch (error) {
-      setErrorSearch(
-        'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-      );
-    }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setNoneResult(false);
-
-    validateAndSearch();
-  };
+  }, [currentSearchKeyword, isShortFilm, searchResult]);
 
   function getCorrectFormateDuration(movie) {
     if (movie && movie.duration) {
@@ -127,7 +60,8 @@ export function useMoviesFilterAndLogic(savedMovies = null) {
     return 'неизвестно';
   }
 
-  //(?.) оператор optional chaining он позволяет читать значение свойств объекта внутри цепочки ссылок без необходимости явно проверять каждое из них на null или undefined.
+  //(?.) оператор optional chaining он позволяет читать значение свойств объекта
+  //внутри цепочки ссылок без необходимости явно проверять каждое из них на null или undefined.
 
   function getAbsoluteImageUrl(movie, preUrl, notImageUrl) {
     if (movie?.image?.url) {
@@ -136,6 +70,95 @@ export function useMoviesFilterAndLogic(savedMovies = null) {
       return movie.image;
     }
     return notImageUrl;
+  }
+
+  function searchSavedMoviesByKeyword(keyword, savedMovies) {
+    try {
+      const filteredSavedMovies = savedMovies.filter((movie) =>
+        getMovieName(movie).toLowerCase().includes(keyword.toLowerCase()),
+      );
+      if (filteredSavedMovies.length === 0) {
+        setNoneResult(true);
+        setSavedSearchResult([]);
+      } else {
+        setNoneResult(false);
+        setSavedSearchResult(filteredSavedMovies);
+      }
+    } catch (error) {
+      setErrorMovieApi(
+        `Произошла ошибка при запросе к API сервера с сохраненными фильмами: ${error.message}`,
+      );
+    }
+  }
+
+  //поиск по всем фильмам:
+  function searchAllMoviesByKeyword(keyword) {
+    const filteredAllMovies = allMovies.filter((movie) =>
+      getMovieName(movie).toLowerCase().includes(keyword.toLowerCase()),
+    );
+    try {
+      if (filteredAllMovies.length === 0) {
+        setNoneResult(true);
+        setSearchResult([]);
+      } else {
+        setNoneResult(false);
+        setSearchResult(filteredAllMovies); // 2
+      }
+    } catch (error) {
+      setErrorMovieApi(
+        `Произошла ошибка при запросе к API со всеми фильмами: ${error.message}`,
+      );
+    }
+  }
+
+  // сохранение фильмов в localStorage
+  function saveSearchResultsToLocalStorage(keyword, isShortFilm, movies) {
+    const data = {
+      keyword,
+      isShortFilm,
+      movies,
+    };
+    localStorage.setItem('searchResults', JSON.stringify(data));
+  }
+
+  function validateSearcKeyword() {
+    if (!currentSearchKeyword) {
+      setErrorSearch('Нужно ввести ключевое слово');
+      return;
+    } else if (
+      isСharacterQuery(currentSearchKeyword, containsCyrillicAndLatinRegex)
+    ) {
+      setErrorSearch(
+        'Пожалуйста, используйте только символы одного алфавита (кириллицы или латиницы).',
+      );
+      return;
+    }
+    setSubmitedSearchKeyword(currentSearchKeyword);
+  }
+
+  function validateAndSearch() {
+    validateSearcKeyword();
+    try {
+      if (savedMovies) {
+        // Если savedMovies предоставлены, выполняем поиск по сохраненным фильмам
+        searchSavedMoviesByKeyword(currentSearchKeyword, savedMovies);
+      } else {
+        // В противном случае выполняем поиск по всем фильмам
+        searchAllMoviesByKeyword(currentSearchKeyword);
+      }
+      setErrorSearch('');
+    } catch (error) {
+      setErrorSearch(
+        'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+      );
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setNoneResult(false);
+
+    validateAndSearch();
   }
 
   return {
@@ -152,41 +175,9 @@ export function useMoviesFilterAndLogic(savedMovies = null) {
     getCorrectFormateDuration,
     getAbsoluteImageUrl,
     errorSearch,
+    setCurrentSearchKeyword,
+    setSearchResult,
+    setSavedSearchResult,
+    savedSearchResult,
   };
 }
-
-// async function validateAndSearch() {
-//   if (!currentSearchKeyword) {
-//     setErrorSearch('Нужно ввести ключевое слово');
-//     return;
-//   } else if (isСharacterQuery(currentSearchKeyword, containsCyrillicAndLatinRegex)) {
-//     setErrorSearch(
-//       'Пожалуйста, используйте только символы одного алфавита (кириллицы или латиницы).',
-//     );
-//     return;
-//   }
-
-//   try {
-//     setSubmitedSearchKeyword(currentSearchKeyword);
-
-//     const [allMovies, savedMovies] = await Promise.all([
-//       searchMoviesByKeyword(currentSearchKeyword, false),
-//       searchMoviesByKeyword(currentSearchKeyword, true),
-//     ]);
-
-//     // Обработка результатов запросов
-//     if (allMovies.length === 0 && savedMovies.length === 0) {
-//       setNoneResult(true);
-//       setSearchResult([]);
-//     } else {
-//       setNoneResult(false);
-//       setSearchResult([...allMovies, ...savedMovies]);
-//     }
-
-//     setErrorSearch('');
-//   } catch (error) {
-//     setErrorSearch(
-//       'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-//     );
-//   }
-// }

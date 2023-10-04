@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import PageWithIdentification from '../common/PageWithIdentification/PageWithIdentification';
 
-import { useFormWithValidation } from '../../../utils/hooks/UseFormWithValidation';
-import validator from 'validator';
+import { useFormWithValidation } from '../../../utils/hooks/useFormWithValidation';
 
 function Register({ onRegister, authError }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
@@ -33,12 +31,3 @@ function Register({ onRegister, authError }) {
 }
 
 export default Register;
-
-// function handleChange(e) {
-//   const {name, value} = e.target;
-
-//   if (name === "name" && !validNameRegex.test(value)) {
-//     return;
-//   }
-//   setData(prevState => ({...prevState, [name]: value}));
-// }
