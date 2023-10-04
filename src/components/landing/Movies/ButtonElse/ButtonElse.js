@@ -8,9 +8,6 @@ function ButtonElse({
 }) {
   const handleButtonClick = () => {
     setVisibleMoviesCount(visibleMoviesCount + visibleMoviesCountToPressButton);
-    console.log(
-      `ButtonElse-click: initialVisibleMoviesCount:${visibleMoviesCountToPressButton}`,
-    );
   };
 
   return (

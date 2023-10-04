@@ -1,6 +1,6 @@
 import React from 'react';
 import PageWithIdentification from '../common/PageWithIdentification/PageWithIdentification';
-import { useFormWithValidation } from '../../../utils/hooks/UseFormWithValidation';
+import { useFormWithValidation } from '../../../utils/hooks/useFormWithValidation';
 
 function Login({ onLogin, authError }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();

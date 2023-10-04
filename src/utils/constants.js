@@ -10,16 +10,16 @@ const serverDataFilmsConfig = {
 };
 
 const serverAuthConfig = {
-  // url: 'https://api.nomoreparties.co/beatfilm-movies',
-  url: 'http://localhost:3000',
+  url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
+  // url: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
 };
 
 const serverDataLocalConfig = {
-  // url: 'https://api.nomoreparties.co/beatfilm-movies',
-  url: 'http://localhost:3000',
+  url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
+  // url: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -27,6 +27,7 @@ const serverDataLocalConfig = {
 
 const urlForImgToServerDataFilms = (data) =>
   `${serverDataFilmsConfig.urlForImg}${data.image.url}`;
+
 const urlForThumbnailToServerDataFilms = (data) =>
   `${serverDataFilmsConfig.urlForImg}${data.image.formats.thumbnail.url}`;
 

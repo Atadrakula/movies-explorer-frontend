@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Movies.css';
 import SearchForm from '../common/SearchForm/SearchForm';
 import Preloader from './Preloader/Preloader';
@@ -7,10 +7,10 @@ import ButtonElse from './ButtonElse/ButtonElse';
 import { useMoviesFilterAndLogic } from '../../../utils/hooks/useMoviesFilterAndLogic';
 
 function Movies({
+  allMovies,
   visibleMoviesCount,
   setVisibleMoviesCount,
   visibleMoviesCountToPressButton,
-  onToggleMovieLike,
   handleMovieLike,
   handleMovieDislike,
   isMovieSaved,
@@ -28,7 +28,23 @@ function Movies({
     getCorrectFormateDuration,
     getAbsoluteImageUrl,
     getMovieName,
-  } = useMoviesFilterAndLogic();
+    setCurrentSearchKeyword,
+    setSearchResult,
+  } = useMoviesFilterAndLogic(null, allMovies);
+
+  useEffect(() => {
+    try {
+      const data = localStorage.getItem('searchResults');
+      if (data) {
+        const { keyword, isShortFilm, movies } = JSON.parse(data);
+        setCurrentSearchKeyword(keyword);
+        setShortFilm(isShortFilm);
+        setSearchResult(movies);
+      }
+    } catch (error) {
+      console.error('Ошибка при чтении данных из localStorage:', error);
+    }
+  }, [setCurrentSearchKeyword, setShortFilm, setSearchResult]);
 
   return (
     <main className="movies">
@@ -42,10 +58,9 @@ function Movies({
       />
       {searchResult.length > 0 ? (
         <MoviesCardList
-          isSavedMovies={false}
+          isRenderSavedMoviesButton={false}
           movies={searchResult}
           visibleMoviesCount={visibleMoviesCount}
-          onToggleMovieLike={onToggleMovieLike}
           handleMovieLike={handleMovieLike}
           handleMovieDislike={handleMovieDislike}
           isMovieSaved={isMovieSaved}

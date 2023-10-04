@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SearchForm from '../common/SearchForm/SearchForm';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 import { useMoviesFilterAndLogic } from '../../../utils/hooks/useMoviesFilterAndLogic';
@@ -8,14 +8,15 @@ function SavedMovies({
   savedMovies,
   handleMovieLike,
   handleMovieDislike,
-  onToggleMovieLike,
   isMovieSaved,
+  isMobileSavedCard,
 }) {
   const {
     currentSearchKeyword,
     errorSearch,
     isNoneResult,
     isShortFilm,
+    savedSearchResult,
     setShortFilm,
     handleInputChange,
     filteredShortMovies,
@@ -23,7 +24,14 @@ function SavedMovies({
     getCorrectFormateDuration,
     getAbsoluteImageUrl,
     handleSubmit,
-  } = useMoviesFilterAndLogic(savedMovies);
+    setSavedSearchResult,
+  } = useMoviesFilterAndLogic(savedMovies, null);
+
+  useEffect(() => {
+    if (savedMovies && savedMovies.length > 0) {
+      setSavedSearchResult(savedMovies);
+    }
+  }, [setSavedSearchResult, savedMovies]);
 
   return (
     <main className="movies">
@@ -35,12 +43,12 @@ function SavedMovies({
         isShortFilm={isShortFilm}
         onToggleShortFilm={setShortFilm}
       />
-      {savedMovies.length > 0 ? (
+      {savedSearchResult.length > 0 ? (
         <MoviesCardList
-          isSavedMovies={true}
-          movies={savedMovies}
+          isSavedMoviesPage={true}
+          isRenderSavedMoviesButton={true}
+          movies={savedSearchResult}
           isShortFilm={isShortFilm}
-          onToggleMovieLike={onToggleMovieLike}
           handleMovieLike={handleMovieLike}
           handleMovieDislike={handleMovieDislike}
           filteredShortMovies={filteredShortMovies}
@@ -48,6 +56,7 @@ function SavedMovies({
           getAbsoluteImageUrl={getAbsoluteImageUrl}
           getMovieName={getMovieName}
           isMovieSaved={isMovieSaved}
+          isMobileSavedCard={isMobileSavedCard}
         />
       ) : !isNoneResult ? (
         <Preloader />

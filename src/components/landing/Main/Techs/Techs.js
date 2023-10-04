@@ -2,10 +2,10 @@ import React from 'react';
 import ChapterTitle from '../../common/ChapterTitle/ChapterTitle';
 import './Techs.css';
 
-function Techs() {
+function Techs({ borderStyle }) {
   return (
     <section className="techs" id="about-techs">
-      <ChapterTitle borderColor="#000" text={'Технологии'} />
+      <ChapterTitle borderStyle={borderStyle} text={'Технологии'} />
       <div className="techs__chapter-description">
         <h3 className="techs__subtitle">7 технологий</h3>
         <p className="techs__text">
