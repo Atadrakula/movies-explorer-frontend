@@ -12,7 +12,13 @@ import PopupProfile from '../landing/PopupProfile/PopupProfile';
 import Register from '../landing/Register/Register';
 import Login from '../landing/Login/Login';
 import PopupMenu from '../landing/PopupMenu/PopupMenu';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import mainApi from '../../utils/MainApi';
 import authApi from '../../utils/AuthApi';
 import movieApi from '../../utils/MovieApi';
@@ -219,6 +225,7 @@ function App() {
       await authApi.pushLogout();
       localStorage.removeItem('searchResults');
       setLoggedIn(false);
+      navigate('/', { replace: true });
     } catch (error) {
       setErrorApi(`Ошибка при выходе из системы: ${error.message}`);
       console.error(`Ошибка при выходе из системы: ${error.message}`);
@@ -342,12 +349,22 @@ function App() {
             />
             <Route
               path="/signin"
-              element={<Login onLogin={handleLogin} authError={authError} />}
+              element={
+                loggedIn ? (
+                  <Navigate to="/" replace />
+                ) : (
+                  <Login onLogin={handleLogin} authError={authError} />
+                )
+              }
             />
             <Route
               path="/signup"
               element={
-                <Register onRegister={handleRegister} authError={authError} />
+                loggedIn ? (
+                  <Navigate to="/" replace />
+                ) : (
+                  <Register onRegister={handleRegister} authError={authError} />
+                )
               }
             />
             <Route path="*" element={<NotFound />} />
