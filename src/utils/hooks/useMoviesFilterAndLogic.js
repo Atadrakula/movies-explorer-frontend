@@ -10,6 +10,7 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
   const [submitedSearchKeyword, setSubmitedSearchKeyword] = useState('');
   const [isShortFilm, setShortFilm] = useState(false);
   const [isNoneResult, setNoneResult] = useState(false);
+  const [isLoadingSearch, setLoadingSearch] = useState(false);
 
   const handleInputChange = (e) => {
     setCurrentSearchKeyword(e.target.value);
@@ -147,6 +148,7 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
         searchAllMoviesByKeyword(currentSearchKeyword);
       }
       setErrorSearch('');
+      setLoadingSearch(false);
     } catch (error) {
       setErrorSearch(
         'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
@@ -157,6 +159,7 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
   function handleSubmit(e) {
     e.preventDefault();
     setNoneResult(false);
+    setLoadingSearch(true);
 
     validateAndSearch();
   }
@@ -179,5 +182,6 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
     setSearchResult,
     setSavedSearchResult,
     savedSearchResult,
+    isLoadingSearch,
   };
 }

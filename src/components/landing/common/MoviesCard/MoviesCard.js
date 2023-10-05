@@ -16,7 +16,6 @@ function MoviesCard({
   const [isLikedMovie, setLikedMovie] = useState(isLiked);
 
   async function handleLikeClick() {
-    debugger;
     try {
       if (isLiked) {
         await handleMovieDislike(movie);

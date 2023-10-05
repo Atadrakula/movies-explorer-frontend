@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ErrorPopup.css';
 
-const ErrorPopup = ({ message }) => {
+function ErrorPopup({ message }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -14,10 +14,10 @@ const ErrorPopup = ({ message }) => {
   }, [message]);
 
   return (
-    <div className={`error-popup ${visible ? 'visible' : ''}`}>
+    <div className={`error-popup ${visible && 'error-popup_visible'}`}>
       <p className="error-popup__text">⚠ {message}</p>
     </div>
   );
-};
+}
 
 export default ErrorPopup;

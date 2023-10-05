@@ -60,7 +60,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
                 className="profile__input input-style"
                 value={values.name || ''}
                 onChange={handleChange}
-                autocomplete="name"
+                autoComplete="name"
               />
             </div>
             <span className="profile__input-text-error">{errors.name}</span>
@@ -78,7 +78,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
                 className="profile__input input-style"
                 value={values.email || ''}
                 onChange={handleChange}
-                autocomplete="email"
+                autoComplete="email"
               />
             </div>
             <span className="profile__input-text-error">{errors.email}</span>

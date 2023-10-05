@@ -30,6 +30,7 @@ function Movies({
     getMovieName,
     setCurrentSearchKeyword,
     setSearchResult,
+    isLoadingSearch,
   } = useMoviesFilterAndLogic(null, allMovies);
 
   useEffect(() => {
@@ -56,7 +57,9 @@ function Movies({
         isShortFilm={isShortFilm}
         onToggleShortFilm={setShortFilm}
       />
-      {searchResult.length > 0 ? (
+      {isLoadingSearch ? (
+        <Preloader />
+      ) : searchResult.length > 0 ? (
         <MoviesCardList
           isRenderSavedMoviesButton={false}
           movies={searchResult}
@@ -76,10 +79,10 @@ function Movies({
             />
           }
         />
-      ) : !isNoneResult ? (
-        <Preloader />
       ) : (
-        <h2 className="movies__none-result">Ничего не найдено</h2>
+        isNoneResult && (
+          <h2 className="movies__none-result">Ничего не найдено</h2>
+        )
       )}
     </main>
   );

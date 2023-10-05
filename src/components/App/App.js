@@ -23,7 +23,7 @@ import { useMoviesFilterAndLogic } from '../../utils/hooks/useMoviesFilterAndLog
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isThemeDark, setIsThemeDark] = useState(false);
@@ -189,7 +189,7 @@ function App() {
   }
 
   async function handleMovieDislike({ id, movieId }) {
-    const actualMovieId = id || movieId;
+    const actualMovieId = id;
     try {
       await mainApi.deleteMovieCard(actualMovieId);
       setSavedMovies((prevSavedMovies) =>
@@ -273,7 +273,7 @@ function App() {
     }
   }
 
-  if (loading) {
+  if (isLoading) {
     return <Preloader />;
   }
 

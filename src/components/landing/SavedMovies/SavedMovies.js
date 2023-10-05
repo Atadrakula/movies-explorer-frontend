@@ -25,6 +25,7 @@ function SavedMovies({
     getAbsoluteImageUrl,
     handleSubmit,
     setSavedSearchResult,
+    isLoadingSearch,
   } = useMoviesFilterAndLogic(savedMovies, null);
 
   useEffect(() => {
@@ -43,7 +44,9 @@ function SavedMovies({
         isShortFilm={isShortFilm}
         onToggleShortFilm={setShortFilm}
       />
-      {savedSearchResult.length > 0 ? (
+      {isLoadingSearch ? (
+        <Preloader />
+      ) : savedSearchResult.length > 0 ? (
         <MoviesCardList
           isSavedMoviesPage={true}
           isRenderSavedMoviesButton={true}
@@ -58,10 +61,10 @@ function SavedMovies({
           isMovieSaved={isMovieSaved}
           isMobileSavedCard={isMobileSavedCard}
         />
-      ) : !isNoneResult ? (
-        <Preloader />
       ) : (
-        <h2 className="movies__none-result">Ничего не найдено</h2>
+        isNoneResult && (
+          <h2 className="movies__none-result">Ничего не найдено</h2>
+        )
       )}
     </main>
   );
