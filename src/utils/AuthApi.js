@@ -10,7 +10,7 @@ class AuthApi {
   _checkResponse(response) {
     return response.json().then((data) => {
       if (!response.ok) {
-        console.error(`Ответ об ошибке от${response.url}: ${response.status}`);
+        // console.error(`Ответ об ошибке от${response.url}: ${response.status}`);
         const error =
           response.status === 401
             ? 'Токен недействителен или отсутствует'
@@ -28,7 +28,7 @@ class AuthApi {
     })
       .then(this._checkResponse)
       .catch((error) => {
-        console.error(`Ошибка сети: ${error}`);
+        // console.error(`Ошибка сети: ${error}`);
         throw new Error(`Не удалось получить данные с сервера: ${error}`);
       });
   }

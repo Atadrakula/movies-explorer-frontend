@@ -69,9 +69,6 @@ function App() {
         await authApi.pullDataAuth();
         setLoggedIn(true);
       } catch (error) {
-        setErrorApi(
-          `Ошибка при загрузке данных пользователя: ${error.message}`,
-        );
         console.error(
           `Ошибка при загрузке данных пользователя: ${error.message}`,
         );
@@ -88,11 +85,9 @@ function App() {
       if (!loggedIn) return;
 
       try {
-        const [dataMovies, dataSavedMovies, dataUser] = await Promise.all([
-          movieApi.pullMovieInfo(),
-          mainApi.pullMovieInfo(),
-          mainApi.pullProfileInfo(),
-        ]);
+        const dataMovies = await movieApi.pullMovieInfo();
+        const dataSavedMovies = await mainApi.pullMovieInfo();
+        const dataUser = await mainApi.pullProfileInfo();
         setAllMovies(dataMovies);
         setSavedMovies(dataSavedMovies.data);
         setCurrentUser(dataUser.data);
@@ -195,7 +190,7 @@ function App() {
   }
 
   async function handleMovieDislike({ id, movieId }) {
-    const actualMovieId = id;
+    const actualMovieId = id || movieId;
     try {
       await mainApi.deleteMovieCard(actualMovieId);
       setSavedMovies((prevSavedMovies) =>
@@ -301,6 +296,7 @@ function App() {
 
           {errorMovieApi && <ErrorPopup message={errorMovieApi} />}
           {errorApi && <ErrorPopup message={errorApi} />}
+
           <Routes>
             <Route path="/" element={<Main borderStyle={borderStyle} />} />
 

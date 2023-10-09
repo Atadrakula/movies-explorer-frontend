@@ -26,7 +26,7 @@
 
 **Ссылки на проект**
 
-IP-адрес 158.160.33.205
+IP-адрес 158.160.125.30
 Ссылка на пул реквест: https://github.com/Atadrakula/movies-explorer-frontend/pull/4#issue-1927058626
 
 * [Ссылка на публикацию](https://web.portfolio.diploma.nomoredomainsicu.ru)

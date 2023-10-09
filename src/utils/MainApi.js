@@ -16,6 +16,9 @@ class MainApi {
         `Ошибка при запросе ${response.url}. Код статуса: ${response.status}`,
       );
       return response.json().then((errorData) => {
+        if (response.status === 404) {
+          return { data: [] }; // Считаем, что у пользователя нет сохраненных фильмов
+        }
         throw new Error(errorData.message || `Ошибка: ${response.status}`);
       });
     }

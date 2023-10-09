@@ -15,7 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy-server": "react-scripts build && scp -r ./build/* mrscriptsmith@158.160.33.205:/home/mrscriptsmith/diploma/frontend/build",
+    "deploy-server": "react-scripts build && ssh mrscriptsmith@158.160.125.30 'rm -rf /home/mrscriptsmith/diploma/frontend/*' && scp -r ./build/* mrscriptsmith@158.160.125.30:/home/mrscriptsmith/diploma/frontend",
     "check-all": "prettier \"**/*.{js,jsx,ts,tsx,css,scss,json,html}\" && npx eslint . && npx stylelint \"**/*.{css,scss}\"",
     "check-sty": "npx stylelint \"**/*.{css,scss}\"",
     "format-pre": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,json,html}\"",
