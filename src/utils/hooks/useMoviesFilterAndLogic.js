@@ -45,6 +45,14 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
     }
   }, [currentSearchKeyword, isShortFilm, searchResult]);
 
+  // Добавлен вызов поиска при изменении положения чекбокса
+  useEffect(() => {
+    if (currentSearchKeyword) {
+      searchMovies();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShortFilm]);
+
   function getCorrectFormateDuration(movie) {
     if (movie && movie.duration) {
       const hours = Math.floor(movie.duration / 60);
@@ -156,12 +164,17 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
     }
   }
 
+  // Вынесен поиск в отдельную функцию для возможности применения поиска при переключении чекбокса
+  function searchMovies() {
+    validateAndSearch();
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     setNoneResult(false);
     setLoadingSearch(true);
 
-    validateAndSearch();
+    searchMovies();
   }
 
   return {
