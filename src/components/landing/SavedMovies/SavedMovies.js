@@ -3,6 +3,10 @@ import SearchForm from '../common/SearchForm/SearchForm';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 import { useMoviesFilterAndLogic } from '../../../utils/hooks/useMoviesFilterAndLogic';
 import Preloader from '../Movies/Preloader/Preloader';
+import {
+  getCorrectFormateDuration,
+  getAbsoluteImageUrl,
+} from '../../../utils/constants';
 
 function SavedMovies({
   savedMovies,
@@ -21,8 +25,6 @@ function SavedMovies({
     handleInputChange,
     filteredShortMovies,
     getMovieName,
-    getCorrectFormateDuration,
-    getAbsoluteImageUrl,
     handleSubmit,
     setSavedSearchResult,
     isLoadingSearch,

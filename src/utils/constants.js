@@ -25,6 +25,52 @@ const serverDataLocalConfig = {
   },
 };
 
+const initialCalculateVisibleMovies = (screenWidth) => {
+  if (screenWidth >= 1280) {
+    return 12; // 4 ряда по 3 карточки
+  } else if (screenWidth >= 768) {
+    return 8; // 4 ряда по 2 карточки
+  } else {
+    return 5; // 5 карточек по 1 в ряд
+  }
+};
+
+const pressButtonCalculateVisibleMovies = (screenWidth) => {
+  if (screenWidth >= 1280) {
+    return 3;
+  } else {
+    return 2;
+  }
+};
+
+const getCorrectFormateDuration = (movie) => {
+  if (movie && movie.duration) {
+    const hours = Math.floor(movie.duration / 60);
+    const remainingMinutes = movie.duration % 60;
+    const hoursText = hours > 0 ? `${hours}ч` : '';
+    const minutesText = remainingMinutes > 0 ? `${remainingMinutes}м` : '';
+
+    if (hoursText && minutesText) {
+      return `${hoursText} ${minutesText}`;
+    } else {
+      return `${hoursText}${minutesText}`;
+    }
+  }
+  return 'неизвестно';
+};
+
+//(?.) оператор optional chaining он позволяет читать значение свойств объекта
+//внутри цепочки ссылок без необходимости явно проверять каждое из них на null или undefined.
+
+const getAbsoluteImageUrl = (movie, preUrl) => {
+  if (movie?.image?.url) {
+    return `${preUrl}${movie.image.url}`;
+  } else if (movie?.image) {
+    return movie.image;
+  }
+  return notImage;
+};
+
 const urlForImgToServerDataFilms = (data) =>
   `${serverDataFilmsConfig.urlForImg}${data.image.url}`;
 
@@ -57,4 +103,8 @@ export {
   urlForImgToServerDataFilms,
   urlForThumbnailToServerDataFilms,
   notImage,
+  pressButtonCalculateVisibleMovies,
+  initialCalculateVisibleMovies,
+  getCorrectFormateDuration,
+  getAbsoluteImageUrl,
 };

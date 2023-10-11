@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
-import { notImage, serverDataFilmsConfig } from '../../../../utils/constants';
+import { serverDataFilmsConfig } from '../../../../utils/constants';
 
 function MoviesCard({
   movie,
@@ -50,11 +50,7 @@ function MoviesCard({
     <li className="moviescard">
       <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
         <img
-          src={getAbsoluteImageUrl(
-            movie,
-            serverDataFilmsConfig.urlForImg,
-            notImage,
-          )}
+          src={getAbsoluteImageUrl(movie, serverDataFilmsConfig.urlForImg)}
           alt={movieName}
           className="moviescard__img button-hover"
         />

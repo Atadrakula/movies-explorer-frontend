@@ -53,34 +53,6 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortFilm]);
 
-  function getCorrectFormateDuration(movie) {
-    if (movie && movie.duration) {
-      const hours = Math.floor(movie.duration / 60);
-      const remainingMinutes = movie.duration % 60;
-      const hoursText = hours > 0 ? `${hours}ч` : '';
-      const minutesText = remainingMinutes > 0 ? `${remainingMinutes}м` : '';
-
-      if (hoursText && minutesText) {
-        return `${hoursText} ${minutesText}`;
-      } else {
-        return `${hoursText}${minutesText}`;
-      }
-    }
-    return 'неизвестно';
-  }
-
-  //(?.) оператор optional chaining он позволяет читать значение свойств объекта
-  //внутри цепочки ссылок без необходимости явно проверять каждое из них на null или undefined.
-
-  function getAbsoluteImageUrl(movie, preUrl, notImageUrl) {
-    if (movie?.image?.url) {
-      return `${preUrl}${movie.image.url}`;
-    } else if (movie?.image) {
-      return movie.image;
-    }
-    return notImageUrl;
-  }
-
   function searchSavedMoviesByKeyword(keyword, savedMovies) {
     try {
       const filteredSavedMovies = savedMovies.filter((movie) =>
@@ -188,8 +160,6 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
     getMovieName,
     handleSubmit,
     filteredShortMovies,
-    getCorrectFormateDuration,
-    getAbsoluteImageUrl,
     errorSearch,
     setCurrentSearchKeyword,
     setSearchResult,

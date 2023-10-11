@@ -1,4 +1,8 @@
 import './App.css';
+import {
+  pressButtonCalculateVisibleMovies,
+  initialCalculateVisibleMovies,
+} from '../../utils/constants';
 import AuthHeader from '../landing/Header/AuthHeader/AuthHeader';
 import NotAuthHeader from '../landing/Header/NotAuthHeader/NotAuthHeader';
 import Main from '../landing/Main/Main.js';
@@ -173,24 +177,6 @@ function App() {
       window.removeEventListener('resize', updateUIBasedOnWidth);
     };
   }, [setVisibleMoviesCount, hasPressedShowMore]);
-
-  function initialCalculateVisibleMovies(screenWidth) {
-    if (screenWidth >= 1280) {
-      return 12; // 4 ряда по 3 карточки
-    } else if (screenWidth >= 768) {
-      return 8; // 4 ряда по 2 карточки
-    } else {
-      return 5; // 5 карточек по 1 в ряд
-    }
-  }
-
-  function pressButtonCalculateVisibleMovies(screenWidth) {
-    if (screenWidth >= 1280) {
-      return 3;
-    } else {
-      return 2;
-    }
-  }
 
   function openPopupMenu() {
     setPopupVisible(true);
