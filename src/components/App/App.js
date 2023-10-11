@@ -36,7 +36,7 @@ function App() {
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(null);
   const [visibleMoviesCountToPressButton, setVisibleMoviesCountToPressButton] =
     useState(0);
-  const [authError, setAuthError] = useState('');
+  const [authTextError, setAuthTextError] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
   const [errorApi, setErrorApi] = useState('');
   const [isMobileSavedCard, setMobileSavedCard] = useState(false);
@@ -62,6 +62,11 @@ function App() {
   const closeAllPopups = useCallback(() => {
     setPopupVisible(false);
   }, []);
+
+  useEffect(() => {
+    // сброс authTextError при смене маршрута
+    setAuthTextError('');
+  }, [location.pathname]);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -238,7 +243,7 @@ function App() {
         navigate('/movies', { replace: true });
       }
     } catch (error) {
-      setAuthError(
+      setAuthTextError(
         `Произошла ошибка входа. Пожалуйста, проверьте введенные данные и повторите попытку.`,
       );
       console.error(
@@ -254,7 +259,7 @@ function App() {
         await handleLogin(data);
       }
     } catch (error) {
-      setAuthError(
+      setAuthTextError(
         `Ошибка при отправки данных регистрации пользователя: ${error.message}`,
       );
       console.error(
@@ -352,7 +357,7 @@ function App() {
                 loggedIn ? (
                   <Navigate to="/" replace />
                 ) : (
-                  <Login onLogin={handleLogin} authError={authError} />
+                  <Login onLogin={handleLogin} authTextError={authTextError} />
                 )
               }
             />
@@ -362,7 +367,10 @@ function App() {
                 loggedIn ? (
                   <Navigate to="/" replace />
                 ) : (
-                  <Register onRegister={handleRegister} authError={authError} />
+                  <Register
+                    onRegister={handleRegister}
+                    authTextError={authTextError}
+                  />
                 )
               }
             />

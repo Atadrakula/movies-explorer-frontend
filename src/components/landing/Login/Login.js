@@ -2,8 +2,10 @@ import React from 'react';
 import PageWithIdentification from '../common/PageWithIdentification/PageWithIdentification';
 import { useFormWithValidation } from '../../../utils/hooks/useFormWithValidation';
 
-function Login({ onLogin, authError }) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+function Login({ onLogin, authTextError }) {
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (isValid) {
@@ -23,7 +25,8 @@ function Login({ onLogin, authError }) {
       onChange={handleChange}
       textError={errors}
       isValid={isValid}
-      authError={authError}
+      authTextError={authTextError}
+      resetForm={resetForm}
     />
   );
 }

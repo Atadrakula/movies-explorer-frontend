@@ -3,8 +3,9 @@ import PageWithIdentification from '../common/PageWithIdentification/PageWithIde
 
 import { useFormWithValidation } from '../../../utils/hooks/useFormWithValidation';
 
-function Register({ onRegister, authError }) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+function Register({ onRegister, authTextError }) {
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -25,7 +26,8 @@ function Register({ onRegister, authError }) {
       onChange={handleChange}
       textError={errors}
       isValid={isValid}
-      authError={authError}
+      authTextError={authTextError}
+      resetForm={resetForm}
     />
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './PageWithIdentification.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
@@ -14,8 +14,14 @@ function PageWithIdentification({
   onChange,
   textError,
   isValid,
-  authError,
+  authTextError,
+  resetForm,
 }) {
+  useEffect(() => {
+    // cброс состояния формы при размонтировании компонента
+    return () => resetForm();
+  }, [resetForm]);
+
   const typeFormClassInput = `auth__input-container ${
     isFormRegistration ? '' : 'auth__input-container_invisible'
   }`;
@@ -86,7 +92,7 @@ function PageWithIdentification({
             />
             <span className="auth__input-text-error">{textError.password}</span>
           </div>
-          <span className="auth__text-error">{authError}</span>
+          <span className="auth__text-error">{authTextError}</span>
           <button
             id="button-submit-auth"
             type="submit"
