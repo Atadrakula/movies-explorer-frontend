@@ -275,6 +275,7 @@ function App() {
       console.error(
         `Ошибка при обновлении данных пользователя: ${error.message}`,
       );
+      throw error; // Выбрасываем исключение, чтобы его можно было перехватить в handleSubmit
     }
   }
 

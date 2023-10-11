@@ -42,11 +42,15 @@ function Profile({ onSignOut, onUpdateProfile }) {
   async function handleSubmit(e) {
     e.preventDefault();
     if (isValid) {
-      onUpdateProfile({
-        name: values.name,
-        email: values.email,
-      });
-      setTextSubmit(`Данные обновлены`);
+      try {
+        await onUpdateProfile({
+          name: values.name,
+          email: values.email,
+        });
+        setTextSubmit(`Данные обновлены`);
+      } catch (error) {
+        setTextSubmit(``);
+      }
     }
   }
   const submitClass = `profile__submit ${

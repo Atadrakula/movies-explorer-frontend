@@ -9,7 +9,7 @@ function ErrorPopup({ message }) {
       setVisible(true);
       setTimeout(() => {
         setVisible(false);
-      }, 2000);
+      }, 4000);
     }
   }, [message]);
 
