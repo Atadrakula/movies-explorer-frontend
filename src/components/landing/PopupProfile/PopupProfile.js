@@ -10,12 +10,16 @@ function Profile({ onSignOut, onUpdateProfile }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
   const [textSubmit, setTextSubmit] = useState('');
+  const [isDataChanged, setIsDataChanged] = useState(false);
+
   const navigate = useNavigate();
+
   const nameInTitle = (str) => `Привет, ${capitalizeFirstLetter(str)}!`;
   const handleButtonClick = () => {
     onSignOut();
     navigate('/signin');
   };
+
   useEffect(() => {
     // Устанавливаем начальные значения полей при обновлении currentUser
     if (currentUser) {
@@ -25,6 +29,15 @@ function Profile({ onSignOut, onUpdateProfile }) {
       });
     }
   }, [currentUser, resetForm]);
+
+  useEffect(() => {
+    // Сверяем текущее значение с изначальным и возводим флаг
+    if (currentUser) {
+      const isNameChanged = values.name !== currentUser.name;
+      const isEmailChanged = values.email !== currentUser.email;
+      setIsDataChanged(isNameChanged || isEmailChanged);
+    }
+  }, [values, currentUser]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -37,7 +50,9 @@ function Profile({ onSignOut, onUpdateProfile }) {
     }
   }
   const submitClass = `profile__submit ${
-    isValid ? 'cursor-pointer button-hover' : 'profile__submit_inactive'
+    isValid && isDataChanged
+      ? 'cursor-pointer button-hover'
+      : 'profile__submit_inactive'
   }`;
 
   return (
@@ -89,6 +104,7 @@ function Profile({ onSignOut, onUpdateProfile }) {
             aria-label="Редактировать профиль"
             type="submit"
             name="supmitProfileButton"
+            disabled={!isValid || !isDataChanged}
           >
             Редактировать
           </button>
