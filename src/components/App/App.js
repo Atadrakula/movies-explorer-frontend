@@ -156,7 +156,7 @@ function App() {
         if (!hasPressedShowMore) {
           const newVisibleMoviesCount =
             initialCalculateVisibleMovies(screenWidth);
-            setVisibleMoviesCount(newVisibleMoviesCount);
+          setVisibleMoviesCount(newVisibleMoviesCount);
         }
 
         const newVisibleMoviesCountToPressButton =
