@@ -43,6 +43,7 @@ function App() {
   const [isMobileAuthHeader, setMobileAuthHeader] = useState(false);
   const [borderStyle, setBorderStyle] = useState({});
   const [allMovies, setAllMovies] = useState([]);
+  const [hasPressedShowMore, setHasPressedShowMore] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -150,14 +151,16 @@ function App() {
           setBorderStyle({});
           setMobileSavedCard(false);
         }
+        // Доп логика - теперь изменение кол-ва отображаемых карточек происходит только при отсутсвии нажатия на Еще
 
-        const newVisibleMoviesCount =
-          initialCalculateVisibleMovies(screenWidth);
+        if (!hasPressedShowMore) {
+          const newVisibleMoviesCount =
+            initialCalculateVisibleMovies(screenWidth);
+            setVisibleMoviesCount(newVisibleMoviesCount);
+        }
+
         const newVisibleMoviesCountToPressButton =
           pressButtonCalculateVisibleMovies(screenWidth);
-        setVisibleMoviesCount((prevCount) =>
-          Math.max(prevCount, newVisibleMoviesCount),
-        );
         setVisibleMoviesCountToPressButton(newVisibleMoviesCountToPressButton);
       }, 1000); // Устанавливаем задержку в 1000 миллисекунд
     }
@@ -169,7 +172,7 @@ function App() {
     return () => {
       window.removeEventListener('resize', updateUIBasedOnWidth);
     };
-  }, [setVisibleMoviesCount]);
+  }, [setVisibleMoviesCount, hasPressedShowMore]);
 
   function initialCalculateVisibleMovies(screenWidth) {
     if (screenWidth >= 1280) {
@@ -319,6 +322,7 @@ function App() {
                   handleMovieLike={handleMovieLike}
                   handleMovieDislike={handleMovieDislike}
                   isMovieSaved={isMovieSaved}
+                  setHasPressedShowMore={setHasPressedShowMore}
                 />
               }
             />

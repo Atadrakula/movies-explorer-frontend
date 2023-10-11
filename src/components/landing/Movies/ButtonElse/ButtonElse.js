@@ -5,9 +5,11 @@ function ButtonElse({
   setVisibleMoviesCount,
   visibleMoviesCount,
   visibleMoviesCountToPressButton,
+  setHasPressedShowMore,
 }) {
   const handleButtonClick = () => {
     setVisibleMoviesCount(visibleMoviesCount + visibleMoviesCountToPressButton);
+    setHasPressedShowMore(true);
   };
 
   return (

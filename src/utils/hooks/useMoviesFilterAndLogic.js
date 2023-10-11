@@ -50,7 +50,7 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
     if (currentSearchKeyword) {
       searchMovies();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShortFilm]);
 
   function getCorrectFormateDuration(movie) {

@@ -14,6 +14,7 @@ function Movies({
   handleMovieLike,
   handleMovieDislike,
   isMovieSaved,
+  setHasPressedShowMore,
 }) {
   const {
     currentSearchKeyword,
@@ -76,6 +77,7 @@ function Movies({
               visibleMoviesCount={visibleMoviesCount}
               setVisibleMoviesCount={setVisibleMoviesCount}
               visibleMoviesCountToPressButton={visibleMoviesCountToPressButton}
+              setHasPressedShowMore={setHasPressedShowMore}
             />
           }
         />
