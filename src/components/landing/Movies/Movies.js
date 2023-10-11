@@ -5,10 +5,6 @@ import Preloader from './Preloader/Preloader';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 import ButtonElse from './ButtonElse/ButtonElse';
 import { useMoviesFilterAndLogic } from '../../../utils/hooks/useMoviesFilterAndLogic';
-import {
-  getCorrectFormateDuration,
-  getAbsoluteImageUrl,
-} from '../../../utils/constants';
 
 function Movies({
   allMovies,
@@ -71,8 +67,6 @@ function Movies({
           handleMovieDislike={handleMovieDislike}
           isMovieSaved={isMovieSaved}
           filteredShortMovies={filteredShortMovies}
-          getCorrectFormateDuration={getCorrectFormateDuration}
-          getAbsoluteImageUrl={getAbsoluteImageUrl}
           getMovieName={getMovieName}
           children={
             <ButtonElse

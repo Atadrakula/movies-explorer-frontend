@@ -1,6 +1,6 @@
-import notImage from '../images/no_photo.png';
+import NotImage from '../images/no_photo.png';
 
-const serverDataFilmsConfig = {
+const ServerDataFilmsConfig = {
   url: 'https://api.nomoreparties.co/beatfilm-movies',
   // url: 'http://localhost:3000',
   headers: {
@@ -9,7 +9,7 @@ const serverDataFilmsConfig = {
   urlForImg: 'https://api.nomoreparties.co/',
 };
 
-const serverAuthConfig = {
+const ServerAuthConfig = {
   // url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
   url: 'http://localhost:3000',
   headers: {
@@ -17,7 +17,7 @@ const serverAuthConfig = {
   },
 };
 
-const serverDataLocalConfig = {
+const ServerDataLocalConfig = {
   // url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
   url: 'http://localhost:3000',
   headers: {
@@ -25,7 +25,7 @@ const serverDataLocalConfig = {
   },
 };
 
-const initialCalculateVisibleMovies = (screenWidth) => {
+const InitialCalculateVisibleMovies = (screenWidth) => {
   if (screenWidth >= 1280) {
     return 12; // 4 ряда по 3 карточки
   } else if (screenWidth >= 768) {
@@ -35,7 +35,7 @@ const initialCalculateVisibleMovies = (screenWidth) => {
   }
 };
 
-const pressButtonCalculateVisibleMovies = (screenWidth) => {
+const PressButtonCalculateVisibleMovies = (screenWidth) => {
   if (screenWidth >= 1280) {
     return 3;
   } else {
@@ -43,7 +43,7 @@ const pressButtonCalculateVisibleMovies = (screenWidth) => {
   }
 };
 
-const getCorrectFormateDuration = (movie) => {
+const GetCorrectFormateDuration = (movie) => {
   if (movie && movie.duration) {
     const hours = Math.floor(movie.duration / 60);
     const remainingMinutes = movie.duration % 60;
@@ -62,28 +62,28 @@ const getCorrectFormateDuration = (movie) => {
 //(?.) оператор optional chaining он позволяет читать значение свойств объекта
 //внутри цепочки ссылок без необходимости явно проверять каждое из них на null или undefined.
 
-const getAbsoluteImageUrl = (movie, preUrl) => {
+const GetAbsoluteImageUrl = (movie, preUrl) => {
   if (movie?.image?.url) {
     return `${preUrl}${movie.image.url}`;
   } else if (movie?.image) {
     return movie.image;
   }
-  return notImage;
+  return NotImage;
 };
 
-const urlForImgToServerDataFilms = (data) =>
-  `${serverDataFilmsConfig.urlForImg}${data.image.url}`;
+const UrlForImgToServerDataFilms = (data) =>
+  `${ServerDataFilmsConfig.urlForImg}${data.image.url}`;
 
-const urlForThumbnailToServerDataFilms = (data) =>
-  `${serverDataFilmsConfig.urlForImg}${data.image.formats.thumbnail.url}`;
+const UrlForThumbnailToServerDataFilms = (data) =>
+  `${ServerDataFilmsConfig.urlForImg}${data.image.formats.thumbnail.url}`;
 
-const cyrillicRegex = /^[а-яёА-ЯЁ]+$/; //регулярка только кириллицы
-const latinRegex = /^[a-zA-Z]+$/; //регулярка только латиницы
+const CyrillicRegex = /^[а-яёА-ЯЁ]+$/; //регулярка только кириллицы
+const LatinRegex = /^[a-zA-Z]+$/; //регулярка только латиницы
 
-const containsCyrillicAndLatinRegex = /^(?=.*[а-яА-ЯёЁ])(?=.*[a-zA-Z])/; //регулярка как минимум 1 символа кириллицы и латиницы
-const validNameRegex = /^[A-Za-zА-Яа-яЁё\s-]*$/; //регулярка только латиницы, кириллицы, пробел или дефис
+const ContainsCyrillicAndLatinRegex = /^(?=.*[а-яА-ЯёЁ])(?=.*[a-zA-Z])/; //регулярка как минимум 1 символа кириллицы и латиницы
+const ValidNameRegex = /^[A-Za-zА-Яа-яЁё\s-]*$/; //регулярка только латиницы, кириллицы, пробел или дефис
 
-const strongPasswordRegex =
+const StrongPasswordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[A-Za-z\d!@#$%^&*()\-_+=]{8,}$/;
 // Должен содержать хотя бы одну строчную (a-z) букву.
 // Должен содержать хотя бы одну заглавную (A-Z) букву.
@@ -92,19 +92,18 @@ const strongPasswordRegex =
 // Все символы, включая специальные символы, допустимы в строке. Длина строки должна быть не менее 8 символов
 
 export {
-  serverAuthConfig,
-  serverDataFilmsConfig,
-  serverDataLocalConfig,
-  cyrillicRegex,
-  latinRegex,
-  containsCyrillicAndLatinRegex,
-  validNameRegex,
-  strongPasswordRegex,
-  urlForImgToServerDataFilms,
-  urlForThumbnailToServerDataFilms,
-  notImage,
-  pressButtonCalculateVisibleMovies,
-  initialCalculateVisibleMovies,
-  getCorrectFormateDuration,
-  getAbsoluteImageUrl,
+  ServerAuthConfig,
+  ServerDataFilmsConfig,
+  ServerDataLocalConfig,
+  CyrillicRegex,
+  LatinRegex,
+  ContainsCyrillicAndLatinRegex,
+  ValidNameRegex,
+  StrongPasswordRegex,
+  UrlForImgToServerDataFilms,
+  UrlForThumbnailToServerDataFilms,
+  PressButtonCalculateVisibleMovies,
+  InitialCalculateVisibleMovies,
+  GetCorrectFormateDuration,
+  GetAbsoluteImageUrl,
 };

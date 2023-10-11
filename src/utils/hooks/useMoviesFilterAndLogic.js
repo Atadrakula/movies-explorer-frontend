@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { latinRegex, containsCyrillicAndLatinRegex } from '../constants';
+import { LatinRegex, ContainsCyrillicAndLatinRegex } from '../constants';
 
 export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
   const [currentSearchKeyword, setCurrentSearchKeyword] = useState('');
@@ -21,7 +21,7 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
   };
 
   const getMovieName = (movie) => {
-    if (isСharacterQuery(submitedSearchKeyword, latinRegex)) {
+    if (isСharacterQuery(submitedSearchKeyword, LatinRegex)) {
       return movie.nameEN;
     } else {
       return movie.nameRU;
@@ -107,7 +107,7 @@ export function useMoviesFilterAndLogic(savedMovies = null, allMovies = []) {
       setErrorSearch('Нужно ввести ключевое слово');
       return;
     } else if (
-      isСharacterQuery(currentSearchKeyword, containsCyrillicAndLatinRegex)
+      isСharacterQuery(currentSearchKeyword, ContainsCyrillicAndLatinRegex)
     ) {
       setErrorSearch(
         'Пожалуйста, используйте только символы одного алфавита (кириллицы или латиницы).',

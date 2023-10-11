@@ -1,7 +1,7 @@
 import './App.css';
 import {
-  pressButtonCalculateVisibleMovies,
-  initialCalculateVisibleMovies,
+  PressButtonCalculateVisibleMovies,
+  InitialCalculateVisibleMovies,
 } from '../../utils/constants';
 import AuthHeader from '../landing/Header/AuthHeader/AuthHeader';
 import NotAuthHeader from '../landing/Header/NotAuthHeader/NotAuthHeader';
@@ -159,12 +159,12 @@ function App() {
 
         if (!hasPressedShowMore) {
           const newVisibleMoviesCount =
-            initialCalculateVisibleMovies(screenWidth);
+            InitialCalculateVisibleMovies(screenWidth);
           setVisibleMoviesCount(newVisibleMoviesCount);
         }
 
         const newVisibleMoviesCountToPressButton =
-          pressButtonCalculateVisibleMovies(screenWidth);
+          PressButtonCalculateVisibleMovies(screenWidth);
         setVisibleMoviesCountToPressButton(newVisibleMoviesCountToPressButton);
       }, 1000); // Устанавливаем задержку в 1000 миллисекунд
     }

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
-import { serverDataFilmsConfig } from '../../../../utils/constants';
+import {
+  ServerDataFilmsConfig,
+  GetCorrectFormateDuration,
+  GetAbsoluteImageUrl,
+} from '../../../../utils/constants';
 
 function MoviesCard({
   movie,
   isRenderSavedMoviesButton,
   handleMovieLike,
   handleMovieDislike,
-  getCorrectFormateDuration,
-  getAbsoluteImageUrl,
   isLiked,
   getMovieName,
   isMobileSavedCard,
@@ -50,7 +52,7 @@ function MoviesCard({
     <li className="moviescard">
       <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
         <img
-          src={getAbsoluteImageUrl(movie, serverDataFilmsConfig.urlForImg)}
+          src={GetAbsoluteImageUrl(movie, ServerDataFilmsConfig.urlForImg)}
           alt={movieName}
           className="moviescard__img button-hover"
         />
@@ -64,7 +66,7 @@ function MoviesCard({
             onClick={handleLikeClick}
           ></button>
         </div>
-        <p className="moviescard__time">{getCorrectFormateDuration(movie)}</p>
+        <p className="moviescard__time">{GetCorrectFormateDuration(movie)}</p>
       </div>
     </li>
   );

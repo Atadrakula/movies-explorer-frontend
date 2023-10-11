@@ -1,4 +1,4 @@
-import { serverAuthConfig } from './constants';
+import { ServerAuthConfig } from './constants';
 
 class AuthApi {
   constructor({ url, headers }) {
@@ -74,6 +74,6 @@ class AuthApi {
   }
 }
 
-const authApi = new AuthApi(serverAuthConfig);
+const authApi = new AuthApi(ServerAuthConfig);
 
 export default authApi;

@@ -1,7 +1,7 @@
 import {
-  urlForImgToServerDataFilms,
-  urlForThumbnailToServerDataFilms,
-  serverDataLocalConfig,
+  UrlForImgToServerDataFilms,
+  UrlForThumbnailToServerDataFilms,
+  ServerDataLocalConfig,
 } from './constants';
 
 class MainApi {
@@ -55,9 +55,9 @@ class MainApi {
       duration: data.duration,
       year: data.year,
       description: data.description,
-      image: urlForImgToServerDataFilms(data),
+      image: UrlForImgToServerDataFilms(data),
       trailerLink: data.trailerLink,
-      thumbnail: urlForThumbnailToServerDataFilms(data),
+      thumbnail: UrlForThumbnailToServerDataFilms(data),
       nameRU: data.nameRU,
       nameEN: data.nameEN,
     };
@@ -81,6 +81,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi(serverDataLocalConfig);
+const mainApi = new MainApi(ServerDataLocalConfig);
 
 export default mainApi;

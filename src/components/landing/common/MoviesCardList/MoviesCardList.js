@@ -11,8 +11,6 @@ function MoviesCardList({
   handleMovieDislike,
   isMovieSaved,
   filteredShortMovies,
-  getCorrectFormateDuration,
-  getAbsoluteImageUrl,
   getMovieName,
   isMobileSavedCard,
   isSavedMoviesPage,
@@ -36,8 +34,6 @@ function MoviesCardList({
         handleMovieLike={handleMovieLike}
         handleMovieDislike={handleMovieDislike}
         isMovieSaved={isMovieSaved}
-        getCorrectFormateDuration={getCorrectFormateDuration}
-        getAbsoluteImageUrl={getAbsoluteImageUrl}
         getMovieName={getMovieName}
         isLiked={movie.isLiked || isSavedMoviesPage}
         isMobileSavedCard={isMobileSavedCard}

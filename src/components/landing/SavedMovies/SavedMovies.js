@@ -3,10 +3,6 @@ import SearchForm from '../common/SearchForm/SearchForm';
 import MoviesCardList from '../common/MoviesCardList/MoviesCardList';
 import { useMoviesFilterAndLogic } from '../../../utils/hooks/useMoviesFilterAndLogic';
 import Preloader from '../Movies/Preloader/Preloader';
-import {
-  getCorrectFormateDuration,
-  getAbsoluteImageUrl,
-} from '../../../utils/constants';
 
 function SavedMovies({
   savedMovies,
@@ -57,8 +53,6 @@ function SavedMovies({
           handleMovieLike={handleMovieLike}
           handleMovieDislike={handleMovieDislike}
           filteredShortMovies={filteredShortMovies}
-          getCorrectFormateDuration={getCorrectFormateDuration}
-          getAbsoluteImageUrl={getAbsoluteImageUrl}
           getMovieName={getMovieName}
           isMovieSaved={isMovieSaved}
           isMobileSavedCard={isMobileSavedCard}

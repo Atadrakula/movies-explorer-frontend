@@ -1,4 +1,4 @@
-import { serverDataFilmsConfig } from './constants';
+import { ServerDataFilmsConfig } from './constants';
 
 class MovieApi {
   constructor({ url, headers }) {
@@ -30,6 +30,6 @@ class MovieApi {
   }
 }
 
-const movieApi = new MovieApi(serverDataFilmsConfig);
+const movieApi = new MovieApi(ServerDataFilmsConfig);
 
 export default movieApi;

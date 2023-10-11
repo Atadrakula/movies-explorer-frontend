@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import validator from 'validator';
-import { validNameRegex, strongPasswordRegex } from '../constants';
+import { ValidNameRegex, StrongPasswordRegex } from '../constants';
 
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
@@ -15,14 +15,14 @@ export function useFormWithValidation() {
           'Пожалуйста, введите корректный адрес электронной почты';
       }
     } else if (name === 'name') {
-      if (!validNameRegex.test(value)) {
+      if (!ValidNameRegex.test(value)) {
         validationError =
           'Имя может содержать только латиницу, кириллицу, пробел или дефис';
       } else if (value.length < 2) {
         validationError = 'Имя должно содержать минимум 2 символа';
       }
     } else if (name === 'password') {
-      if (!strongPasswordRegex.test(value)) {
+      if (!StrongPasswordRegex.test(value)) {
         validationError =
           'Пароль должен содержать минимум 8 символов, включая заглавные и строчные буквы, цифры, и спецсимволы: !@#$%^&*()-_+=';
       }
