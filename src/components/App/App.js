@@ -251,7 +251,7 @@ function App() {
     try {
       const result = await authApi.pushRegistration(data);
       if (result.data) {
-        navigate('/signin', { replace: true });
+        await handleLogin(data);
       }
     } catch (error) {
       setAuthError(
