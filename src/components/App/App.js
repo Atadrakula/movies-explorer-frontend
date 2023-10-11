@@ -132,6 +132,8 @@ function App() {
 
         if (window.innerWidth <= 800) {
           setMobileAuthHeader(true);
+        } else {
+          setMobileAuthHeader(false);
         }
 
         if (window.innerWidth <= 600) {
@@ -141,6 +143,7 @@ function App() {
           });
         } else {
           setBorderStyle({});
+          setMobileSavedCard(false);
         }
 
         const newVisibleMoviesCount =
