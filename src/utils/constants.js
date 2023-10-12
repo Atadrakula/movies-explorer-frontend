@@ -10,16 +10,16 @@ const ServerDataFilmsConfig = {
 };
 
 const ServerAuthConfig = {
-  // url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
-  url: 'http://localhost:3000',
+  url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
+  // url: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
 };
 
 const ServerDataLocalConfig = {
-  // url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
-  url: 'http://localhost:3000',
+  url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
+  // url: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
