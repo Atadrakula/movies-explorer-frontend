@@ -9,8 +9,20 @@ function PopupMenu({ onClose, isOpen }) {
   }`;
   const openPopupMenu = `popup-menu ${isOpen ? 'popup-menu_visible' : ''}`;
 
+  const handleBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={visiblePopupClass}>
+    <div
+      className={visiblePopupClass}
+      onClick={handleBackgroundClick}
+      role="button"
+      tabIndex="0"
+      onKeyDown={(e) => {}}
+    >
       <nav className={openPopupMenu}>
         <button
           aria-label="Закрыть"

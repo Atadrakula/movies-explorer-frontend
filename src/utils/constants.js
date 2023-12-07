@@ -1,125 +1,109 @@
-import card_1 from '../images/pic__1.png';
-import card_2 from '../images/pic__2.png';
-import card_3 from '../images/pic__3.png';
-import card_4 from '../images/pic__4.png';
-import card_5 from '../images/pic__5.png';
-import card_6 from '../images/pic__6.png';
-import card_7 from '../images/pic__7.png';
-import card_8 from '../images/pic__8.png';
-import card_9 from '../images/pic__9.png';
-import card_10 from '../images/pic__10.png';
-import card_11 from '../images/pic__11.png';
-import card_12 from '../images/pic__12.png';
+import NotImage from '../images/no_photo.png';
 
-const moviesCards = [
-  {
-    owner: '12345',
-    like: ['12345'],
-    _id: 'card_1',
-    src: card_1,
-    alt: 'Фотограф и темнокожие мальчики',
-    name: '33 слова о дизайне',
-    time: '1ч 47м',
+const ServerDataFilmsConfig = {
+  url: 'https://api.nomoreparties.co/beatfilm-movies',
+  // url: 'http://localhost:3000',
+  headers: {
+    'Content-Type': 'application/json',
   },
-  {
-    owner: '12345',
-    like: ['56789'],
-    _id: 'card_2',
-    src: card_2,
-    alt: 'Человек в очках',
-    name: 'Киноальманах «100 лет дизайна»',
-    time: '1ч 3м',
-  },
-  {
-    owner: '12345',
-    like: ['56789'],
-    _id: 'card_3',
-    src: card_3,
-    alt: 'Человек с гитарой',
-    name: 'В погоне за Бенкси',
-    time: '1ч 42м',
-  },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_4',
-    src: card_4,
-    alt: 'Здание с колоннами',
-    name: 'Баския: Взрыв реальности',
-    time: '1ч 21м',
-  },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_5',
-    src: card_5,
-    alt: 'Люди катаются на скейтах по дороге',
-    name: 'Бег это свобода',
-    time: '1ч 44м',
-  },
-  {
-    owner: '56789',
-    like: ['12345'],
-    _id: 'card_6',
-    src: card_6,
-    alt: 'Человек разбирает книги дома',
-    name: 'Книготорговцы',
-    time: '1ч 37м',
-  },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_7',
-    src: card_7,
-    alt: 'Три человека что-то обсуждают',
-    name: 'Когда я думаю о Германии ночью',
-    time: '1ч 56м',
-  },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_8',
-    src: card_8,
-    alt: 'Ж/д станция с граффити',
-    name: 'Gimme Danger: История Игги и The Stooge...',
-    time: '1ч 59м',
-  },
-  {
-    owner: '56789',
-    like: ['12345'],
-    _id: 'card_9',
-    src: card_9,
-    alt: 'Много людей в забеге',
-    name: 'Дженис: Маленькая девочка грустит',
-    time: '1ч 42м',
-  },
-  {
-    owner: '56789',
-    like: ['12345'],
-    _id: 'card_10',
-    src: card_10,
-    alt: 'Танцующие люди на дискотеке',
-    name: 'Соберись перед прыжком',
-    time: '1ч 10м',
-  },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_11',
-    src: card_11,
-    alt: 'Мужчина крупным планом с сигаретой',
-    name: 'Пи Джей Харви: A dog called money',
-    time: '1ч 4м',
-  },
-  {
-    owner: '56789',
-    like: ['56789'],
-    _id: 'card_12',
-    src: card_12,
-    alt: 'Мужчина в очках перед монитором',
-    name: 'По волнам: Искусство звука в кино',
-    time: '1ч 7м',
-  },
-];
+  urlForImg: 'https://api.nomoreparties.co/',
+};
 
-export default moviesCards;
+const ServerAuthConfig = {
+  url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
+  // url: 'http://localhost:3000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
+const ServerDataLocalConfig = {
+  url: 'https://api.web.portfolio.diploma.nomoredomainsicu.ru',
+  // url: 'http://localhost:3000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
+const InitialCalculateVisibleMovies = (screenWidth) => {
+  if (screenWidth >= 1280) {
+    return 12; // 4 ряда по 3 карточки
+  } else if (screenWidth >= 768) {
+    return 8; // 4 ряда по 2 карточки
+  } else {
+    return 5; // 5 карточек по 1 в ряд
+  }
+};
+
+const PressButtonCalculateVisibleMovies = (screenWidth) => {
+  if (screenWidth >= 1280) {
+    return 3;
+  } else {
+    return 2;
+  }
+};
+
+const GetCorrectFormateDuration = (movie) => {
+  if (movie && movie.duration) {
+    const hours = Math.floor(movie.duration / 60);
+    const remainingMinutes = movie.duration % 60;
+    const hoursText = hours > 0 ? `${hours}ч` : '';
+    const minutesText = remainingMinutes > 0 ? `${remainingMinutes}м` : '';
+
+    if (hoursText && minutesText) {
+      return `${hoursText} ${minutesText}`;
+    } else {
+      return `${hoursText}${minutesText}`;
+    }
+  }
+  return 'неизвестно';
+};
+
+//(?.) оператор optional chaining он позволяет читать значение свойств объекта
+//внутри цепочки ссылок без необходимости явно проверять каждое из них на null или undefined.
+
+const GetAbsoluteImageUrl = (movie, preUrl) => {
+  if (movie?.image?.url) {
+    return `${preUrl}${movie.image.url}`;
+  } else if (movie?.image) {
+    return movie.image;
+  }
+  return NotImage;
+};
+
+const UrlForImgToServerDataFilms = (data) =>
+  `${ServerDataFilmsConfig.urlForImg}${data.image.url}`;
+
+const UrlForThumbnailToServerDataFilms = (data) =>
+  `${ServerDataFilmsConfig.urlForImg}${data.image.formats.thumbnail.url}`;
+
+const CyrillicRegex = /^[а-яёА-ЯЁ]+$/; //регулярка только кириллицы
+const LatinRegex = /^[a-zA-Z]+$/; //регулярка только латиницы
+
+const ContainsCyrillicAndLatinRegex = /^(?=.*[а-яА-ЯёЁ])(?=.*[a-zA-Z])/; //регулярка как минимум 1 символа кириллицы и латиницы
+const ValidNameRegex = /^[A-Za-zА-Яа-яЁё\s-]*$/; //регулярка только латиницы, кириллицы, пробел или дефис
+
+const StrongPasswordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[A-Za-z\d!@#$%^&*()\-_+=]{8,}$/;
+// Должен содержать хотя бы одну строчную (a-z) букву.
+// Должен содержать хотя бы одну заглавную (A-Z) букву.
+// Должен содержать хотя бы одну цифру (0-9).
+// Должен содержать хотя бы один специальный символ из набора: !@#$%^&*()-_+=.
+// Все символы, включая специальные символы, допустимы в строке. Длина строки должна быть не менее 8 символов
+
+export {
+  ServerAuthConfig,
+  ServerDataFilmsConfig,
+  ServerDataLocalConfig,
+  CyrillicRegex,
+  LatinRegex,
+  ContainsCyrillicAndLatinRegex,
+  ValidNameRegex,
+  StrongPasswordRegex,
+  UrlForImgToServerDataFilms,
+  UrlForThumbnailToServerDataFilms,
+  PressButtonCalculateVisibleMovies,
+  InitialCalculateVisibleMovies,
+  GetCorrectFormateDuration,
+  GetAbsoluteImageUrl,
+};

@@ -1,34 +1,88 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PopupProfile.css';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../../utils/hooks/useFormWithValidation';
+import { capitalizeFirstLetter } from '../../../utils/utils';
 
-function Profile() {
+function Profile({ onSignOut, onUpdateProfile }) {
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+  const [textSubmit, setTextSubmit] = useState('');
+  const [isDataChanged, setIsDataChanged] = useState(false);
+
   const navigate = useNavigate();
+
+  const nameInTitle = (str) => `Привет, ${capitalizeFirstLetter(str)}!`;
   const handleButtonClick = () => {
+    onSignOut();
     navigate('/signin');
   };
+
+  useEffect(() => {
+    // Устанавливаем начальные значения полей при обновлении currentUser
+    if (currentUser) {
+      resetForm({
+        name: currentUser.name || '',
+        email: currentUser.email || '',
+      });
+    }
+  }, [currentUser, resetForm]);
+
+  useEffect(() => {
+    // Сверяем текущее значение с изначальным и возводим флаг
+    if (currentUser) {
+      const isNameChanged = values.name !== currentUser.name;
+      const isEmailChanged = values.email !== currentUser.email;
+      setIsDataChanged(isNameChanged || isEmailChanged);
+    }
+  }, [values, currentUser]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (isValid) {
+      try {
+        await onUpdateProfile({
+          name: values.name,
+          email: values.email,
+        });
+        setTextSubmit(`Данные обновлены`);
+      } catch (error) {
+        setTextSubmit(``);
+      }
+    }
+  }
+  const submitClass = `profile__submit ${
+    isValid && isDataChanged
+      ? 'cursor-pointer button-hover'
+      : 'profile__submit_inactive'
+  }`;
 
   return (
     <main>
       <section className="profile">
-        <h1 className="profile__name">Привет, Виталий!</h1>
-        <form action="#" className="profile__form">
+        <h1 className="profile__name">
+          {currentUser && nameInTitle(currentUser.name)}
+        </h1>
+        <form action="#" className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__container-input">
             <div className="profile__label-input-wrapper">
-              <label htmlFor="profile-text" className="profile__label">
+              <label htmlFor="profile-name" className="profile__label">
                 Имя
               </label>
               <input
                 placeholder="Имя"
-                name="profile-text"
-                id="profile-text"
+                name="name"
+                id="profile-name"
                 type="text"
-                value="Виталий"
                 className="profile__input input-style"
-                readOnly
+                value={values.name || ''}
+                onChange={handleChange}
+                autoComplete="name"
               />
             </div>
-            <span className="profile__input-text-error"></span>
+            <span className="profile__input-text-error">{errors.name}</span>
           </div>
           <div className="profile__container-input">
             <div className="profile__label-input-wrapper">
@@ -37,26 +91,30 @@ function Profile() {
               </label>
               <input
                 placeholder="example@example.ru"
-                name="profile-email"
+                name="email"
                 id="profile-email"
                 type="email"
-                value="pochta@yandex.ru"
                 className="profile__input input-style"
-                readOnly
+                value={values.email || ''}
+                onChange={handleChange}
+                autoComplete="email"
               />
             </div>
-            <span className="profile__input-text-error"></span>
+            <span className="profile__input-text-error">{errors.email}</span>
           </div>
+          <span className="profile__submit-text">{textSubmit}</span>
+          <button
+            className={submitClass}
+            aria-label="Редактировать профиль"
+            type="submit"
+            name="supmitProfileButton"
+            disabled={!isValid || !isDataChanged}
+          >
+            Редактировать
+          </button>
         </form>
         <button
-          className="profile__button-edit cursor-pointer"
-          aria-label="Редактировать профиль"
-          type="submit"
-        >
-          Редактировать
-        </button>
-        <button
-          className="profile__button-exit cursor-pointer"
+          className="profile__button-exit cursor-pointer button-hover"
           aria-label="Выйти из аккаунта"
           type="button"
           onClick={handleButtonClick}

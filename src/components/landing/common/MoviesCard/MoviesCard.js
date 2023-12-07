@@ -1,59 +1,72 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { CurrentUserContext } from '../../../../contexts/CurrentUserContext';
+import React, { useState } from 'react';
 import './MoviesCard.css';
+import {
+  ServerDataFilmsConfig,
+  GetCorrectFormateDuration,
+  GetAbsoluteImageUrl,
+} from '../../../../utils/constants';
 
-function MoviesCard({ moviescard, isSavedMovies }) {
-  const currentUser = useContext(CurrentUserContext);
-  const isLiked =
-    moviescard.like && moviescard.like.some((i) => i === currentUser._id);
-  const [isMobile, setIsMobile] = useState(false);
+function MoviesCard({
+  movie,
+  isRenderSavedMoviesButton,
+  handleMovieLike,
+  handleMovieDislike,
+  isLiked,
+  getMovieName,
+  isMobileSavedCard,
+}) {
+  const [isLikedMovie, setLikedMovie] = useState(isLiked);
+
+  async function handleLikeClick() {
+    try {
+      if (isLiked) {
+        await handleMovieDislike(movie);
+      } else {
+        await handleMovieLike(movie);
+      }
+      setLikedMovie(!isLikedMovie);
+    } catch (error) {
+      console.error('Ошибка при лайке/дизлайке фильма:', error.message);
+    }
+  }
 
   const cardLikedClassName = `moviescard__heart cursor-pointer ${
     isLiked && 'moviescard__heart_active'
   }`;
 
   const cardDeleteClassName = `moviescard__cross cursor-pointer button-hover ${
-    isMobile ? 'moviescard__cross_visible' : ''
+    isMobileSavedCard ? 'moviescard__cross_visible' : ''
   }`;
 
-  const toggleClassNameButton = isSavedMovies
+  const toggleClassNameButton = isRenderSavedMoviesButton
     ? cardDeleteClassName
     : cardLikedClassName;
 
   const cardFormCursorClassToggle = `moviescard__wrapper-for-cursor ${
-    isSavedMovies ? 'cursor-pointer' : ''
+    isRenderSavedMoviesButton ? 'cursor-pointer' : ''
   }`;
 
-  useEffect(() => {
-    const handleResizeWindow = () => {
-      setIsMobile(window.innerWidth < 767);
-    };
-
-    handleResizeWindow();
-
-    window.addEventListener('resize', handleResizeWindow);
-
-    return () => {
-      window.removeEventListener('resize', handleResizeWindow);
-    };
-  }, []);
+  const movieName = getMovieName(movie);
 
   return (
     <li className="moviescard">
-      <img
-        src={moviescard.src}
-        alt={moviescard.alt}
-        className="moviescard__img"
-      />
+      <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
+        <img
+          src={GetAbsoluteImageUrl(movie, ServerDataFilmsConfig.urlForImg)}
+          alt={movieName}
+          className="moviescard__img button-hover"
+        />
+      </a>
       <div className={cardFormCursorClassToggle}>
         <div className="moviescard__name-form">
-          <h2 className="moviescard__name">{moviescard.name}</h2>
+          <h2 className="moviescard__name">{movieName}</h2>
           <button
             className={toggleClassNameButton}
             aria-label="Лайкнуть/Дизлайкнуть"
+            onClick={handleLikeClick}
           ></button>
         </div>
-        <p className="moviescard__time">{moviescard.time}</p>
+        <p className="moviescard__time">{GetCorrectFormateDuration(movie)}</p>
       </div>
     </li>
   );

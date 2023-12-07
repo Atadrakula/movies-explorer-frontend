@@ -1,5 +1,6 @@
 @import url('../../common/link-hover.css');
 @import url('../../common/cursor-pointer.css');
+@import url('../../common/input-style-search.css');
 
 .searchform {
   padding: 60px 70px 10px;
@@ -14,12 +15,18 @@
 }
 
 .searchform__input-container {
-  padding: 6px 6px 6px 18px;
+  padding: 4px 4px 4px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #2f2f2f;
   border-radius: 20px;
+  border: 2px solid transparent;
+}
+
+.searchform__input-container:focus-within {
+  border: 2px solid rgb(255 255 255 / 40%);
+  transition: border 0.4s ease-in-out;
 }
 
 .searchform__input {
